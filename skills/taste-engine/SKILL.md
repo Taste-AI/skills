@@ -75,6 +75,12 @@ system summarized. If a token and the screenshot disagree, the screenshot wins.
 Every section earns a place in the output. Don't drop any that is present.
 
 - **metadata** — `version` (confirm schema), `extracted_at`, `project_name`.
+  `extracted_at` is the **freshness** of the data: when this brand system was
+  actually extracted. On a cache hit it's the *original* extraction (can be up to
+  the cache TTL old), **not** the time you submitted — so if you need current
+  data and `extracted_at` looks stale, re-extract with `force=true`. (At the
+  submission envelope the same instant is `completed_at`, with `cache_hit`
+  flagging a cached serve.)
 - **profile** — `brand_name`, `industry`, `page_type`, `primary_purpose`,
   `main_cta`, `copy_tone`, `brand_signature`, `visual_language`, `strategy`,
   `style_classification`. **This is your design brief, match tone and intent,
@@ -187,7 +193,7 @@ specific copy, no slop verbs, no fabricated trust signals?
 | tool / resource | use |
 |---|---|
 | `submit_brand(url, force=false)` | start an extraction → `submission_id` (**costs credits, even on cache hit**) |
-| `get_submission(id)` | poll `status` until `completed` / `failed` |
+| `get_submission(id)` | poll `status` until `completed` / `failed`; `cache_hit` + `completed_at` tell you if/when it was extracted (freshness) |
 | `get_brand(id)` | full brand system + artifacts (read it **all**; re-reading by id does not re-spend) |
 | `list_submissions(status?, search?, limit, offset)` | find an existing `submission_id` to reuse |
 | `resource://brand-system/schema/v1` | field-level map of the brand system (if your client surfaces MCP resources) |
