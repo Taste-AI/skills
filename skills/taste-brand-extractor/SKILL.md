@@ -46,8 +46,9 @@ and stop.
 
 `get_brand(submission_id, sections: ["metadata", "profile"])` before
 anything else. `profile` is the design brief — every build decision answers
-to it. `metadata.extracted_at` dates the data (on a cache hit it reflects
-the original extraction, not your request).
+to it. `metadata.extracted_at` dates the data: on a cache hit — which
+`get_submission` flags as `cache_hit` — it reflects the original extraction,
+not your request.
 
 If `profile` describes something other than the brand, a cookie wall, a
 bot-challenge page, or any other non-brand content, the crawl failed silently: re-extract with
