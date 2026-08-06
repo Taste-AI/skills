@@ -1,0 +1,19 @@
+.github/CODEOWNERS
+  s_ad4b271682f154::t_f80b6acbc53d64 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "d17cfe930d3ea0a2e0939bfc017cb9b24e92d86b",
+  "prompts": {},
+  "sessions": {
+    "s_ad4b271682f154": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a2e77b47-4989-4d7f-9d19-fa66029403b5",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}
