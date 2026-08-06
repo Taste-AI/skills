@@ -1,0 +1,85 @@
+skills/taste-creative-director/SKILL.md
+  s_ad4b271682f154::t_2dda432478e418 295-296
+  s_081862f35a4a29::t_c147c5c8721d6d 207
+  s_ad4b271682f154::t_589a5988c679c1 440
+  s_c6a2cb2d271574::t_aa251a140f2fd1 126-127
+  s_c6a2cb2d271574::t_b2240b9035148f 78-79
+  s_c6a2cb2d271574::t_659ce2bd1524d2 156-158
+  s_ad4b271682f154::t_a06c85a1cf8fdf 85
+  s_ad4b271682f154::t_64b994277c7ba7 293-294,326,336,439
+  s_ad4b271682f154::t_e1a9b4de1d73a6 425
+  s_081862f35a4a29::t_4981c7e7f95dba 16
+  s_081862f35a4a29::t_3e83f428fe9c6c 151
+  s_081862f35a4a29::t_1477aee0012e9b 368
+  s_ad4b271682f154::t_d8351a64603358 20
+  s_081862f35a4a29::t_7252f68c46f491 99,102
+  s_ad4b271682f154::t_28300cf5cdaded 136-138
+  s_ad4b271682f154::t_a7ca6e2e4c0848 1-2,4-9,13,21-23,26-34,38-43,48-62,68-77,80-82,86-97,124-125,128-135,139-147,149,152-153,161-162,164-188,190-192,195-200,208-216,222-235,238-270,273-280,288-292,297-308,310-324,328-335,337-338,340-357,369-376,378-424,426-429,431-434,437-438,441-446
+  s_ad4b271682f154::t_dd321e6cb3cba3 64-67
+  s_c6a2cb2d271574::t_3c13c9f9d3f223 217-221
+  s_ad4b271682f154::t_404337ea363c10 325,327
+  h_7ebc124c02485e 3,10-12,14-15,17-19,24-25,35-37,44-47,63,83-84,98,100-101,103-123,148,150,154-155,159-160,163,189,193-194,201-206,236-237,271-272,281-287,309,339,358-367,377,430,435-436,447-456
+skills/taste-creative-director/anti-slop.md
+  s_ad4b271682f154::t_64b994277c7ba7 1-111
+skills/taste-brand-extractor/SKILL.md
+  s_ad4b271682f154::t_42edfa81f7dd43 2
+  h_7ebc124c02485e 9,14-15,18,33,36,52-53,58,63,69-70,75,81,87,94,98,102,107,115,119,123,127,130,136,147
+  s_ad4b271682f154::t_82fef6aa12b8e0 12
+README.md
+  s_ad4b271682f154::t_f472f7544825e4 83
+  s_ad4b271682f154::t_060241c23e3c9b 78
+  s_ad4b271682f154::t_be743da294fca5 70-71
+  s_ad4b271682f154::t_ca4912be643612 13-15,18-20,22,26,29-31,34-35
+  s_ad4b271682f154::t_7331174d8fccfc 79
+  s_ad4b271682f154::t_37d2bbc93e890a 1
+  s_ad4b271682f154::t_d973c20c5cb56d 80-82
+  h_7ebc124c02485e 43,51
+  s_ad4b271682f154::t_f923170db32086 84
+  s_ad4b271682f154::t_9b9af50bdd7467 72
+  s_ad4b271682f154::t_42ea20af26cfb8 3-5,39-41,44-50,52-54,58,63-64
+skills/taste-search/SKILL.md
+  s_ad4b271682f154::t_601593348a5f93 18,20,33,35-40,74-75,91-92,94-95,97
+  h_7ebc124c02485e 6,19,22,24,34,42,45,52,69,73,76-87,93,104-105
+  s_c6a2cb2d271574::t_8b2a86ca0f04d2 5,7-10
+  s_ad4b271682f154::t_8e289499c658b8 23,43-44,46-48,53-64,67-68,96,108-109
+  s_c6a2cb2d271574::t_d33e4c539fc192 99-103,106-107
+  s_ad4b271682f154::t_997ffe46dffc6e 41
+  s_ad4b271682f154::t_27e417dd4ff6a6 1-4,11-17,21,25-32,49-51,65-66,70-72,88-90,98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "690493e42dd6e6848c26025b55fad8f5f261a149",
+  "prompts": {},
+  "humans": {
+    "h_7ebc124c02485e": {
+      "author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  },
+  "sessions": {
+    "s_081862f35a4a29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "526481ab-e5e6-4edb-849d-1d928c87234b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    },
+    "s_ad4b271682f154": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a2e77b47-4989-4d7f-9d19-fa66029403b5",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    },
+    "s_c6a2cb2d271574": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d2bf9265-8cc7-4f67-b323-132601ab2ea7",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}
