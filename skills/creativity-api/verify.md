@@ -58,9 +58,9 @@ a 4.2:1 contrast and a 9px overflow.
   clever copy that almost means something.
 - **Uncounted caps.** The floor and the gate speak in numbers — card-grid
   sections, layout families, the one signature, the one marquee — count
-  each on the finished page; the 40% source share is counted over
-  `BRAND.json`'s cited values. A cap checked by impression was never
-  checked.
+  each on the finished page; the three-draw cap is counted over
+  `BRAND.json`'s thirteen dimension citations. A cap checked by impression
+  was never checked.
 
 ## The feedback
 
