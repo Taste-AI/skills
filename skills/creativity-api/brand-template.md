@@ -11,7 +11,7 @@ template; refill it for the invented brand.
 Top-level keys of the object, in this order (fill every section your
 references' extractions carried; omit only what the design genuinely lacks):
 
-`metadata` (project_name only, a real extraction also carries version/status, but they do no work here), `profile` (brand_name, industry,
+`profile` (brand_name, industry,
 primary_purpose, main_cta, copy_tone[], brand_signature, visual_language,
 strategy, style_classification), `layout`, `colors`, `typography`,
 `surfaces`, `elevation`, `interactions`, `actions`, `navigation`,
