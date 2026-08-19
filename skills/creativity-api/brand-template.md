@@ -8,8 +8,9 @@ template; refill it for the invented brand.
 
 ## Sections to fill
 
-Top-level keys of the object, in this order (fill every section your
-references' extractions carried; omit only what the design genuinely lacks):
+Top-level keys of the object, in this order — one dimension each, one
+drawn source each (which draws are independent, dependent, or from the
+brief is the table in SKILL.md):
 
 `profile` (brand_name, industry,
 primary_purpose, main_cta, copy_tone[], brand_signature, visual_language,
@@ -17,6 +18,11 @@ strategy, style_classification), `layout`, `colors`, `typography`,
 `surfaces`, `elevation`, `interactions`, `actions`, `navigation`,
 `data_display`, `icons`, `assets`, `sections` (ordered page sections,
 this is the page plan).
+
+Each dimension arrives from exactly one
+`get_brand(submission_id, sections=[<dimension>])` pull and lands here
+whole. Omit a dimension only when the design genuinely lacks it — not
+because the pull came back thin; a thin pull is a reroll.
 
 ## Conventions (they matter, consumers depend on them)
 
@@ -65,14 +71,19 @@ one clause in its description).
 
 ## Provenance
 
-Every taste value, a face, a hex, an easing, a radius, a texture
-classification, a section anatomy, names the source that taught it, in
-the **nearest `notes` or `description` field the schema already has**. Real
-extractions carry these fields; using them for provenance adds no custom
-field and keeps the shape pure. The citation is one clause, not an essay:
-`"line-height .8 is the lelieuunique atom"`. A taste value without a
-citation is a facet nobody decided, the gate treats it as undecided, and
-undecided facets are where the default walks in dressed as a decision.
+Every dimension names the source that won it, in the **nearest `notes` or
+`description` field the schema already has**. Real extractions carry these
+fields; using them for provenance adds no custom field and keeps the shape
+pure. The citation is one clause, not an essay: `"typography drawn whole
+from lelieuunique"`. A dimension without a citation is a facet nobody
+drew, the gate treats it as undecided, and undecided facets are where the
+default walks in dressed as a decision.
+
+Remapped values say so in the same field: which role the donor's value
+held and which winning token it now resolves to,
+`"card ground: donor's surface-raised → colors.surface.raised"`. A
+remapped value with no note is indistinguishable from an invented one,
+and the gate cannot tell them apart either.
 
 ## Fidelity
 
