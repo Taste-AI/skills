@@ -22,10 +22,10 @@ this is the page plan).
 
 - Color values: uppercase 6-digit `hex`. `colors` carries the primitives
   and the semantic tokens the page will declare, each with a name, its
-  hex, and a `rules.description` saying where it may be used, so every
-  color in the CSS resolves to a named token. Transparency ships as an
-  explicit overlay token: base hex plus its alpha noted in the
-  description.
+  hex, the role of the color in `rules.description`, and `rules.when_to_use`
+  saying where it may be used, so every color in the CSS resolves to a named
+  token. Transparency ships as an explicit overlay token: base hex plus its
+  alpha noted in the description.
 - Typography: `specs.font_weight` as a numeric STRING (`"800"`);
   `font_variation_settings` when the face is variable.
 - Button states carry `text_color` (`focus` is exempt, it carries `outline`).
