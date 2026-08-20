@@ -51,6 +51,17 @@ a 4.2:1 contrast and a 9px overflow.
 - **Dead interaction.** Hover the two most interactive controls and
   screenshot each hovered state; tab to confirm focus is visible; confirm
   `prefers-reduced-motion` actually quiets the page.
+- **The first row.** Measure the nav's wordmark and links against the
+  content column's left edge at both widths — a wrapper whose padding a
+  later rule overrode puts the first thing anyone sees flush to the screen
+  edge while every section below aligns.
+- **Vector text at 390.** Measure the effective rendered size of any text
+  living inside an SVG graphic — an SVG that scales as one image shrinks
+  its labels below legibility; the signature graphic needs a responsive
+  answer, not a uniform scale-down.
+- **The numbers, re-proven.** Any fix that touched a shown number, a date,
+  or chart data re-runs `validate_brand.py` before the round closes — a
+  hand-edited number is unverified by definition.
 - **Copy that fails as prose.** Last, read every visible string aloud in
   the client's voice — screenshots hide broken language. A claim with no
   referent, wordplay that almost lands, poetry no pin earned: each

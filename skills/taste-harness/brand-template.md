@@ -11,7 +11,7 @@ template; refill it for the invented brand.
 Top-level keys of the object, in this order (fill every section your
 references' extractions carried; omit only what the design genuinely lacks):
 
-`profile` (brand_name, industry,
+`metadata` (project_name only, a real extraction also carries version/status, but they do no work here), `profile` (brand_name, industry,
 primary_purpose, main_cta, copy_tone[], brand_signature, visual_language,
 strategy, style_classification), `layout`, `colors`, `typography`,
 `surfaces`, `elevation`, `interactions`, `actions`, `navigation`,
@@ -22,10 +22,10 @@ this is the page plan).
 
 - Color values: uppercase 6-digit `hex`. `colors` carries the primitives
   and the semantic tokens the page will declare, each with a name, its
-  hex, the role of the color in `rules.description`, and `rules.when_to_use`
-  saying where it may be used, so every color in the CSS resolves to a named
-  token. Transparency ships as an explicit overlay token: base hex plus its
-  alpha noted in the description.
+  hex, and a `rules.description` saying where it may be used, so every
+  color in the CSS resolves to a named token. Transparency ships as an
+  explicit overlay token: base hex plus its alpha noted in the
+  description.
 - Typography: `specs.font_weight` as a numeric STRING (`"800"`);
   `font_variation_settings` when the face is variable.
 - Button states carry `text_color` (`focus` is exempt, it carries `outline`).
@@ -62,6 +62,16 @@ One `sizes` entry is a decision only when a citation says the corpus
 ships one button system; `visuals` stopping at `hover` is never a
 decision. The spacing scale is named inside `layout` (the grid step, or
 one clause in its description).
+
+## The gesture and the budget
+
+`assets` carries the embedded gesture: the budgeted loud moments are built
+as live fragments while the sources are open, rendered, LOOKED at, and
+their final snapshots embedded as data-URIs under `assets` — real
+extractions carry screenshots there, so the shape stays pure. Compose
+their visual form from the embedded pixels, never from prose about them.
+`profile.visual_language` names the (at most two) loud systems the page
+budgets; the gate counts them.
 
 ## Provenance
 

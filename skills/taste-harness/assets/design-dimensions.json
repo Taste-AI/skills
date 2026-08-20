@@ -1,0 +1,311 @@
+{
+ "source": "taste-creativiy-mvp design-constitution.json @ v2.1",
+ "dimensions": [
+  {
+   "id": "09_elements_order",
+   "name": "Nav Bar Elements Order",
+   "section": "Visual Hierarchy",
+   "question": "Do the elements follow a creative arrangement?",
+   "ai_slop": "The header strictly follows the \"Logo (Left), Links (Center), CTA (Right)\" formula. It feels like a template. No variation or intentional reordering.",
+   "good": "The arrangement is clean and functional. Slight variations from the template (e.g., centered logo, grouped links) but still recognizable as a standard pattern.",
+   "great": "The element order is disrupted intentionally. Logo may be centered with links split to both sides. CTA may be integrated into the logo area. The arrangement creates a unique identity while remaining usable."
+  },
+  {
+   "id": "11_above_the_fold",
+   "name": "Above the Fold",
+   "section": "Visual Hierarchy",
+   "question": "Does the Hero section fit perfectly within the screen on the first load, or does it leave a \"peek\" of the next section?",
+   "ai_slop": "Often there's no glimpse into the next section and when there is it feels accidental. There's no understanding of any rule or alignment. The hero reads as a standalone block.",
+   "good": "There's usually a glimpse of the next section, but it feels forced and lacks clear intention. For example, there might be a cut in the image, but only for the sake of revealing the next section, without any continuity in layout or storytelling.",
+   "great": "Great heroes often show part of the next section, making it feel like it's still part of the hero. Even when they don't, the next section still feels like a continuation — like an extension of the hero. The transition is fluid and intentional."
+  },
+  {
+   "id": "12_next_section_transition",
+   "name": "Hero-to-Next-Section Transition",
+   "section": "Visual Hierarchy",
+   "question": "Is the hero section related to the next section or does it change to a completely different section?",
+   "ai_slop": "Often there's no continuity from this section to the next, showcasing a harsh break like changing in background color or a completely different layout. Sections feel like independent blocks assembled without awareness of each other.",
+   "good": "Normally, there are elements that maintain the continuity between the hero and the next section. For example, the background color or a gradient flowing from the hero into the following section. The connection exists but is surface-level.",
+   "great": "The next section feels like a continuation of the hero, with a very similar design and subtle differences that create variation without being too different. The transition is seamless — you may not even notice where the hero ends and the next section begins.\n\n**AI Slop assessment patterns:** \"Hard Divider Stop\" (harsh disconnect), \"White to Black Cut\" (stark color changes), \"Forced Premium Contrast\" (stiff, disjointed breaks), \"Banner Interrupt Cut\" (tense segmentation).\n**Good assessment patterns:** \"smooth and cohesive,\" \"precise and steady,\" \"smooth and purposeful.\"\n**Great assessment patterns:** \"fluid and refined,\" \"cohesive and intentional,\" \"fluid and seamless.\""
+  },
+  {
+   "id": "13_conventional_elements",
+   "name": "Conventional Elements (Title/Body/CTA)",
+   "section": "Visual Hierarchy",
+   "question": "Check \"Title, Body, CTA\" arrangements.",
+   "ai_slop": "Almost 100% of AI-generated designs follow a rigid vertical \"Title, Body, CTA\" order. The stack is always the same: big heading, paragraph, button. No variation, no surprise.",
+   "good": "Usually follows the same vertical \"Title, Body, CTA\" hierarchy but introduces layout breathing room. It breaks the monotony with horizontal variations — positioning the Title side-by-side with the Body to save vertical space, or placing the Body side-by-side with the CTA to create a more compact, professional block.",
+   "great": "This is where exploration creates distinction. Instead of following a formula, it uses the arrangement to drive a narrative. The order is disrupted to prioritize impact and flow, featuring multiple variations such as: \"Body, Title, CTA\" or \"Title, CTA, Body.\" These can be arranged vertically, horizontally, or in asymmetrical grids that force the eye to actually look at the content instead of just scanning past it."
+  },
+  {
+   "id": "14_omitting_elements",
+   "name": "Omitting Elements",
+   "section": "Visual Hierarchy",
+   "question": "Beyond the \"Title, Body, CTA\" trio arrangements — what happens when elements are removed?",
+   "ai_slop": "AI has a hard time making the layout look balanced when missing one of these elements. The absence feels like a bug, not a choice. Empty space is awkward rather than purposeful.",
+   "good": "Normally follows a clean structure where the Title is strong enough to discard the Body, or where the CTA is moved to the navigation menu to let the Hero breathe. The omission is clean but conservative.",
+   "great": "Uses the space to create an experience rather than just delivering information. Examples include:\n- **Interaction-First:** Title and Body replaced by a functional tool (search bar, product configurator) that invites immediate action without explanation.\n- **Pure Visual Narrative:** High-quality image or video occupies 100% of the screen, message delivered solely through motion or scrolling, eliminating textual noise.\n- **Typographic Art:** Title merges with the graphic design, becoming the interface itself, eliminating the need for traditional buttons or text blocks.\n\n> **Key insight from research:** *\"AI Slop sections do not interact with one another. As if they were built individually. Great heroes almost never have CTA and minimum text. They are more focused on visual quality and user experience.\"*"
+  },
+  {
+   "id": "18_footer_hierarchy",
+   "name": "Footer Hierarchy",
+   "section": "Visual Hierarchy",
+   "question": "Is there a clear order of importance between the elements or random?",
+   "ai_slop": "The footer presents many elements with similar size, weight, and spacing. Logos, links, and secondary information all compete visually. The CTA often blends into the link grid or disappears among the other elements. Titles and links feel almost identical. The eye does not know where to start. Cluttered, lacks clear order of importance.",
+   "good": "The footer shows a clear hierarchy between primary elements and secondary links. The logo, CTA, or headline anchors the section while navigation links appear in structured groups. Section titles are stronger than the links below them. Spacing separates content blocks and the grid keeps alignment clean. Organized and easy to scan.",
+   "great": "The footer creates a strong visual order that guides the eye from the primary action to the least important information. A dominant element (CTA, headline, or large logo) anchors the section. Link groups follow in a clear structure with controlled spacing. Minor items (legal text) move to the bottom with lighter visual weight. Easy to understand within a second."
+  },
+  {
+   "id": "22_footer_scroll_behavior",
+   "name": "Footer Scroll Behavior (final impression)",
+   "section": "Visual Hierarchy",
+   "question": "Does the page end abruptly or leave a strong final impression?",
+   "ai_slop": "The page ends suddenly with a small footer that feels attached to the content above. There is little visual separation between the last section and the footer. The structure often finishes with a thin line of links and a copyright line at the bottom. The ending feels abrupt.",
+   "good": "The footer clearly marks the end of the page with a change in background tone or spacing. Content is structured and easy to scan. The copyright line sits at the bottom with clear separation. The ending feels clean and complete but follows common patterns.",
+   "great": "The footer creates a strong final moment in the scroll experience. A clear visual anchor (large CTA, logo, or structured layout) and a transition that signals the end of the page. Background contrast and spatial treatment make the footer feel like a destination, not just a stop."
+  },
+  {
+   "id": "01_margins",
+   "name": "Margins",
+   "section": "Layout",
+   "question": "Does content occupy at least 90% of the screen?",
+   "ai_slop": "Content is trapped in a narrow centered \"safe box.\" Nothing touches the edges. Every section feels like it lives inside the same invisible rectangle.",
+   "good": "Mostly centered layout with smaller margins. Some elements (often images) stretch full-width occasionally. The design plays it safe but at least acknowledges the edges exist.",
+   "great": "The design uses the full canvas confidently. Colors, images, or structural elements extend fully left and right. The margins become a design tool, not a constraint. Full-width backgrounds, edge-to-edge imagery, and purposeful negative space coexist."
+  },
+  {
+   "id": "02_grid",
+   "name": "Grid",
+   "section": "Layout",
+   "question": "Do all sections follow a common grid?",
+   "ai_slop": "Misaligned edges. Text blocks start offset from images. Vertical gutters change size as you scroll. Each section is treated as an independent block — even when using a 12-column grid, the gutter and container width vary between sections, causing cross-section misalignment.",
+   "good": "Simple, consistent columns. Standard blog or landing page with 1/2 or 1/3 width elements. Clean but predictable and \"boxy.\" The grid works but never surprises.",
+   "great": "Complex but aligned. Large headline spans 7 columns, small caption spans 2 — both align perfectly to the same left-hand \"track.\" The grid creates hierarchy without breaking alignment. Elements of different sizes still feel connected through shared vertical guides."
+  },
+  {
+   "id": "03_alignments",
+   "name": "Alignments",
+   "section": "Layout",
+   "question": "How are the elements placed within the sections?",
+   "ai_slop": "Every heading, paragraph, and button is centered. No horizontal eye movement; only scrolling straight down. The layout reads as a single column of centered blocks.",
+   "good": "Content bounces left to right in a predictable rhythm. You can guess where the next image will be before scrolling. Alignment is intentional but formulaic.",
+   "great": "Large headlines offset to the left while a supporting image sits lower and to the right. White space (negative space) is used as an active element to balance heavy objects. Alignment creates tension and visual rhythm, guiding the eye through the composition."
+  },
+  {
+   "id": "04_spacing",
+   "name": "Spacing",
+   "section": "Layout",
+   "question": "Does the website breathe, or does every section feel the same?",
+   "ai_slop": "Sections all look identical. Spacing, visual weight, and tone don't vary at all. Alignment is accidental — as if sections were copy-pasted. Flat, monotonous, lifeless.",
+   "good": "Spacing and tone are intentionally applied. Section heights, padding, and alignment are consistent and chosen with care. All sections carry roughly the same visual weight. Orderly, neat, yet predictable and visually flat.",
+   "great": "Spacing, visual weight, and tone are intentionally varied to create rhythm. Dense sections balanced by calm ones. Variation is purposeful, guiding attention, establishing hierarchy, giving the page a sense of flow and storytelling. The page breathes differently in different places."
+  },
+  {
+   "id": "06_logo_ratio",
+   "name": "Logo-to-Menu Ratio",
+   "section": "Layout",
+   "question": "Is the logo sized to balance with the text links?",
+   "ai_slop": "The navbar feels unnecessarily tall because the logo has too much empty padding around it. The text links look tiny and \"lost\" next to a massive brand mark. The header wastes vertical screen real estate.",
+   "good": "The logo height matches the button height, but there is still a lot of \"dead air\" above and below the items. It's organized but lacks a tight, professional finish.",
+   "great": "The x-height of the logo matches the x-height of the navigation font. The entire header feels like a single, slim horizontal \"ribbon\" where every element is vertically centered to the pixel. Sleek, high-end, maximizes screen real estate for content."
+  },
+  {
+   "id": "07_nav_positioning",
+   "name": "Nav Bar Positioning",
+   "section": "Layout",
+   "question": "Does it use a predictable layout, or does it use positioning creatively?",
+   "ai_slop": "Elements are positioned in a very predictable or default way. Everything follows a rigid template structure. The nav feels like it came from a boilerplate.",
+   "good": "Positioning is clean and functional. The nav adapts to the content but doesn't break new ground. Professional but unremarkable.",
+   "great": "The nav uses positioning as a design tool. It may float, detach, adapt to scroll context, or integrate with the hero section in unexpected ways."
+  },
+  {
+   "id": "08_nav_alignment",
+   "name": "Nav Bar Alignment / Adaptation",
+   "section": "Layout",
+   "question": "Is the navigation intentionally aligned? Does the nav container adapt to the layout beneath it?",
+   "ai_slop": "The navigation follows a rigid left-logo, right-links structure, without any adaptation to the layout beneath it. The nav exists independently of the page content.",
+   "good": "Navigation aligns to the page grid. The container width matches the body. Functional and clean.",
+   "great": "The nav adapts to the content structure. It may be wider or narrower than the body, align to specific grid tracks, or shift its internal layout based on what's below. The nav is a design element, not just a utility bar."
+  },
+  {
+   "id": "19_footer_structure",
+   "name": "Footer Structure",
+   "section": "Layout",
+   "question": "Is the layout a clean grid (columns/rows) or loosely arranged blocks?",
+   "ai_slop": "The footer appears as a loose collection of blocks with weak alignment. Columns may exist but they do not align cleanly to vertical grid tracks. Gutters vary and spacing feels inconsistent. Some elements drift outside the main structure or break the grid without purpose. Feels assembled piece by piece.",
+   "good": "The footer uses a clear column grid with consistent gutters and alignment. Content follows predictable rows and columns. Links and groups are evenly distributed across the grid. Clean and functional.",
+   "great": "The footer shows strong grid control while using the structure intentionally. Columns may vary in width to create hierarchy but still align to the grid. Gutters remain consistent and rows feel carefully organized. Structure serves the design intent."
+  },
+  {
+   "id": "21_footer_density",
+   "name": "Footer Density",
+   "section": "Layout",
+   "question": "Is spacing tight and controlled or filled with dead space?",
+   "ai_slop": "The footer contains large areas of empty space that do not serve a clear purpose. Vertical padding is often excessive and rows feel stretched apart. Link lists may be widely spaced with weak grouping. The layout feels bloated and inefficient. Spacing appears accidental instead of controlled.",
+   "good": "The footer uses balanced spacing with controlled vertical padding. Link groups are clearly separated while remaining easy to scan. Rows feel organized and spacing stays consistent across the grid. Functional density.",
+   "great": "The footer shows strong control over density. Spacing feels intentional and tightly managed. Important elements receive breathing room while link groups stay compact. Vertical rhythm guides the eye through the structure without wasted space. Every pixel of spacing is purposeful."
+  },
+  {
+   "id": "23_section_layouts",
+   "name": "Section Layouts (master page, 18 sub-dimensions)",
+   "section": "Layout",
+   "question": "",
+   "ai_slop": "Template-based. Each section uses a default structure that could come from any landing page builder. No structural idea or intentional layout choice. Sections are interchangeable.",
+   "good": "Clean and functional. The layout works well and follows a clear grid. Spacing and alignment are controlled. The section serves its purpose but doesn't push boundaries.",
+   "great": "A distinct structural idea. The layout is driven by a concept — the grid, spacing, and element placement all serve a specific design intent. The section feels like it was designed for its content, not filled into a template.\n\n*Reference sites used for Good/Great across the master page:* aim.obys.agency, augen.pro, cocotastudio.com, ctrl.xyz, dub.co, duna.com, evasanchez.info, funkhaus.io/en, jobyaviation.com, myhealthprac.com, thenoomo.com, on.energy, opalcamera.com, oci.madebybuzzworthy.com, ralphpeskett.co.uk, reflect.app, software-template.codedesign.app, sunday.ai, telhaclarke.com.au, tinywins.com, visacenter.chipsa.design, waabi.ai, 1820productions.com."
+  },
+  {
+   "id": "05_components",
+   "name": "Components",
+   "section": "Consistency",
+   "question": "Do similar components follow consistent layout rules across the site?",
+   "ai_slop": "A button in the header is rounded but the button in the hero is square. One card has a 20px corner radius while the card in the next section has 8px. Components feel pulled from different UI kits. No internal consistency.",
+   "good": "Every single card — regardless of whether it holds a price, an icon, or a photo — has exactly the same padding and border radius. Cohesive but can feel rigid or \"one-size-fits-all.\"",
+   "great": "Cards in the pricing section are tall and vertical to emphasize value, while cards in the gallery are wide and horizontal to emphasize the image, yet both use the exact same shadow style and internal margin logic. Components adapt their shape to context while sharing a coherent design language."
+  },
+  {
+   "id": "24_side_tab_accent",
+   "name": "Side-Tab Accent Border",
+   "section": "Consistency",
+   "question": "Are cards decorated with a thick colored border on one side?",
+   "ai_slop": "A card-shaped element carries a thick non-neutral border on a single side (typically left) — the most recognizable tell of AI-generated UI. The flagged side is at least 2px wide and dominates the other sides (other sides ≤1px, or the flagged side is ≥2× the others), paired with either a non-zero border-radius or a width ≥3px.",
+   "good": "Cards lean on background, shadow, or typographic emphasis to convey hierarchy. If a side accent appears, it is deliberate, sparse, and consistent with the rest of the component system rather than a default decoration glued onto every card.",
+   "great": "Card distinction comes from material treatment, spacing, content hierarchy, or restrained brand-color use — never from a colored stripe attached to one edge as a substitute for design."
+  },
+  {
+   "id": "t01_typographic_play",
+   "name": "Typographic Play (How fonts vary within a heading)",
+   "section": "Typography",
+   "question": "When the headline mixes faces/styles/weights, does the variation trace to a reference move — or is it a templated 'italic accent on one word'?",
+   "ai_slop": "Adds a single italic-serif accent word inside an otherwise all-caps display headline (e.g. 'WEEK *of the* SHIPPING') with no reference proving this exact move. The italic is the only typographic gesture and reads as 'I needed to play with fonts so I italicized one word.' This is a default training-data move, not a designer's choice. Equivalent slop: a one-word color change with no other variation, a one-word size change, or a single underline accent — when the surrounding text has no other rhythm.",
+   "good": "Mixes 2 typographic dimensions across the heading (e.g. weight + scale, or color + scale, or italic + color). Each variation is applied to multiple words, not just one. The mix is consistent within the section but doesn't trace tightly to a specific reference.",
+   "great": "The typographic play is lifted directly from a reference move the envelope cites — bubble-outline display letters (santateresafest), kinetic doodles flanking plain display (antoniouve), oversized-condensed + handwritten-overlay (santateresafest's 'Your first of the summer'), or layered colored-stripe-behind-letters. Color, scale, and weight all vary together, and the variation is named in `union_proves` of the envelope."
+  },
+  {
+   "id": "c01_contrast",
+   "name": "Contrast (Accessibility)",
+   "section": "Color Palette",
+   "question": "Do the colors provide sufficient contrast for readability?",
+   "ai_slop": "Uses color combinations with low or inconsistent contrast, making text and UI elements difficult to read. Bright colors may be placed over similar brightness backgrounds, reducing legibility.\n**Common bad pairs:** Red-Green, Green-Yellow, Blue-Purple, Blue-Green, Light-on-Light.",
+   "good": "Uses generally readable contrast levels, especially for key elements like headings and buttons, though some smaller text or secondary elements may still fall below ideal accessibility thresholds.",
+   "great": "Uses a clear and consistent contrast system, ensuring text and interactive elements remain readable across the interface. Color combinations follow accessibility guidelines and create strong visual hierarchy.\n**Good pairs:** blue/orange, blue/red, purple/yellow, dark blue/light yellow, black/yellow."
+  },
+  {
+   "id": "c02_color_blindness",
+   "name": "Color Blindness (Accessibility)",
+   "section": "Color Palette",
+   "question": "Are the colors distinguishable for users with color vision deficiencies?",
+   "ai_slop": "Relies heavily on color alone to convey meaning, often using combinations that are difficult to distinguish for color-blind users (such as red/green). No additional visual cues.",
+   "good": "Uses colors that are mostly distinguishable, though some combinations may still rely partially on color differences alone. Layout and typography provide some structural support.",
+   "great": "Uses accessible color choices and additional visual cues (icons, labels, patterns, or contrast) so that information remains understandable even when color perception is limited. Meaning never depends on hue alone."
+  },
+  {
+   "id": "c03_saturation",
+   "name": "Saturation",
+   "section": "Color Palette",
+   "question": "Does it look like a pure 100% saturation color or a refined color?",
+   "ai_slop": "Picks `#FF0000` (Pure Red) + `#0000FF` (Pure Blue). Usually touches the corners of the color graphs. Colors feel like \"default digital light.\"",
+   "good": "Although it avoids primary colors, it reaches the corners of the graphs very often. Still feels slightly too vivid or digitally raw.",
+   "great": "Rarely touches the corners of the graph. Colors have been \"conditioned\" — moved slightly toward the center/bottom to feel more mature, like uncoated ink rather than screen light.\n\n> **Key insight:** *\"AI Slop mimics real colors with saturation + gradients + textures. Good/Great designs mimic uncoated ink, not textures or light.\"*"
+  },
+  {
+   "id": "c04_undertones",
+   "name": "Undertones (Shared DNA)",
+   "section": "Color Palette",
+   "question": "Do colors share the same undertone?",
+   "ai_slop": "There is no shared DNA between the colors. Colors feel like random strangers pulled from different palettes. No unifying warmth, coolness, or tonal quality.",
+   "good": "Uses a standard harmony (like Complementary or Analogous) found on a color wheel tool. It's mathematically correct, but can feel \"predictable\" or like a generic corporate template.",
+   "great": "The designer has tweaked the saturation and brightness so the colors feel like they belong to the same family. Even if they are opposites, they might share a subtle undertone (e.g., all colors have a tiny bit of yellow in them to feel \"warm\"). The relationship feels custom, not formula-derived."
+  },
+  {
+   "id": "c05_brightness",
+   "name": "Brightness (Shared DNA)",
+   "section": "Color Palette",
+   "question": "Do the colors share the same brightness system?",
+   "ai_slop": "Uses colors with random brightness levels. Some colors are extremely bright while others are very dark, without a clear structure or hierarchy. The palette feels inconsistent and visually unstable.",
+   "good": "Uses colors with generally similar brightness levels, but some inconsistencies remain. Most colors follow a shared brightness range, although a few elements may appear slightly disconnected.",
+   "great": "Uses a coherent brightness system where colors follow a consistent value structure. Brightness differences are intentional and used to create hierarchy, readability, and visual rhythm across the interface."
+  },
+  {
+   "id": "c06_color_application",
+   "name": "Dark Theme (sub-dimension 2)",
+   "section": "Dark Mode",
+   "question": "Is the palette limited and controlled?",
+   "ai_slop": "Uses many colors (multiple hues, gradients, tinted surfaces), each occupying noticeable space. No single color clearly dominates.",
+   "good": "Uses a reduced palette (1–2 main hues + neutrals), but secondary colors still take meaningful space. Controlled but not fully disciplined.",
+   "great": "One dominant dark base covers most of the screen. Any other color is limited to one accent used sparingly or as one intentional block, never scattered."
+  },
+  {
+   "id": "15_newsletter",
+   "name": "Newsletter",
+   "section": "Contextual Fit",
+   "question": "How is the newsletter signup section designed?",
+   "ai_slop": "The section shows a basic email field and button stacked under a headline. Spacing, width, and alignment follow a predictable pattern. The form sits inside a centered container with little hierarchy. Feels generic and template-driven.",
+   "good": "The section uses a clean form layout with clear hierarchy between headline, input field, and button. The grid keeps alignment consistent and spacing improves readability. The signup action is easy to understand. Professional but conventional.",
+   "great": "The section uses position as the main design tool. The form may shift off center, attach to an edge, or sit inside an asymmetrical layout. The input and button are placed in relation to the grid. Spacing and alignment create tension and guide the eye toward the action. The form becomes a design moment, not just a utility block."
+  },
+  {
+   "id": "16_sign_up",
+   "name": "Sign Up",
+   "section": "Contextual Fit",
+   "question": "How is the registration/sign-up form designed?",
+   "ai_slop": "The section displays a basic stack of input fields followed by a sign up button. All fields share the same width and spacing. Labels, inputs, and the button carry similar visual weight. Everything feels uniform and template-based.",
+   "good": "The section uses a clean grid where fields align consistently and spacing separates each step. The sign up button stands out clearly. Headline and short text explain the action. Functional and conversion-aware.",
+   "great": "The section turns the sign up process into a clear visual flow. Fields may be grouped or arranged in structured columns. The primary button anchors the section through size, contrast, or spacing. Supporting elements reinforce the action without distracting from the form. The form is concept-driven.\n\n**Notable Great examples:**\n- **Cash App** — Left headline *\"Cash App makes money simple\"* with row of three proof cards, giant bright green CTA card on far right dominating the grid.\n- **Nexa** — Giant typography *\"BUILT TO SERVE. DESIGNED TO SCALE.\"* with single small button as only action."
+  },
+  {
+   "id": "17_send_message",
+   "name": "Send Message / Contact Form",
+   "section": "Contextual Fit",
+   "question": "How is the contact form designed?",
+   "ai_slop": "The section sits in a single centered column or a simple two column split. Fields are stacked with identical width and spacing. Alignment is slightly off and gutters are inconsistent. Inputs look like basic rectangles repeated with no structure.",
+   "good": "The form uses a clean one or two column grid with precise alignment and consistent gutters. Fields may vary slightly in size such as a larger message box. Corners, spacing, and grouping feel controlled. Professional and polished.",
+   "great": "The form uses the grid as a design tool. It may expand to three columns or break the standard split. Fields are distributed across the grid with intentional empty space. Alignment shifts away from center and creates composition. Some areas feel dense while others are open. The form becomes a layout statement."
+  },
+  {
+   "id": "20_footer_conversion",
+   "name": "Footer Conversion",
+   "section": "Contextual Fit",
+   "question": "Is there a clear next step (newsletter, CTA) or is it purely informational?",
+   "ai_slop": "The footer contains no clear action or the CTA is buried inside a dense grid of links. Buttons often look similar to navigation links and do not stand out. Multiple small actions may compete for attention. The section behaves as a purely informational block. The user reaches the end of the page with no obvious next step.",
+   "good": "The footer includes a visible CTA such as a newsletter signup or button. The action sits inside the grid with clear spacing and readable contrast. It is easy to identify the next step even though the structure stays familiar. Closes the page in a practical, organized way.",
+   "great": "The footer acts as a strong final conversion moment. A single primary action anchors the section and stands out clearly through size, contrast, or positioning. The conversion element is impossible to miss and feels like a deliberate closing statement."
+  },
+  {
+   "id": "10_nav_scroll_behavior",
+   "name": "Nav Bar Scroll Behavior",
+   "section": "Interaction",
+   "question": "Does the nav disappear, stay sticky, or hide until scrolling back up?",
+   "ai_slop": "The navigation bar either vanishes completely upon scroll or remains as a static, bulky block at the top. No thought given to scroll interaction.",
+   "good": "The nav stays sticky or hides on scroll-down and reappears on scroll-up. Functional but uses common patterns without adding personality.",
+   "great": "The scroll behavior is part of the design narrative. The nav may transform (collapse, change background, morph into a pill), integrate with scroll-triggered animations, or use the scroll position to create progressive disclosure."
+  },
+  {
+   "id": "i01_media_match",
+   "name": "Media Match (does the page carry the corpus's media?)",
+   "section": "Imagery",
+   "question": "Does the page ship the same media the studied references ship — photography, illustration, texture, or pure type?",
+   "ai_slop": "The references carry photography but the page ships none — pure type and colored blocks because the deliverable is 'a single self-contained file.' Dropping the corpus's photography for that reason is an evasion, not a reading: seeded placeholder URLs and embedded data-URIs are both self-contained, so 'self-contained' means one FILE, never zero photographs. However clean the type, the resemblance to the references is broken.",
+   "good": "The page ships the corpus's dominant medium, but the choice wasn't studied — photography appears because heroes usually carry photos, not because the references proved it. When the corpus splits photo against pure type, the page picks by habit instead of letting the brief's subject decide.",
+   "great": "The media choice is read from the corpus: what the references actually ship — photography and its treatment, illustration, texture, or pure type — is studied and matched. When the corpus splits, the brief's subject casts the deciding vote: a physical, atmospheric subject (a venue, a festival night, food, objects, people) takes photography; only an abstract or interface subject earns pure type. A purely typographic hero appears only when a studied reference makes exactly that move."
+  },
+  {
+   "id": "i02_image_recipe",
+   "name": "Image Recipe (one page-wide treatment)",
+   "section": "Imagery",
+   "question": "Does every image ship through one page-wide recipe — aspect ratios, crop discipline, grade — with its box declared in the markup?",
+   "ai_slop": "Every image arrives as-is: mixed aspect ratios, no shared grade, one photo warm and the next cold, crops decided per slot. No width/height or aspect-ratio declared in the markup, so the page reflows as images load — the loading page and the settled page are two different pages.",
+   "good": "Images share an approximate look — similar tones, similar crops — but the recipe was never braided up front, so a late addition drifts off-grade. Dimensions are declared on most images; loading behavior is left to browser defaults.",
+   "great": "Photography is itself a facet: one page-wide image recipe is braided — aspect ratios, crop discipline, grade — with the register's treatment applied in CSS (grayscale, duotone, grain), so every frame ships through the same treatment. Every image declares its box in the markup (width/height or aspect-ratio) so the loading page and the settled page are the same page; hero media loads eager, below-the-fold lazy."
+  },
+  {
+   "id": "i03_image_honesty",
+   "name": "Image Honesty (pixels match captions; no faked media)",
+   "section": "Imagery",
+   "question": "Was every shipped image actually LOOKED at, and can it honestly sit under its caption?",
+   "ai_slop": "Seeded placeholders ship sight-unseen — the seed names the intent ('silo-river-dusk') but nobody checked the pixels, so a caption about harvest sits over a random office lobby: a seeded placeholder is a random photograph, and the seed names your intent, not the pixels. Or a fake product UI built from styled divs stands in for photography. A caption claims what the pixels don't show.",
+   "good": "Placeholders were glanced at and the obviously wrong ones swapped, but marginal frames survive — an image that only half-earns its caption stays because hunting another seed felt expensive. Real imagery where it matters most, but the discipline thins below the fold.",
+   "great": "Every image was LOOKED at and kept only if it can honestly sit under its caption; when no seed cooperates, crop tighter, treat harder, or caption looser — never a dishonest pairing. When photography is called for: an image-gen tool if one is available, else seeded placeholder photography (https://picsum.photos/seed/<descriptive-seed>/<w>/<h>, the seed naming the shot). A depicted interface is a real capture, a generated image, or nothing — never photography's substitute built from styled divs."
+  }
+ ]
+}
