@@ -47,7 +47,7 @@ shape you have been reading all run.
   `role` and `notes` on faces); where it doesn't — an easing, a border, a
   spacing step, a grid number, a compositional move — the study writes the
   role from observation: where the source deploys it, on what elements, at
-  what moment. A value without its role is half an atom and does not enter
+  what moment. **Color atoms are written in OKLCH**: convert each harvested hex to OKLCH (lossless representation, not a nudge; keep the source hex in the entry's notes) and record the palette as a relationship ladder — lightness ordered, shared hue noted, chroma role named. Compose derives every colour decision from the ladder's relationships, not from hex strings, and converts back only at CSS-writing time. A value without its role is half an atom and does not enter
   `BRAND.json`; at compose, an atom is deployed only inside its harvested
   role, and deploying it elsewhere is a transplant that carries a written
   justification or doesn't ship.
@@ -116,7 +116,7 @@ invented descriptor pre-decides what the corpus was supposed to decide, and
 the results come back agreeing with your prior. Expressive descriptors
 enter a query only later, and only cited — when they trace to an interview
 answer or a studied finding, hunting references for a direction already
-decided from evidence (directed search, not decoration). Whenever an anchor or a strong candidate
+decided from evidence (directed search, not decoration). **One query leaves the industry**: of the three-plus discovery queries, exactly one searches the client's materials and manner (from the interview) in OTHER industries — the register's craft neighbors, not its competitors. Whenever an anchor or a strong candidate
 emerges, run `search_similar_brands` on it as a second lens: it returns
 visual neighbors text search cannot reach. **Acquiring a source:** a
 result already in the engine is read with `get_brand_extraction_result`.
@@ -147,7 +147,7 @@ to it), plus the facets this brief demands. **When the studied sources ship
 photography, the page ships photography** — an image-gen tool if one is
 connected, else stock placeholders, picked by subject and run through the
 studied recipe (grade, crop, duotone, texture) until each frame sits
-honestly under its caption:
+honestly under its caption: **Photo picking is a decision, not a draw**: for every photo slot, fetch at least four candidates, LOOK at all of them, and pick with a one-line reason; a candidate nobody looked at never ships. No photo block exceeds 100vh at 1440 — a taller one is cropped to its subject.
 `https://picsum.photos/seed/<descriptive-seed>/<w>/<h>` for atmosphere,
 place and craft; `https://loremflickr.com/<w>/<h>/<keyword>` when the
 subject must be specific (a workshop, a fabric, a press); and for the
@@ -168,7 +168,7 @@ them. Done when every facet's decision traces to ≥3 atoms from ≥3 sources.
 
 **3½. Study the anchors deep.** The wide study prices facets in slices;
 anatomies cannot be sliced. Name the anchor sources — the two or three
-references whose anatomies the planned components and sections will follow
+references whose anatomies the planned components and sections will follow (at least one anchor from OUTSIDE the brief's industry)
 — and for each one: pull the heavy sections of its extraction
 (`get_brand_extraction_result` with the component and layout sections, not
 only the palette slices), and walk its live pages in the browser at full
@@ -184,7 +184,7 @@ the page will adopt, its **code**: pull the source's captured `html` and
 `css` from the extraction's `result.artifacts` and read how the section is
 actually built — the real grid-template, the real paddings, the real font
 stack. An anatomy remembered from a screenshot is prose; an anatomy read
-from its own stylesheet is evidence. Wide keeps the braid
+from its own stylesheet is evidence. **Surgery graft**: for each anchor-adopted section, compose STARTS from the source's actual HTML skeleton copied out of the captured artifacts — strip its content and class names, keep the structural tree and layout CSS — then re-express every visible value through `BRAND.json` until the seam disappears. The bones are transplanted; the skin must be the brand's. Anatomies-never-verbatim applies to the FINISHED section. Wide keeps the braid
 honest; deep is where its structure comes from. Done when every anchor has
 placed at least one compositional atom — a section or component anatomy,
 not a value — in `BRAND.json`, citing the screenshot you actually viewed.
@@ -197,7 +197,7 @@ Every value is braided from the studied sources (atoms verbatim, assemblies
 novel) and will ship verbatim. **Every taste value names its source in the
 nearest `notes`/`description` field** — one clause, not an essay: an
 uncited taste value is a facet nobody decided, which is the door slop walks
-through. Fill `sections` as the page plan: the ordered inventory derived
+through. Fill `sections` as the page plan: **each section entry carries an ASCII wireframe** — a 12-column grid sketch (rows of labeled boxes, column spans marked) distilled from the anchor's screenshot and captured code; compose reproduces each wireframe's structure before any styling, and verify checks the built section against its wireframe. Then fill the rest of the plan: the ordered inventory derived
 from studied anatomies, each section naming its anatomy reference, with the
 one invented signature named in `profile.brand_signature`. The strongest
 signature resolves the interview's central tension: the page reads as if
