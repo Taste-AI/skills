@@ -116,7 +116,7 @@ invented descriptor pre-decides what the corpus was supposed to decide, and
 the results come back agreeing with your prior. Expressive descriptors
 enter a query only later, and only cited — when they trace to an interview
 answer or a studied finding, hunting references for a direction already
-decided from evidence (directed search, not decoration). **One query leaves the industry**: of the three-plus discovery queries, exactly one searches the client's materials and manner (from the interview) in OTHER industries — the register's craft neighbors, not its competitors. Whenever an anchor or a strong candidate
+decided from evidence (directed search, not decoration). **One query leaves the industry**: of the three-plus discovery queries, exactly one searches the client's materials and manner (from the interview) in OTHER industries — the register's craft neighbors, not its competitors. **Look at the board before you choose**: every result card carries a screenshot — open and LOOK at all of them (every card, every query) before deciding what to extract or reuse. Sources are picked by what the pixels show, never by what the identity paragraph claims; each pick carries a one-line reason from the looking. A source chosen unseen is the search's word taken on faith — the door genre slop walks through. Whenever an anchor or a strong candidate
 emerges, run `search_similar_brands` on it as a second lens: it returns
 visual neighbors text search cannot reach. **Acquiring a source:** a
 result already in the engine is read with `get_brand_extraction_result`.
