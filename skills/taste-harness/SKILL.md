@@ -41,7 +41,16 @@ shape you have been reading all run.
 - An **atom** is an exact value seen in a source — a hex, an easing curve, a
   leading, a border treatment. Atoms ship verbatim; nudging values washes
   the craft toward the default. Exact values are always copied from
-  `BRAND.json`'s text, never read off pixels.
+  `BRAND.json`'s text, never read off pixels. **An atom is value plus
+  role — every atom, no exceptions.** Where the extraction declares the
+  role, copy it (`when_to_use` on colors, surfaces, gradients and shadows,
+  `role` and `notes` on faces); where it doesn't — an easing, a border, a
+  spacing step, a grid number, a compositional move — the study writes the
+  role from observation: where the source deploys it, on what elements, at
+  what moment. A value without its role is half an atom and does not enter
+  `BRAND.json`; at compose, an atom is deployed only inside its harvested
+  role, and deploying it elsewhere is a transplant that carries a written
+  justification or doesn't ship.
 - Every **assembly** braids atoms from multiple sources. A **facet-level recipe**
   (the palette, the type system) braids ≥3 atoms from ≥3 sources; an
   **individual section** braids 2–4 atoms from ≥2 sources. No source owns
@@ -63,7 +72,10 @@ shape you have been reading all run.
   the seam.
 - Every component's **anatomy** — its structure, proportions, internal
   hierarchy, states — comes from a named reference you studied, never from
-  your memory of what such a component looks like. The corpus outranks you:
+  your memory of what such a component looks like, and its structure is
+  harvested from the source's **own code** (the extraction's captured
+  html/css artifacts) — a screenshot tells you what a section looks like;
+  only its stylesheet tells you how its designer built it. The corpus outranks you:
   when your instinct and the reference disagree, the reference wins.
 
 ## The loop
@@ -161,10 +173,21 @@ references whose anatomies the planned components and sections will follow
 (`get_brand_extraction_result` with the component and layout sections, not
 only the palette slices), and walk its live pages in the browser at full
 height — your own full-page screenshots, never the search-card thumbnail —
-before writing any anatomy into `BRAND.json`. Wide keeps the braid honest;
-deep is where its structure comes from. Done when every anchor has placed
-at least one compositional atom — a section or component anatomy, not a
-value — in `BRAND.json`, citing the screenshot you actually viewed.
+before writing any anatomy into `BRAND.json`. While each anchor walk is
+open, harvest three measurements the slices cannot carry: its **color
+proportions** (histogram the screenshot with a short script — record
+ground / ink / accent as percentages), **two or three compositional moves
+by name** (an overlap, a bleed that breaks the container, a column drift,
+an offset pairing — moves, not grid numbers), and its **type-scale ratio**
+(display ÷ heading ÷ body, e.g. 40/28/16 ≈ 1.45) — and, for every anatomy
+the page will adopt, its **code**: pull the source's captured `html` and
+`css` from the extraction's `result.artifacts` and read how the section is
+actually built — the real grid-template, the real paddings, the real font
+stack. An anatomy remembered from a screenshot is prose; an anatomy read
+from its own stylesheet is evidence. Wide keeps the braid
+honest; deep is where its structure comes from. Done when every anchor has
+placed at least one compositional atom — a section or component anatomy,
+not a value — in `BRAND.json`, citing the screenshot you actually viewed.
 
 **4. Fill `BRAND.json`.** Write the decisions as the extraction that
 doesn't exist yet — the format is your own references'
@@ -224,6 +247,37 @@ page from `BRAND.json` alone.
   each recurring deliberately rather than a different trinket per section.
   Citations justify a pattern, never the sum — five individually-pinned
   loud systems are still slop, and so is a scrapbook of pinned ornaments.
+- **The composition floor.** The rules above police the pieces; these
+  police what sits *between* them. Each carries its trigger and its
+  numbers — when the trigger holds, the parameter is the law:
+  - *Color economy* — **when the palette has any accent**: `colors` declares
+    target proportions harvested from the anchors (ground / ink / accent,
+    summing 100; when the corpus is silent, start from 70/20/10) plus the
+    accent's **one peak section**, named. At verify, histogram the built
+    page: any band off by more than ±8 points, or an accent peaking in two
+    places, fails.
+  - *Layout moves* — **when the page has more than 3 sections**: the page
+    ships **≥2 studied compositional moves** (from the anchor harvest,
+    named in `layout.notes`). At verify, shoot a pacing strip — one frame
+    every ~800px; more than 3 consecutive frames with the same silhouette
+    (same container width, same alignment) is the metronome, and fails.
+  - *Type system* — **always**: the scale is declared as a **ratio from an
+    anchor** (not loose sizes), and the page carries **exactly one
+    typographic event outside the hero** (pull-quote at display size, a
+    giant numeral, a wordmark bookend — a studied move). Micro floor:
+    `tabular-nums` on any aligned digits, tracking tightened above 48px,
+    `text-wrap: balance` on headings.
+  - *Component grammar* — **when the page ships ≥3 interactive
+    components**: `actions` names one `grammar_source`; radius, border
+    weight and shadow policy each hold **one value family-wide**, and
+    variant sets (primary / secondary / ghost) travel from that single
+    source, never assembled one control per source.
+  - *The star section* — **when the page has ≥5 sections**: exactly **one**
+    section (the signature's home) gets double budget — height ≥1.5× the
+    median section, ≥2 custom moves — and its two neighbors ship **zero**
+    loud systems: contrast of investment, not only of color. `sections`
+    reads as an arc (open loud → prove quiet → star → resolve), never as
+    equal-weight panels.
 - **The arithmetic.** Write `validate_brand.py` beside `BRAND.json`: it
   cross-foots every number the page will show (sums, averages,
   percentages, unit math), checks date–weekday coherence, checks axis
