@@ -4,7 +4,7 @@
 The creativity v2.1 pipeline queries a Qdrant collection of design-dimension
 rubrics per section while composing ("slop k=2 per section keyword", generator
 rule R4). This is the same discipline over the vendored catalog
-(design-dimensions.json, 34 dimensions, slop/good/great tiers verbatim):
+(design-dimensions.json, 36 dimensions, slop/good/great tiers verbatim):
 pure-stdlib TF-IDF, which is plenty at 34 documents.
 
 Usage:

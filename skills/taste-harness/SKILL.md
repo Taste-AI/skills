@@ -10,12 +10,16 @@ leaves with an identity that could only be theirs, and every decision in the
 room traces to a pinned piece of evidence.
 
 **Requirements.** This skill needs the taste-engine MCP tools
-(`search_brands`, `list_submissions`, `submit_brand`, `get_submission`,
-`get_brand`, `find_similar_brands`) and a driveable browser with navigate,
+(`search_brands`, `list_brand_extractions`, `extract_brand`,
+`poll_brand_extraction`, `get_brand_extraction_result`,
+`search_similar_brands` — an older server may expose these as
+`list_submissions` / `submit_brand` / `get_submission` / `get_brand` /
+`find_similar_brands`; same tools, use the names the server offers) and a
+driveable browser with navigate,
 JavaScript evaluate, and screenshots you can save as image files. If any of
 that is missing, say so and stop — the loop below cannot run from memory, and
 running it from memory produces exactly the work this skill exists to
-prevent. The run is fully autonomous: no step waits on a human.
+prevent. The run is fully autonomous: do not wait on a user for any step.
 
 **The handoff note**, defined once: the closing message of the run
 (conversation, not a file, not a deliverable). It carries the interview
@@ -44,6 +48,19 @@ shape you have been reading all run.
   more than 40% of the page — counted as its share of `BRAND.json`'s cited
   values, never by impression. The test: each source's designer recognizes
   their lesson, never their work.
+- Every borrowed piece is a **graft**, never a collage tile: cut living
+  from its source (the atom verbatim, the anatomy named) and grafted onto
+  this client's rootstock — re-expressed through the brand's own story,
+  motif and voice until the seam disappears. Atoms travel verbatim;
+  **anatomies never do** — an adopted anatomy changes at least one
+  structural move, re-expressed through the signature or the brand's motif.
+  The word "verbatim" inside an anatomy citation is a confession, not
+  diligence: a section whose anatomy field says verbatim goes back for
+  rework (or carries a written justification) before compose. A graft that
+  took reads as this brand's even with the citation removed; one the host
+  rejects — a section that still reads as its source's when placed on the
+  page — is reworked through the signature or struck, never left showing
+  the seam.
 - Every component's **anatomy** — its structure, proportions, internal
   hierarchy, states — comes from a named reference you studied, never from
   your memory of what such a component looks like. The corpus outranks you:
@@ -66,26 +83,34 @@ the one only this client could own.
 
 **2. Search wide.** At least three `search_brands` calls at the deepest
 depth the tool offers (`deep`), aimed at different facets; extract
-or reuse six to ten sources — check `list_submissions` before extracting
+or reuse six to ten sources — check `list_brand_extractions` before extracting
 anew. Pick the opening move from the brief's shape:
 
 | Brief shape | Opening move |
 |---|---|
 | One vibe, no names | **Board-first**: one broad deep query (top_k 10–15), facets assigned over the board, targeted queries only for gaps |
 | Sources named ("layout of X, colors of Y") | **Anchor-first**: extract the named sites directly; search only the open facets |
-| Style / movement / technique | **Style query**: name the movement in the query — the style arm finds it even with zero tagged exemplars |
+| Style / movement / technique | **Style query**: carry the brief's style name verbatim and unexpanded — the style arm finds it even with zero tagged exemplars. Never translate the term into your own synonyms: a "Monochrome" brief searched as "black-and-white" has already decided what the corpus was supposed to decide. Let the results define the style, then add facet adjectives only in follow-up queries |
 | "Like X, but Y" | **Anchored pivot**: put the anchor inside the query ("like ramp.com but warm, for hospitality") — X is a coordinate, not a source; extract X only if the brief also assigns it a facet |
-| "X and similar" | **Dual-lens**: `find_similar_brands` follows the LOOK (whole-gestalt visual neighbors), anchored deep search follows the MEANING (the cultural neighborhood) — different sets; merge, extract only winners |
+| "X and similar" | **Dual-lens**: `search_similar_brands` follows the LOOK (whole-gestalt visual neighbors), anchored deep search follows the MEANING (the cultural neighborhood) — different sets; merge, extract only winners |
 | A color or tone seeds the brief | Lead the query with the tone but recruit by **color-role, not hue**: the useful cluster is sites where the tone plays the same structural role (ground vs ink vs accent), never hue-neighbors where it plays another |
 
-Phrase each query as the caption of the ideal result — one target facet
-plus minimal scene context. Whenever an anchor or a strong candidate
-emerges, run `find_similar_brands` on it as a second lens: it returns
+Build each discovery query from the brief's own material only — the
+industry, the page type, the named style verbatim, whatever layout, palette
+or audience words the client actually gave — one target facet plus minimal
+scene context. Never decorate a query with aesthetic adjectives the brief
+never said ("bold retro", "appetite-forward", "neighborhood energy"): every
+invented descriptor pre-decides what the corpus was supposed to decide, and
+the results come back agreeing with your prior. Expressive descriptors
+enter a query only later, and only cited — when they trace to an interview
+answer or a studied finding, hunting references for a direction already
+decided from evidence (directed search, not decoration). Whenever an anchor or a strong candidate
+emerges, run `search_similar_brands` on it as a second lens: it returns
 visual neighbors text search cannot reach. **Acquiring a source:** a
-result already in the engine is read with
-`get_brand`. A site not yet in the engine enters through `submit_brand`
-with its URL, then `get_submission` polled until the extraction completes,
-then `get_brand`. When the corpus is thin for the register, shed adjectives
+result already in the engine is read with `get_brand_extraction_result`.
+A site not yet in the engine enters through `extract_brand` with its URL,
+then `poll_brand_extraction` polled until the extraction completes, then
+`get_brand_extraction_result`. When the corpus is thin for the register, shed adjectives
 and search the adjacent register — the client's *materials and manner* —
 before settling for weak matches; a corpus hole is itself a finding. Reuse
 extractions for economy, never for comfort: a source that anchors every
@@ -106,17 +131,44 @@ negative space, where subjects face; the styling patterns — texture,
 overlays, duotones, borders on media. Each finding is an atom like any
 hex: it lands in `BRAND.json` — `assets` or the `profile.visual_language`
 descriptions — with its citation, and the composed page's imagery is held
-to it), plus the facets this brief demands. Screenshots come with each
-extraction — open every screenshot URL the `get_brand` response carries in
-the browser; view every screenshot you cite. Note the patterns every
+to it), plus the facets this brief demands. **When the studied sources ship
+photography, the page ships photography** — an image-gen tool if one is
+connected, else stock placeholders, picked by subject and run through the
+studied recipe (grade, crop, duotone, texture) until each frame sits
+honestly under its caption:
+`https://picsum.photos/seed/<descriptive-seed>/<w>/<h>` for atmosphere,
+place and craft; `https://loremflickr.com/<w>/<h>/<keyword>` when the
+subject must be specific (a workshop, a fabric, a press); and for the
+invented team — the one subject real-photo placeholders cannot honestly
+cover — illustrated avatars
+(`https://api.dicebear.com/9.x/<style>/svg?seed=<name>`) restyled to the
+page's ink, or your own illustration, or type. Going photography-free is a
+citation, not an escape: it requires the studied sources themselves
+shipping no imagery, named in `profile.style_classification`. Screenshots come with each
+extraction — open every screenshot URL the `get_brand_extraction_result`
+response carries in the browser; view every screenshot you cite, and save
+every screenshot you view into the run's `study/` folder — viewed evidence
+that isn't on disk can't be audited or re-read during compose. Note the patterns every
 source refuses in `profile.style_classification` as you go — they become
 the corpus negatives the ship gate checks;
 the exact values you harvest go straight into `BRAND.json` as you decide
 them. Done when every facet's decision traces to ≥3 atoms from ≥3 sources.
 
+**3½. Study the anchors deep.** The wide study prices facets in slices;
+anatomies cannot be sliced. Name the anchor sources — the two or three
+references whose anatomies the planned components and sections will follow
+— and for each one: pull the heavy sections of its extraction
+(`get_brand_extraction_result` with the component and layout sections, not
+only the palette slices), and walk its live pages in the browser at full
+height — your own full-page screenshots, never the search-card thumbnail —
+before writing any anatomy into `BRAND.json`. Wide keeps the braid honest;
+deep is where its structure comes from. Done when every anchor has placed
+at least one compositional atom — a section or component anatomy, not a
+value — in `BRAND.json`, citing the screenshot you actually viewed.
+
 **4. Fill `BRAND.json`.** Write the decisions as the extraction that
-doesn't exist yet — the format is your own references' `get_brand`
-responses, refilled for the invented brand; the section list, conventions,
+doesn't exist yet — the format is your own references'
+`get_brand_extraction_result` responses, refilled for the invented brand; the section list, conventions,
 and gate-checked shapes live in [brand-template.md](brand-template.md).
 Every value is braided from the studied sources (atoms verbatim, assemblies
 novel) and will ship verbatim. **Every taste value names its source in the
@@ -125,11 +177,15 @@ uncited taste value is a facet nobody decided, which is the door slop walks
 through. Fill `sections` as the page plan: the ordered inventory derived
 from studied anatomies, each section naming its anatomy reference, with the
 one invented signature named in `profile.brand_signature`. The strongest
-signature measured is **data as art direction**: one real dataset from the
-brief becomes the page's principal ornament — a sleep trace drawn
-full-width, a program grid as the poster — and its numbers pass the
-validator like every other claim; a signature graphic that lies is the
-costliest defect a page can carry. Inside any
+signature resolves the interview's central tension: the page reads as if
+the brief's hardest constraint were the reason the brand exists — name,
+founding story, and one motif all carrying it. When the brief ships a real
+dataset, **data as art direction** is that resolution's strongest form —
+one real dataset becomes the page's principal ornament, its numbers passing
+the validator like every other claim (a signature graphic that lies is the
+costliest defect a page can carry); otherwise fuse the constraint with the
+founding story. A signature that merely decorates beside the constraint is
+the instant choice. Inside any
 collection, siblings vary by hierarchy — uniform treatment ×N is the prior
 talking. Done when a designer who never saw the sources could build the
 page from `BRAND.json` alone.
@@ -141,7 +197,9 @@ page from `BRAND.json` alone.
   the named source actually make that move? A value with no citation is
   undecided — decide it now, from evidence, or strike it. A failed
   spot-check demotes the value to undecided: re-decide and re-cite, or
-  strike, then spot-check the replacement.
+  strike, then spot-check the replacement. Tally each source's share of
+  `BRAND.json`'s cited values now — a source over 40% is rebalanced here,
+  while the sources are still open, not discovered at the ship gate.
 - **The floor, where it is already decidable in the JSON:** every
   interactive control's `visuals` declares its reachable states —
   `default`, `hover`, `focus`, **`active`**, plus disabled / loading /
@@ -160,8 +218,12 @@ page from `BRAND.json` alone.
   saturated color field, oversized display type, an ornament layer,
   polychrome coding, a full-bleed loud band. At most **two** page-wide,
   named in `profile.visual_language`; every other section is quiet chrome.
+  Small ornament devices are not exempt as chrome — rotated snapshots,
+  price badges, tape corners, hand-drawn marks, stamp borders each count
+  as one device, and the page carries at most **two distinct devices**,
+  each recurring deliberately rather than a different trinket per section.
   Citations justify a pattern, never the sum — five individually-pinned
-  loud systems are still slop.
+  loud systems are still slop, and so is a scrapbook of pinned ornaments.
 - **The arithmetic.** Write `validate_brand.py` beside `BRAND.json`: it
   cross-foots every number the page will show (sums, averages,
   percentages, unit math), checks date–weekday coherence, checks axis
@@ -198,7 +260,7 @@ each section, query design guidance** with the section type + content goal
 Preference order: a connected design-guidance tool; the live guidance
 index when its checkout is present; the bundled catalog
 (`python3 <this skill's base directory>/assets/slop_lookup.py "<query>" --k 2`
-— 34 dimensions with slop/good/great tiers; the run's working directory is
+— 36 dimensions with slop/good/great tiers; the run's working directory is
 the project, not this folder, so call the script by its full path). Treat the answer as contextual challenge, never as
 an atom source — expressive decisions stay cited to pins. Log every
 query → dimensions → changed/confirmed; the log rides in the handoff

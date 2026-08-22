@@ -1,7 +1,8 @@
 # BRAND.json: the extraction of a site that doesn't exist yet
 
 The decisions document is a **Taste Engine extraction response, filled by
-hand**: write the `design_system` object that `get_brand` WOULD return if
+hand**: write the `design_system` object that `get_brand_extraction_result`
+WOULD return if
 the finished page were extracted tomorrow. You have been reading this exact
 shape all run for every reference, your references' extractions are the
 template; refill it for the invented brand.

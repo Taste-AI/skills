@@ -306,6 +306,24 @@
    "ai_slop": "Seeded placeholders ship sight-unseen — the seed names the intent ('silo-river-dusk') but nobody checked the pixels, so a caption about harvest sits over a random office lobby: a seeded placeholder is a random photograph, and the seed names your intent, not the pixels. Or a fake product UI built from styled divs stands in for photography. A caption claims what the pixels don't show.",
    "good": "Placeholders were glanced at and the obviously wrong ones swapped, but marginal frames survive — an image that only half-earns its caption stays because hunting another seed felt expensive. Real imagery where it matters most, but the discipline thins below the fold.",
    "great": "Every image was LOOKED at and kept only if it can honestly sit under its caption; when no seed cooperates, crop tighter, treat harder, or caption looser — never a dishonest pairing. When photography is called for: an image-gen tool if one is available, else seeded placeholder photography (https://picsum.photos/seed/<descriptive-seed>/<w>/<h>, the seed naming the shot). A depicted interface is a real capture, a generated image, or nothing — never photography's substitute built from styled divs."
+  },
+  {
+   "id": "25_ticker_marquee",
+   "name": "Ticker / Marquee Band (earned or absent)",
+   "section": "Components",
+   "question": "Does a scrolling ticker or rotated marquee band appear only because a studied reference ships it — or because it is the current default?",
+   "ai_slop": "A rotated or auto-scrolling ticker strip appears because every AI landing page ships one: repeated slogan clauses with separator marks (dots, stars, slashes), an angle chosen for 'energy', no studied source shipping the pattern. It decorates the seam between two sections and could be deleted without any reader noticing anything missing.",
+   "good": "The ticker traces to a studied reference that actually ships one, but arrives as-is: the source's angle and rhythm untouched, its clauses interchangeable slogans that could ride any brand's band.",
+   "great": "Absent unless a studied source ships the pattern — a page with no ticker loses nothing. When one ships: the anatomy is grafted, never verbatim (angle or rhythm tied to the brand's own signature or motif), its clauses carry facts of this brand rather than slogans, and it is counted against the loudness budget as one of the page's two loud systems."
+  },
+  {
+   "id": "26_sticker_scrapbook",
+   "name": "Sticker / Scrapbook Ornament Kit (earned or absent)",
+   "section": "Components",
+   "question": "Do rotated stickers, starburst price badges, polaroid frames, tape corners, stamps or hand-drawn marks appear only because a studied reference ships that exact device — and how many distinct ornament devices does the page accumulate?",
+   "ai_slop": "The scrapbook kit assembled: a rotated starburst or circular price badge, polaroid-framed snapshots with tape or tilt, hand-drawn underlines or circles, dashed-border stamps — several of them across the page, each defensible alone, none traceable to a studied source shipping that exact device. Individually cute, together they are everyone's 'authentic local joint' costume.",
+   "good": "One or two ornament devices, each traceable to a studied reference that ships it, but arriving as-is — the source's tilt, the source's badge shape — and scattered wherever a section felt plain.",
+   "great": "Absent unless a studied source ships the exact device. When one ships: it is grafted (its geometry tied to the brand's own signature or motif), it appears with discipline (one device, recurring deliberately, not a different ornament per section), and the page-wide count of distinct ornament devices stays at two or fewer — the sum is counted like the loudness budget, because five individually-pinned ornaments are still slop."
   }
  ]
 }
