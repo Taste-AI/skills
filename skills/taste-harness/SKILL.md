@@ -122,7 +122,7 @@ visual neighbors text search cannot reach. **Acquiring a source:** a
 result already in the engine is read with `get_brand_extraction_result`.
 A site not yet in the engine enters through `extract_brand` with its URL,
 then `poll_brand_extraction` polled until the extraction completes, then
-`get_brand_extraction_result`. When the corpus is thin for the register, shed adjectives
+`get_brand_extraction_result`. Polling happens inside this same run: loop `poll_brand_extraction` with a pause between rounds (sleep via Bash) until every submission completes or fails. **Never end your turn to "wait"** — there is no timer and no resumption; an ended turn is a dead run. While a batch extracts, keep working: study the sources already readable, and come back to the queue. When the corpus is thin for the register, shed adjectives
 and search the adjacent register — the client's *materials and manner* —
 before settling for weak matches; a corpus hole is itself a finding. Reuse
 extractions for economy, never for comfort: a source that anchors every
