@@ -1,0 +1,24 @@
+README.md
+  s_84684c0786ea1f::t_1e54aa4627ee27 3-5,13-14,26,29,34-35,65,67-70,72-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "8d25ab58544ae5b7c4c56eb2c211af9316ddc198",
+  "prompts": {},
+  "humans": {
+    "h_7ebc124c02485e": {
+      "author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  },
+  "sessions": {
+    "s_84684c0786ea1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16816292-8458-4a71-ac0a-b424a4279ba3",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}
