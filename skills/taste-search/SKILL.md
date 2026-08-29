@@ -34,11 +34,28 @@ Make at least three `search_brands` calls at the deepest depth the tool offers (
 
 **One query leaves the industry.** Of the three-plus queries, exactly one uses explicit materials or manner from the brief to search in OTHER industries — craft neighbors, not competitors.
 
+### Example queries per opening move
+
+Patterns that pin a usable reference on the first try — adapt the facts, keep the shape:
+
+| Opening move | Brief | Query fired |
+|---|---|---|
+| Board-first | "dreamy editorial skincare, calm and warm" (nothing else given) | `search_brands("dreamy editorial skincare, calm and warm", top_k=12)` |
+| Anchor-first | "layout of linear.app, colors of ramp.com" | Extract both directly; the open facet (say, type) gets its own query: `search_brands("distinctive display typeface pairing for a developer-tool landing page")` |
+| Style query | "vintage feeling site for a clothing brand" | `search_brands("vintage feeling clothing brand site")` — "vintage", not "retro": the corpus vocabulary has "Retro", but that's not the brief's word, so it never enters the query |
+| Anchored pivot | "like Notion but for restaurants" | `search_brands("like Notion but for restaurants")` |
+| Dual-lens | "sites like patagonia.com and similar" | `search_brands("outdoor apparel brand with rugged environmental storytelling")` **and** `search_similar_brands` on patagonia.com's extraction — kept as two sets |
+| Color/tone-seeded | "terracotta accent on a cream ground, for a ceramics brand" | `search_brands("cream ground with a terracotta accent used sparingly, ceramics or home-goods brand")` |
+| One query leaves the industry | brief is a fintech app; the interview surfaced "engraved, tactile, trustworthy like a bank note" | `search_brands("engraved linework and tactile trust cues", <no industry token>)` — run against the corpus with no industry filter, so print/currency/luxury-packaging sites can surface |
+| Client already crosses industries | "playful colorful consumer fintech" / "B2B SaaS brand that feels gaming inspired" | Carry the client's own cross-industry word verbatim, no invented cross-pollination needed: `search_brands("B2B SaaS brand with a gaming-inspired visual language")` |
+
 ## 3. Write the query without deciding the style
 
 Build each query only from explicit brief facts: industry, page type, audience, content, named references, and any style, layout, or palette words the client wrote verbatim. Your own assumptions about the brief never become aesthetic search filters. If the brief names no style, omit style entirely and let the returned references define the available visual directions.
 
 Never decorate a query with aesthetic adjectives the brief never said ("bold retro", "appetite-forward", "neighborhood energy"): every invented descriptor pre-decides what the corpus was supposed to decide, and the results come back agreeing with your prior. Expressive descriptors enter a later query only when they cite a studied finding, hunting more evidence for a direction already observed in the corpus — directed search, not decoration.
+
+A brief can also hand you adjectives that are not facts at all: "a personal website that is completely custom and unique" names no industry, no style, no reference. "Custom" and "unique" describe every brief and search on none of them — querying `search_brands("completely custom and unique personal website")` just returns whatever the corpus tags as unusual, which is not the same thing. Drop the empty adjectives, search the one real fact that remains (`search_brands("personal portfolio website")`), and let the results propose the available directions instead of inventing one from air.
 
 Write the query as the caption of the ideal result: one target facet plus minimal factual context, stacking a second facet only when the brief demands it. A phrasing shape that lands beats a keyword list:
 
