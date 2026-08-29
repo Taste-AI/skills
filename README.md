@@ -1,8 +1,9 @@
 # Taste Engine skills
 
-Agent skills for the [Taste Engine](https://engine.thetaste.ai): extract,
-replicate, match, and search any website's brand system from your coding
-agent.
+Agent skills for the [Taste Engine](https://engine.thetaste.ai): search for
+design references, direct a full brand build from evidence, or build a new
+page inside a brand that already exists — then grade the result against the
+reference.
 
 Skills use the open [`SKILL.md`](https://github.com/vercel-labs/skills) standard,
 so the same folder works across Claude Code, Codex, Cursor, OpenCode, Gemini CLI,
@@ -10,8 +11,8 @@ and other agents that support it.
 
 ## install
 
-All three skills, into every coding agent the CLI detects on your machine —
-`npx` runs the installer on demand, nothing to install globally:
+Into every coding agent the CLI detects on your machine — `npx` runs the
+installer on demand, nothing to install globally:
 
 ```bash
 npx skills add Taste-AI/skills
@@ -26,13 +27,10 @@ npx skills add Taste-AI/skills --list
 Or install one skill at a time:
 
 ```bash
-npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-brand-extractor
 npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-search
-npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-creative-director
+npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-harness
+npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-adherence
 ```
-
-Each command installs the whole skill folder, so `taste-creative-director`
-arrives with its `anti-slop.md` alongside `SKILL.md`.
 
 ## connect the MCP (required)
 
@@ -67,19 +65,28 @@ Full setup per client: [MCP server docs](https://engine.thetaste.ai/docs/ai-tool
 
 | skill | what it does |
 |---|---|
-| [`taste-brand-extractor`](skills/taste-brand-extractor/SKILL.md) | extract a site's brand system and build with it faithfully — plans which sections to fetch, applies each with its per-section guide, and audits the output against the extraction |
-| [`taste-search`](skills/taste-search/SKILL.md) | find real design references before designing — search the brand corpus by described aesthetic or find brands visually similar to an extraction, then hand off to `taste-brand-extractor` to build |
-| [`taste-creative-director`](skills/taste-creative-director/SKILL.md) | direct multi-source builds as a creative director — one evidenced source per design facet, an evidence gate before composing, and an anti-slop floor with hard bans |
+| [`taste-search`](skills/taste-search/SKILL.md) | find real design references before designing — search the brand corpus by described aesthetic, or find brands visually similar to an extraction |
+| [`taste-harness`](skills/taste-harness/SKILL.md) | direct a full brand build from evidence — study wide, fill a `BRAND.json` extraction of the invented brand citing every source, gate it, compose, verify |
+| [`brand-adherence`](skills/brand-adherence/SKILL.md) | ship a new page for a brand that already exists, as if that brand's own team shipped it — pull the reference extraction section by section, build the page from its verbatim tokens, fonts, components, and assets, then grade the result with the adherence verifier |
 
-## repo layout
+`taste-search` and `taste-harness` drive `search_brands`,
+`list_brand_extractions`, `extract_brand`, `poll_brand_extraction`,
+`get_brand_extraction_result`, and `search_similar_brands` (an older server
+may expose these as `list_submissions` / `submit_brand` / `get_submission` /
+`get_brand` / `find_similar_brands`). `brand-adherence` drives `submit_brand`,
+`get_submission`, and `get_brand` to acquire the reference brand, plus
+`verify_brand_adherence`, `poll_brand_adherence`, and
+`get_brand_adherence_result` to score the page you ship against it — its
+verifier extracts both sides itself from two URLs, so a page graded with it
+needs a public URL the engine can reach; a page served on loopback is
+invisible to it.
 
 ```
 skills/
-├── taste-brand-extractor/
-│   └── SKILL.md            # extract → plan the fetch → apply per section → build on-brand → audit
 ├── taste-search/
 │   └── SKILL.md            # search the corpus / find similar brands → shortlist
-└── taste-creative-director/
-    ├── SKILL.md                # multi-source creative direction: facets, evidence gate
-    └── anti-slop.md        # the floor against generic defaults, loaded at composition time
+├── taste-harness/
+│   └── SKILL.md            # search wide → study wide → BRAND.json → compose → verify
+└── brand-adherence/
+    └── SKILL.md            # pull a brand's extraction section by section → build on-brand → grade
 ```
