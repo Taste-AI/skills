@@ -1,9 +1,8 @@
 # Taste Engine skills
 
 Agent skills for the [Taste Engine](https://engine.thetaste.ai): search for
-design references, direct a full brand build from evidence, or build a new
-page inside a brand that already exists — then grade the result against the
-reference.
+design references, or build a new page inside a brand that already exists —
+then grade the result against the reference.
 
 Skills use the open [`SKILL.md`](https://github.com/vercel-labs/skills) standard,
 so the same folder works across Claude Code, Codex, Cursor, OpenCode, Gemini CLI,
@@ -28,7 +27,6 @@ Or install one skill at a time:
 
 ```bash
 npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-search
-npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-harness
 npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-adherence
 ```
 
@@ -66,10 +64,9 @@ Full setup per client: [MCP server docs](https://engine.thetaste.ai/docs/ai-tool
 | skill | what it does |
 |---|---|
 | [`taste-search`](skills/taste-search/SKILL.md) | find real design references before designing — search the brand corpus by described aesthetic, or find brands visually similar to an extraction |
-| [`taste-harness`](skills/taste-harness/SKILL.md) | direct a full brand build from evidence — study wide, fill a `BRAND.json` extraction of the invented brand citing every source, gate it, compose, verify |
 | [`brand-adherence`](skills/brand-adherence/SKILL.md) | ship a new page for a brand that already exists, as if that brand's own team shipped it — pull the reference extraction section by section, build the page from its verbatim tokens, fonts, components, and assets, then grade the result with the adherence verifier |
 
-`taste-search` and `taste-harness` drive `search_brands`,
+`taste-search` drives `search_brands`,
 `list_brand_extractions`, `extract_brand`, `poll_brand_extraction`,
 `get_brand_extraction_result`, and `search_similar_brands` (an older server
 may expose these as `list_submissions` / `submit_brand` / `get_submission` /
@@ -85,8 +82,6 @@ invisible to it.
 skills/
 ├── taste-search/
 │   └── SKILL.md            # search the corpus / find similar brands → shortlist
-├── taste-harness/
-│   └── SKILL.md            # search wide → study wide → BRAND.json → compose → verify
 └── brand-adherence/
     └── SKILL.md            # pull a brand's extraction section by section → build on-brand → grade
 ```
