@@ -19,13 +19,15 @@ Build each query knowing what you're looking for — style, layout, palette, mot
 - Always follow the original intent of the user's or agent's prompt. Don't add anything they didn't ask for, and don't translate what they did. If the prompt says "monochromatic", the query is monochromatic, not "black and white".
 - Open and read every result fully before using it.
 
-| Brief shape | Opening move | Example query |
-|---|---|---|
-| Vibe |  | `search_brands("dreamy editorial skincare, calm and warm", top_k=6)` |
-| Style or movement — the user names one | Carry the word exactly. The search is what interprets style terms, including ones nothing is formally tagged with; your synonym would decide what it was supposed to decide. | `search_brands("vintage feeling clothing brand site")` — vintage, not "retro", even though Retro is the official tag; also `search_brands("y2k web aesthetic for a music label")`, `search_brands("swiss international style studio portfolio")` |
-| Color or tone | Recruit by color role, not hue: sites where the tone plays the same structural part (ground / ink / accent), not hue neighbours where it plays a different one. | `search_brands("cream ground with a terracotta accent used sparingly, ceramics or home-goods brand")` |
-| A reference with a pivot | Anchor inside the query, where it steers the search instead of supplying a reference. Run the site-to-site path too, as its own set. | `search_brands("like Notion but for restaurants")` |
-| Named sources — the prompt already picked the sites | Those sites are the references, so search covers what they don't — here, type. | `search_brands("distinctive display typeface pairing for a developer-tool landing page")` |
+A brief that's just a vibe gets a query that's just the vibe: `search_brands("dreamy editorial skincare, calm and warm", top_k=6)`.
+
+When the user names a style or movement, carry the word exactly as they wrote it. The search is what interprets style terms, including ones nothing is formally tagged with — swapping in your own synonym would decide what the search was supposed to decide. `search_brands("vintage feeling clothing brand site")` keeps "vintage" even though the corpus's official tag for that register is "Retro": the user said vintage, so vintage is what gets searched. Same discipline behind `search_brands("y2k web aesthetic for a music label")` and `search_brands("swiss international style studio portfolio")`.
+
+When a color or tone seeds the brief, recruit by color role rather than hue: the useful cluster is sites where the tone plays the same structural part — ground, ink, or accent — never hue neighbours where it plays a different one. `search_brands("cream ground with a terracotta accent used sparingly, ceramics or home-goods brand")` is built that way.
+
+A reference with a pivot goes inside the query itself, where it steers the search instead of supplying a reference: `search_brands("like Notion but for restaurants")`. Run the site-to-site path too, as its own set — covered below.
+
+When the prompt already picked the sites, those sites are the references, and the search covers only what they don't. `search_brands("distinctive display typeface pairing for a developer-tool landing page")` is what's left to ask for when a "layout of linear.app, colors of ramp.com" brief has already named its layout and its color source.
 
 ### `search_similar_brands`
 
@@ -34,12 +36,13 @@ Use this one when you already have a brand and want others that look like it —
 - You already have the extraction — from this run or an earlier one — so pass its `submission_id` straight to `search_similar_brands`.
 - You only have a url — off a `search_brands` card, or a site the user named — so extract it first: `extract_brand(url)` → poll → `search_similar_brands(submission_id)`. The loop is written out in step 4.
 
-| Brief shape | Opening move | Example query |
-|---|---|---|
-| A site, unqualified — "like ours", "competitors of acme.com", "sites like patagonia.com" | **Two lenses**: neighbors of the extraction follow the *look*, while an anchored deep `search_brands` follows the *meaning* — the cultural neighborhood. Two sets, inspected separately, rank preserved inside each | `search_similar_brands(submission_id)` on patagonia.com's extraction **and** `search_brands("outdoor apparel brand with rugged environmental storytelling")` |
-| Sources named — "layout of linear.app, colors of ramp.com" | **Anchor first**: `extract_brand` the named sites directly, since they're already the reference. Pull neighbors only if the board wants more of that look; the open facets go to `search_brands` (row above) | `extract_brand("linear.app")`, `extract_brand("ramp.com")`, then `search_similar_brands(submission_id)` on either if the board is thin |
-| A site with a pivot — "like Notion but for restaurants" | The second path of the anchored pivot, run alongside the query: extract the anchor, take its neighbors. Keep the sets apart — the query carries the pivot, the neighbors map the anchor's visual neighborhood | `search_similar_brands(submission_id)` on Notion's extraction |
-| A winner worth mining | Not a brief shape but the tool's other use: a second lens on a result set, covered in step 3 | `search_similar_brands(submission_id)` on the first-ranked result |
+An unqualified site — "like ours", "competitors of acme.com", "sites like patagonia.com" — calls for two lenses at once: `search_similar_brands(submission_id)` on the extraction follows the *look* (whole-gestalt visual neighbors), while an anchored deep `search_brands` follows the *meaning* (the cultural neighborhood) — `search_brands("outdoor apparel brand with rugged environmental storytelling")` for patagonia.com. Inspect the two sets separately, rank preserved inside each.
+
+When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_brand("linear.app")`, `extract_brand("ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
+
+A site with a pivot runs its second path alongside the query: extract the anchor and take its neighbors — `search_similar_brands(submission_id)` on Notion's extraction, for a "like Notion but for restaurants" brief. Keep the sets apart: the query carries the pivot, the neighbors only map the anchor's visual neighborhood.
+
+And a winner worth mining isn't a brief shape at all but the tool's other use — a second lens on a result set already in hand, `search_similar_brands(submission_id)` on the first-ranked result, covered in step 3.
 
 ## 2. Write the query without deciding the style
 
