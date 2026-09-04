@@ -19,15 +19,15 @@ Build each query knowing what you're looking for — style, layout, palette, mot
 - Always follow the original intent of the user's or agent's prompt. Don't add anything they didn't ask for, and don't translate what they did. If the prompt says "monochromatic", the query is monochromatic, not "black and white".
 - Open and read every result fully before using it.
 
-A brief that's just a vibe gets a query that's just the vibe: `search_brands("dreamy editorial skincare, calm and warm", top_k=6)`.
+A prompt that's just a vibe gets a query that's just the vibe: `search_brands("dreamy editorial skincare, calm and warm", top_k=6)`.
 
 When the user names a style or movement, carry the word exactly as they wrote it. The search is what interprets style terms, including ones nothing is formally tagged with — swapping in your own synonym would decide what the search was supposed to decide. `search_brands("vintage feeling clothing brand site")` keeps "vintage" even though the corpus's official tag for that register is "Retro": the user said vintage, so vintage is what gets searched. Same discipline behind `search_brands("y2k web aesthetic for a music label")` and `search_brands("swiss international style studio portfolio")`.
 
-When a color or tone seeds the brief, recruit by color role rather than hue: the useful cluster is sites where the tone plays the same structural part — ground, ink, or accent — never hue neighbours where it plays a different one. `search_brands("cream ground with a terracotta accent used sparingly, ceramics or home-goods brand")` is built that way.
+When a color or tone seeds the prompt, recruit by color role rather than hue: the useful cluster is sites where the tone plays the same structural part — ground, ink, or accent — never hue neighbours where it plays a different one. `search_brands("cream ground with a terracotta accent used sparingly, ceramics or home-goods brand")` is built that way.
 
 A reference with a pivot goes inside the query itself, where it steers the search instead of supplying a reference: `search_brands("like Notion but for restaurants")`. Run the site-to-site path too, as its own set — covered below.
 
-When the prompt already picked the sites, those sites are the references, and the search covers only what they don't. `search_brands("distinctive display typeface pairing for a developer-tool landing page")` is what's left to ask for when a "layout of linear.app, colors of ramp.com" brief has already named its layout and its color source.
+When the prompt already picked the sites, those sites are the references, and the search covers only what they don't. `search_brands("distinctive display typeface pairing for a developer-tool landing page")` is what's left to ask for when a "layout of linear.app, colors of ramp.com" prompt has already named its layout and its color source.
 
 ### `search_similar_brands`
 
@@ -40,9 +40,9 @@ An unqualified site — "like ours", "competitors of acme.com", "sites like pata
 
 When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_brand("linear.app")`, `extract_brand("ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
 
-A site with a pivot runs its second path alongside the query: extract the anchor and take its neighbors — `search_similar_brands(submission_id)` on Notion's extraction, for a "like Notion but for restaurants" brief. Keep the sets apart: the query carries the pivot, the neighbors only map the anchor's visual neighborhood.
+A site with a pivot runs its second path alongside the query: extract the anchor and take its neighbors — `search_similar_brands(submission_id)` on Notion's extraction, for a "like Notion but for restaurants" prompt. Keep the sets apart: the query carries the pivot, the neighbors only map the anchor's visual neighborhood.
 
-And a winner worth mining isn't a brief shape at all but the tool's other use — a second lens on a result set already in hand, `search_similar_brands(submission_id)` on the first-ranked result, covered in step 3.
+And a winner worth mining isn't a prompt shape at all but the tool's other use — a second lens on a result set already in hand, `search_similar_brands(submission_id)` on the first-ranked result, covered in step 3.
 
 ## 2. Write the query without deciding the style
 
