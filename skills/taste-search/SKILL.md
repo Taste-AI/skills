@@ -29,7 +29,7 @@ A reference with a pivot goes inside the query itself, where it steers the searc
 
 When the prompt already picked the sites, those sites are the references, and the search covers only what they don't. `search_brands("distinctive display typeface pairing for a developer-tool landing page")` is what's left to ask for when a "layout of linear.app, colors of ramp.com" prompt has already named its layout and its color source.
 
-When the prompt already crosses industries — "playful colorful consumer fintech", "a B2B SaaS brand that feels gaming inspired" — that pairing travels straight into the query, no invention needed: `search_brands("playful colorful consumer fintech")`, `search_brands("B2B SaaS brand with a gaming-inspired visual language")`.
+When the prompt already crosses industries — "playful colorful consumer fintech", "a B2B SaaS brand that feels gaming inspired" — that pairing travels straight into the query, no invention needed: `search_brands("playful colorful consumer fintech")`, `search_brands("B2B SaaS brand that feels gaming inspired")`.
 
 ### `search_similar_brands`
 
