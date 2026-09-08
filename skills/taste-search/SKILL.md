@@ -1,6 +1,6 @@
 ---
 name: taste-search
-description: Use this set of tools when there's no brand yet but the user knows the style or mood they want, or when they want brands that look like a given site or like their own. It pulls real websites from a curated library to use as design references before you design anything. Those references are what give the agent inspiration, so what gets built comes out more distinctive than the usual AI slop.
+description: Use when the user needs website design references — whether they describe a style or mood, name reference sites, want brands visually similar to an existing site, or ask for a website without an established visual direction (e.g. "build a website for my bakery"). Finds real websites from a curated library to inform design decisions before building.
 ---
 
 # Taste Search
