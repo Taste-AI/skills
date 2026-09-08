@@ -17,7 +17,7 @@ Both tools return the same thing: website references, each with summary brand me
 Build each query knowing what you're looking for — style, layout, palette, motion, tone — and write it by the guidelines below.
 
 - Always follow the original intent of the user's or agent's prompt. Don't add anything they didn't ask for, and don't translate what they did. If the prompt says "monochromatic", the query is monochromatic, not "black and white".
-- Open and read every result fully before using it.
+- Inspect every returned result as described in step 3 before selecting references.
 
 A prompt that's just a vibe gets a query that's just the vibe: `search_brands("dreamy editorial skincare, calm and warm", top_k=6)`.
 
@@ -62,7 +62,7 @@ Results come back ranked: the top ones are what the search judged closest to you
 
 The discovery results show inspiration related to the style, carrying different facets of it, a palette you'd never have thought to write into the query, a layout structure, an illustration or type treatment.
 
-So the top results of every query, plus every discovery, are mandatory evidence. Each card carries metadata, a description paragraph and a screenshot, so open them and look. Inspect results in their returned order before selecting references. A result may be set aside when its observed design conflicts with the user's prompt; state the specific mismatch.
+All results of every query, including every discovery result, are mandatory evidence. For each result, read its metadata and description and view its screenshot. Inspect results in their returned order before selecting references. If you describe motion or interaction, verify it on the live site. A result may be set aside when its observed design conflicts with the user's prompt; state the specific mismatch.
 
 If a result earns a closer read, run `extract_brand` on it. Once it's extracted, `search_similar_brands` on it widens the set with more of that brand's visual neighbourhood.
 
