@@ -67,9 +67,9 @@ Full setup per client: [MCP server docs](https://engine.thetaste.ai/docs/ai-tool
 | [`brand-adherence`](skills/brand-adherence/SKILL.md) | ship a new page for a brand that already exists, as if that brand's own team shipped it — pull the reference extraction section by section, build the page from its verbatim tokens, fonts, components, and assets, then grade the result with the adherence verifier |
 
 `taste-search` drives `search_brands`,
-`list_brand_extractions`, `extract_brand`, `poll_brand_extraction`,
+`extract_brand`, `poll_brand_extraction`,
 `get_brand_extraction_result`, and `search_similar_brands` (an older server
-may expose these as `list_submissions` / `submit_brand` / `get_submission` /
+may expose these as `submit_brand` / `get_submission` /
 `get_brand` / `find_similar_brands`). `brand-adherence` drives `submit_brand`,
 `get_submission`, and `get_brand` to acquire the reference brand, plus
 `verify_brand_adherence`, `poll_brand_adherence`, and
