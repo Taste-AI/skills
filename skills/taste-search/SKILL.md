@@ -62,7 +62,7 @@ Results come back ranked: the top ones are what the search judged closest to you
 
 The discovery results show inspiration related to the style, carrying different facets of it, a palette you'd never have thought to write into the query, a layout structure, an illustration or type treatment.
 
-So the top results of every query, plus every discovery, are mandatory evidence. Each card carries metadata, a description paragraph and a screenshot, so open them and look. The ranking already did the judging; looking tells you what a source teaches.
+So the top results of every query, plus every discovery, are mandatory evidence. Each card carries metadata, a description paragraph and a screenshot, so open them and look. Inspect results in their returned order before selecting references. A result may be set aside when its observed design conflicts with the user's prompt; state the specific mismatch.
 
 If a result earns a closer read, run `extract_brand` on it. Once it's extracted, `search_similar_brands` on it widens the set with more of that brand's visual neighbourhood.
 
