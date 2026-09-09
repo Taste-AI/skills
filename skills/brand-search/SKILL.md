@@ -1,9 +1,9 @@
 ---
-name: taste-search
+name: brand-search
 description: Use when the user needs website design references — whether they describe a style or mood, name reference sites, want brands visually similar to an existing site, or ask for a website without an established visual direction (e.g. "build a website for my bakery"). Finds real websites from a curated library to inform design decisions before building.
 ---
 
-# Taste Search
+# Brand Search
 
 ## 1. Pick the right search tool
 

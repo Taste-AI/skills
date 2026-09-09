@@ -26,7 +26,7 @@ npx skills add Taste-AI/skills --list
 Or install one skill at a time:
 
 ```bash
-npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-search
+npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-search
 npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-adherence
 ```
 
@@ -63,10 +63,10 @@ Full setup per client: [MCP server docs](https://engine.thetaste.ai/docs/ai-tool
 
 | skill | what it does |
 |---|---|
-| [`taste-search`](skills/taste-search/SKILL.md) | find real design references before designing — search the brand corpus by described aesthetic, or find brands visually similar to an extraction |
+| [`brand-search`](skills/brand-search/SKILL.md) | find real design references before designing — search the brand corpus by described aesthetic, or find brands visually similar to an extraction |
 | [`brand-adherence`](skills/brand-adherence/SKILL.md) | ship a new page for a brand that already exists, as if that brand's own team shipped it — pull the reference extraction section by section, build the page from its verbatim tokens, fonts, components, and assets, then grade the result with the adherence verifier |
 
-`taste-search` drives `search_brands`,
+`brand-search` drives `search_brands`,
 `extract_brand`, `poll_brand_extraction`,
 `get_brand_extraction_result`, and `search_similar_brands` (an older server
 may expose these as `submit_brand` / `get_submission` /
@@ -80,7 +80,7 @@ invisible to it.
 
 ```
 skills/
-├── taste-search/
+├── brand-search/
 │   └── SKILL.md            # search the corpus / find similar brands → shortlist
 └── brand-adherence/
     └── SKILL.md            # pull a brand's extraction section by section → build on-brand → grade
