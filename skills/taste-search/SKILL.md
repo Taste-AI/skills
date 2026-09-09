@@ -38,7 +38,7 @@ Use this one when you already have a brand and want others that look like it —
 
 An unqualified site — "like ours", "competitors of acme.com", "sites like patagonia.com" — calls for two lenses at once: `search_similar_brands(submission_id)` on the extraction follows the *look* (whole-gestalt visual neighbors), while an anchored deep `search_brands` follows the *meaning* (the cultural neighborhood) — `search_brands("outdoor apparel brand with rugged environmental storytelling")` for patagonia.com. Inspect the two sets separately, rank preserved inside each.
 
-When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_brand("linear.app")`, `extract_brand("ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
+When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_brand("https://linear.app")`, `extract_brand("https://ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
 
 A site with a pivot runs its second path alongside the query: extract the anchor and take its neighbors — `search_similar_brands(submission_id)` on Notion's extraction, for a "like Notion but for restaurants" prompt. Keep the sets apart: the query carries the pivot, the neighbors only map the anchor's visual neighborhood.
 
