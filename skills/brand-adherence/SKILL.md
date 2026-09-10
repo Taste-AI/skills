@@ -29,7 +29,11 @@ echo "Crawl URL: http://$CRAWL_ID"
 ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=300s
 ```
 
-The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `submit_brand(url)`. Keep the tunnel open for the duration of the session.
+The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `submit_brand(url)`. Keep the tunnel open for the duration of the session. For static files without a server consider using the Python built-in server:
+
+```
+python3 -m http.server 3000
+```
 
 **Never ask for the whole document at once.** Pass `sections` and take two or three at a time. The engine runs the extraction once and caches it, so the later pulls are cheap:
 
