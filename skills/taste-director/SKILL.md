@@ -62,12 +62,13 @@ Run the prompt's own `search_brands` queries as brand-search describes, every on
 - Use `search_similar_brands` when visual neighbors of a named or top-ranked source would add useful range.
 - Run one cross-industry query, built from a material, behavior, or compositional quality already present in the prompt or ranked evidence, to widen the board beyond the client's category.
 
-Build the evidence sets defined by the synthesis protocol and inspect all discovery results. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
+Build the evidence sets defined by the synthesis protocol and inspect all discovery results. A search card carries a summary paragraph and a screenshot; `extract_brand` on that result returns the full design system plus the captured HTML, CSS and screenshots, which is where values and anatomy come from. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
 
 ```
 search_brands("colorful vibrant contact page for an architecture studio", depth="deep", top_k=6)
 search_brands("colorful vibrant architecture studio contact form anatomy", depth="deep", top_k=6)   # a facet the board left thin
 search_brands("saturated color blocking in cultural spaces", depth="deep", top_k=6)   # the cross-industry query
+extract_brand("https://memphis.it/en")   # rank 1 of the first query: full design system + captured HTML, CSS, screenshots
 ```
 
 ## 3. Study the evidence
