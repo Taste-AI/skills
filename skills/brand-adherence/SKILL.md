@@ -26,10 +26,10 @@ CRAWL_ID=crawl-$(uuidgen)
 # Print the URL that we can submit.
 echo "Crawl URL: http://$CRAWL_ID"
 # Open the SSH tunnel.
-ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=300s
+ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=3600s
 ```
 
-The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `submit_brand(url)`. Keep the tunnel open for the duration of the session. For static files without a server consider using the Python built-in server:
+The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `submit_brand(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or verification takes three to five minutes, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
 
 ```
 python3 -m http.server 3000 --bind 127.0.0.1
@@ -130,7 +130,7 @@ Write each finding down before you fix it, then fix from the written finding. A 
 
 Your own eyes carry your own blind spots: you graded work you also made. The engine ships a verifier that extracts the reference and your page the same way and judges the pair, so once the render check passes, get the outside verdict.
 
-**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or any tunnel you hold that exposes the working directory. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
+**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Tastelabs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
 
 ```
 verify_brand_adherence(reference_url=<the brand site>, source_url=<your page>)
