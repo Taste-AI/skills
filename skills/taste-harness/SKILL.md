@@ -16,6 +16,16 @@ worth borrowing. Inspiration here is a discipline, not a mood. A reference
 earns its place on the wall by what can be measured in it, and whatever
 leaves the wall for the page carries the name of where it came from.
 
+**Requirements.** This skill needs the brand-search skill, the taste-engine
+MCP tools (`search_brands`,
+`list_brand_extractions`, `extract_brand`, `poll_brand_extraction`,
+`get_brand_extraction_result`, `search_similar_brands`, and `lookup_slop`) and
+a driveable browser that can navigate the built page to evaluate the
+execution and save screenshots as image files. The run is fully autonomous.
+Complete every step without requesting input.
+
+## The one failure this skill exists to prevent
+
 The alternative is what the web already has too much of. Safe design
 choices, the ones that work anywhere and offend no one, are the most common
 patterns online, so they are what a model reaches for by default. For
@@ -29,15 +39,7 @@ component anatomy, surfaces and materials, backgrounds, imagery and art
 direction, motion and interaction, iconography, and copy voice. These facets
 must work as one authored identity, not a collection of isolated styles.
 
-**Requirements.** This skill needs the brand-search skill, the taste-engine
-MCP tools (`search_brands`,
-`list_brand_extractions`, `extract_brand`, `poll_brand_extraction`,
-`get_brand_extraction_result`, `search_similar_brands`, and `lookup_slop`) and
-a driveable browser that can navigate the built page to evaluate the
-execution and save screenshots as image files. The run is fully autonomous.
-Complete every step without requesting input.
-
-**Why the loop is shaped this way**: Models default to familiar patterns, and
+Models default to familiar patterns, and
 the most recently viewed source can influence the result more than earlier
 evidence. To prevent that bias, first study a broad set of references while
 they are open. Record every chosen value, its role, and its source in
@@ -63,7 +65,19 @@ finished page. Three pillars, judged by looking:
 - **Functionality: is it well executed?**
   - It is easy to use; buttons, links, forms, and menus behave as expected.
 
-## The synthesis protocol
+## 1. Read the prompt
+
+Infer missing product context on your own; there
+is no one to ask. Record consequential assumptions in the handoff note. Do not invent a
+visual direction before studying references. Create `BRAND.json` with only the
+known profile and strategy fields.
+
+Implement every explicit requirement and
+prohibition. Before handoff, check the finished page against the prompt line by
+line. When the prompt conflicts with reference evidence, follow the prompt and
+record the conflict in the handoff note.
+
+## 2. Search the prompt, then the gaps
 
 Retrieval follows the **brand-search** skill: how a query is written from the
 prompt's own words, which tool to use, how results are read without
@@ -119,6 +133,57 @@ cards cannot be grafted onto them; the anatomy source wins the conflict.
 Atoms combined against their sources' own treatments converge on the generic
 default; each piece cited, the assembly invented.
 
+Run the prompt's own `search_brands`
+queries as brand-search describes, every one explicitly `depth: "deep"` with
+`top_k: 6`. Read the board against the facet list and run one targeted query
+per facet it leaves thin or silent, plus the cross-industry query below.
+
+- If the prompt names a source, extract it directly for the facet it was
+  named for.
+- If it names a style, movement, or technique, search that phrase verbatim.
+- The prompt's style words ride in every targeted query, layout included. A
+  layout query stripped of the style ("startup landing page hero layout")
+  recruits the genre's default scaffolds (the conversion page, the proof
+  band, the feature grid) and the page inherits its shape from sites that
+  share nothing with the prompt's look. Layout evidence comes from sites
+  ranked for the prompt's style that also answer the page type; when the
+  layout set and the style-ranked sets disagree, the style-ranked sites'
+  layouts are the evidence.
+- Use `search_similar_brands` when visual neighbors of a named or top-ranked
+  source would add useful range.
+- Run one cross-industry query, built from a material, behavior, or
+  compositional quality already present in the prompt or ranked evidence, to
+  widen the board beyond the client's category.
+
+Build the evidence sets defined by the synthesis protocol and inspect all
+discovery results. Acquire sources as brand-search describes, and check
+`list_brand_extractions` before starting new extractions.
+
+```
+search_brands("colorful vibrant contact page for an architecture studio", depth="deep", top_k=6)
+search_brands("colorful vibrant architecture studio contact form anatomy", depth="deep", top_k=6)   # a facet the board left thin
+search_brands("saturated color blocking in cultural spaces", depth="deep", top_k=6)   # the cross-industry query
+```
+
+## 3. Study the evidence
+
+Inspect each query's evidence set and every
+discovery result from its extraction: the full-page screenshot and the
+captured HTML and CSS, not the search thumbnail and not a live visit. Save
+every cited screenshot in `study/`.
+
+Record concrete findings in `BRAND.json` as you work:
+
+- exact values and their roles;
+- spacing, type scale, color relationships, surfaces, and motion;
+- composition, image treatment, and copy voice; and
+- component structure from captured HTML and CSS.
+
+For every adopted component, cite the source whose code defines its anatomy.
+For discovery evidence, record only the specific detail selected under the
+synthesis protocol. If the ranked references consistently use photography or
+another dominant medium, preserve that art-direction choice in the final page.
+
 Synthesize the final system facet by facet. A value can come from the
 prompt's own search or from a targeted facet search, but the assembled
 page must read as one identity. Resolve seams through shared roles, rhythm,
@@ -131,7 +196,7 @@ patterns, ornaments, and assets. Preserve the evidence accurately inside its
 assigned facet, then combine the facets into a coherent implementation rather
 than reproducing one complete source.
 
-## The master reference
+### The master reference
 
 Many sources feed the page; one supplies its skeleton. Choose one source from
 the ranked evidence sets, or a shelf source promoted under the synthesis
@@ -164,12 +229,7 @@ bookend grafted onto a generic link grid. Cite it. Never ship a bare link
 grid when the board holds a better close. If the result reads as several unrelated source
 styles, simplify the facet additions or choose a better master.
 
-**The prompt comes first.** Implement every explicit requirement and
-prohibition. Before handoff, check the finished page against the prompt line by
-line. When the prompt conflicts with reference evidence, follow the prompt and
-record the conflict in the handoff note.
-
-## Evidence rules
+### What transfers from a reference, and what does not
 
 - Cite the source behind every design decision.
 - Record each extracted value and its observed role in `BRAND.json`. Copy
@@ -288,7 +348,22 @@ record the conflict in the handoff note.
     grafted into a page whose forms are sharp borderless slabs. A component
     joins its page's family or its own source's, never a third.
 
-## Motion and layers
+## 4. Write BRAND.json
+
+Write it in the shape of a Taste Engine
+extraction result, the same `design_system` object
+`get_brand_extraction_result` returns for every reference: profile, layout,
+colors, typography, surfaces, elevation, interactions, actions, navigation,
+data_display, icons, assets, and sections. The shape and its conventions are in
+[brand-template.md](brand-template.md). Give every design value a nearby
+source citation. Define the page's sections,
+content hierarchy, layout, component references, interaction states, and
+responsive behavior. Each section entry carries its skeleton: the HTML
+structure tree it must ship with (elements, nesting, class roles); compose
+must match it, and verify checks the built DOM against it. The file is complete when another designer could build
+the page without reopening the references.
+
+### Motion and layers
 
 - **Motion is atoms too.** Every entrance and hover ships as exact numbers:
   distance, duration, delay, named easing, staggers as formulas
@@ -306,70 +381,9 @@ record the conflict in the handoff note.
   scrim / stage, three layers with roles. The scrim is an atom with a value
   (gradient or opacity) and a citation, never an unexamined black overlay.
 
+## 5. Check the specification
 
-## The loop
-
-**1. Interpret the prompt.** Infer missing product context on your own; there
-is no one to ask. Record consequential assumptions in the handoff note. Do not invent a
-visual direction before studying references. Create `BRAND.json` with only the
-known profile and strategy fields.
-
-**2. Search the prompt, then the gaps.** Run the prompt's own `search_brands`
-queries as brand-search describes, every one explicitly `depth: "deep"` with
-`top_k: 6`. Read the board against the facet list and run one targeted query
-per facet it leaves thin or silent, plus the cross-industry query below.
-
-- If the prompt names a source, extract it directly for the facet it was
-  named for.
-- If it names a style, movement, or technique, search that phrase verbatim.
-- The prompt's style words ride in every targeted query, layout included. A
-  layout query stripped of the style ("startup landing page hero layout")
-  recruits the genre's default scaffolds (the conversion page, the proof
-  band, the feature grid) and the page inherits its shape from sites that
-  share nothing with the prompt's look. Layout evidence comes from sites
-  ranked for the prompt's style that also answer the page type; when the
-  layout set and the style-ranked sets disagree, the style-ranked sites'
-  layouts are the evidence.
-- Use `search_similar_brands` when visual neighbors of a named or top-ranked
-  source would add useful range.
-- Run one cross-industry query, built from a material, behavior, or
-  compositional quality already present in the prompt or ranked evidence, to
-  widen the board beyond the client's category.
-
-Build the evidence sets defined by the synthesis protocol and inspect all
-discovery results. Acquire sources as brand-search describes, and check
-`list_brand_extractions` before starting new extractions.
-
-**3. Study the evidence.** Inspect each query's evidence set and every
-discovery result from its extraction: the full-page screenshot and the
-captured HTML and CSS, not the search thumbnail and not a live visit. Save
-every cited screenshot in `study/`.
-
-Record concrete findings in `BRAND.json` as you work:
-
-- exact values and their roles;
-- spacing, type scale, color relationships, surfaces, and motion;
-- composition, image treatment, and copy voice; and
-- component structure from captured HTML and CSS.
-
-For every adopted component, cite the source whose code defines its anatomy.
-For discovery evidence, record only the specific detail selected under the
-synthesis protocol. If the ranked references consistently use photography or
-another dominant medium, preserve that art-direction choice in the final page.
-
-**4. Complete `BRAND.json`.** Write it in the shape of a Taste Engine
-extraction result, the same `design_system` object
-`get_brand_extraction_result` returns for every reference: profile, layout,
-colors, typography, surfaces, elevation, interactions, actions, navigation,
-data_display, icons, assets, and sections. Give every design value a nearby
-source citation. Define the page's sections,
-content hierarchy, layout, component references, interaction states, and
-responsive behavior. Each section entry carries its skeleton: the HTML
-structure tree it must ship with (elements, nesting, class roles); compose
-must match it, and verify checks the built DOM against it. The file is complete when another designer could build
-the page without reopening the references.
-
-**5. Check the specification.** Before building, spot-check citations while
+Before building, spot-check citations while
 the sources are still open. Confirm that:
 
 - Every design value has a valid source, and a value from a facet search
@@ -388,7 +402,9 @@ the sources are still open. Confirm that:
 Resolve missing, unsupported, or contradictory decisions in `BRAND.json`
 before writing markup.
 
-**6. Compose.** Close the references and build from `BRAND.json`. Apply the
+## 6. Compose
+
+Close the references and build from `BRAND.json`. Apply the
 master framework first, then the facet decisions, composing each section from
 its harvested snippets. Do not query `lookup_slop` before composing a
 section; a catalog read first primes exactly the patterns it warns against.
@@ -398,7 +414,13 @@ sends the section back to rework unless a rubric-clearing reference overrules
 it.
 Record each audit's verdict, reworked or confirmed, in the handoff note.
 
-**7. Verify, as a stranger.** Verification is an audit, not a victory lap.
+```
+lookup_slop(section="hero", goal="invite clients to start a project", direction="color-blocked, left-aligned statement", neighbors="fixed nav above, channel bands below")
+```
+
+## 7. Verify as a stranger
+
+Verification is an audit, not a victory lap.
 Set the compose reasoning aside and judge only what is on disk (`BRAND.json`,
 the captures in `study/`, and the built page) the way a reviewer who never
 saw the process would. Every claim is checked against pixels, never against
@@ -430,6 +452,8 @@ headline pasted beside its per-line source refutes itself on sight. Count
 the pairs against the adopted-device list; a missing pair fails the run.
 
 ## Ship gate
+
+Ship only when:
 
 Ship only when:
 
