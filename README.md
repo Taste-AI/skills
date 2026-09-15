@@ -88,7 +88,8 @@ skills/
 ├── brand-search/
 │   └── SKILL.md            # search the corpus / find similar brands → shortlist
 ├── taste-director/
-│   └── SKILL.md            # search → lock ranked evidence → BRAND.json → build → verify side by side
+│   ├── SKILL.md            # search → lock ranked evidence → BRAND.json → build → verify side by side
+│   └── brand-template.md   # the shape and conventions of BRAND.json
 └── brand-adherence/
     └── SKILL.md            # pull a brand's extraction section by section → build on-brand → grade
 ```
