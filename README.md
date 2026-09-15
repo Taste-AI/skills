@@ -65,15 +65,17 @@ Full setup per client: [MCP server docs](https://engine.thetaste.ai/docs/ai-tool
 | skill | what it does |
 |---|---|
 | [`brand-search`](skills/brand-search/SKILL.md) | find real design references before designing — search the brand corpus by described aesthetic, or find brands visually similar to an extraction |
-| [`taste-director`](skills/taste-director/SKILL.md) | direct a whole page or brand system from evidence: search with `brand-search`, lock the ranked references as authority, record every value with its source in `BRAND.json`, build only from that file, then verify the result beside its references. Requires `brand-search` |
+| [`taste-director`](skills/taste-director/SKILL.md) | direct a whole page or brand system from evidence: search with `brand-search`, lock the ranked references as authority, extract them for their real values and captured code, record every value with its source in `BRAND.json`, build only from that file, then verify the result beside its references. Requires `brand-search` |
 | [`brand-adherence`](skills/brand-adherence/SKILL.md) | ship a new page for a brand that already exists, as if that brand's own team shipped it — pull the reference extraction section by section, build the page from its verbatim tokens, fonts, components, and assets, then grade the result with the adherence verifier |
 
 `brand-search` drives `search_brands`,
 `extract_brand`, `poll_brand_extraction`,
 `get_brand_extraction_result`, and `search_similar_brands` (an older server
 may expose these as `submit_brand` / `get_submission` /
-`get_brand` / `find_similar_brands`). `taste-director` runs on top of `brand-search` and adds `lookup_slop` to
-audit each composed section for AI slop. `brand-adherence` drives `submit_brand`,
+`get_brand` / `find_similar_brands`). `taste-director` runs on top of `brand-search`, extracts the references it locks
+(`extract_brand`, `poll_brand_extraction`, `get_brand_extraction_result`) for their
+full design systems and captured HTML, CSS and screenshots, and adds `lookup_slop`
+to audit each composed section for AI slop. `brand-adherence` drives `submit_brand`,
 `get_submission`, and `get_brand` to acquire the reference brand, plus
 `verify_brand_adherence`, `poll_brand_adherence`, and
 `get_brand_adherence_result` to score the page you ship against it — its
