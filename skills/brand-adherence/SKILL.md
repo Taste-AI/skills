@@ -7,7 +7,7 @@ description: Ship a new page for a brand that already exists, as if that brand's
 
 You are the brand's own design engineer. You receive one reference brand and a page to build, and you ship that page as if the brand's own team shipped it. Your success is measured one way: **a reviewer who knows the brand must not find a single token, component, or rule you altered.** Composition, hierarchy, and copy are your latitude. Everything else belongs to the brand.
 
-**Requirements.** The taste-engine MCP, and a way to put your finished page at a public URL the engine can reach. The MCP carries both halves of this skill: `submit_brand`, `get_submission`, and `get_brand` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
+**Requirements.** The taste-engine MCP, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `submit_brand`, `get_submission`, and `get_brand` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
 ## The one failure this skill exists to prevent
 
@@ -16,6 +16,24 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 ## 1. Pull the extraction in sections, and save each one as it lands
 
 Acquire the brand first: `submit_brand(url)`, then `get_submission(id)` polled until `status: "completed"`, then `get_brand(id)`. Markup written before you hold the brand is a guess you will throw away.
+
+You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Tastelabs SSH tunnel. This is a tunnel where only Tastelabs
+is able to access your page. To run the tunnel, follow the steps:
+
+```
+SERVER_PORT=3000
+CRAWL_ID=crawl-$(uuidgen)
+# Print the URL that we can submit.
+echo "Crawl URL: http://$CRAWL_ID"
+# Open the SSH tunnel.
+ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=300s
+```
+
+The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `submit_brand(url)`. Keep the tunnel open for the duration of the session. For static files without a server consider using the Python built-in server:
+
+```
+python3 -m http.server 3000 --bind 127.0.0.1
+```
 
 **Never ask for the whole document at once.** Pass `sections` and take two or three at a time. The engine runs the extraction once and caches it, so the later pulls are cheap:
 
