@@ -1,6 +1,6 @@
 ---
 name: brand-search
-description: Use when the user needs website design references — whether they describe a style or mood, name reference sites, want brands visually similar to an existing site, or ask for a website without an established visual direction (e.g. "build a website for my bakery"). Finds real websites from a curated library to inform design decisions before building.
+description: Use this set of tools when there's no brand yet but the user knows the style or mood they want, or when they want brands that look like a given site or like their own. It pulls real websites from a curated library to use as design references before you design anything. Those references are what give the agent inspiration, so what gets built comes out more distinctive than the usual AI slop.
 ---
 
 # Brand Search
@@ -17,17 +17,19 @@ Both tools return the same thing: website references, each with summary brand me
 Build each query knowing what you're looking for — style, layout, palette, motion, tone — and write it by the guidelines below.
 
 - Always follow the original intent of the user's or agent's prompt. Don't add anything they didn't ask for, and don't translate what they did. If the prompt says "monochromatic", the query is monochromatic, not "black and white".
-- Inspect every returned result as described in step 3 before selecting references.
+- Open and read every result fully before using it.
 
 A prompt that's just a vibe gets a query that's just the vibe: `search_brands("dreamy editorial skincare, calm and warm", top_k=6)`.
 
 When the user names a style or movement, carry the word exactly as they wrote it. The search is what interprets style terms, including ones nothing is formally tagged with — swapping in your own synonym would decide what the search was supposed to decide. `search_brands("vintage feeling clothing brand site")` keeps "vintage" even though the corpus's official tag for that register is "Retro": the user said vintage, so vintage is what gets searched. Same discipline behind `search_brands("y2k web aesthetic for a music label")` and `search_brands("swiss international style studio portfolio")`.
 
-When a color or tone seeds the prompt, recruit by color role rather than hue: the useful cluster is sites where the tone plays the same structural part — ground, ink, or accent — never hue neighbours where it plays a different one. `search_brands("cream ground with a terracotta accent")` is built that way.
+When a color or tone seeds the prompt, recruit by color role rather than hue: the useful cluster is sites where the tone plays the same structural part — ground, ink, or accent — never hue neighbours where it plays a different one. `search_brands("cream ground with a terracotta accent used sparingly, ceramics or home-goods brand")` is built that way.
 
 A reference with a pivot goes inside the query itself, where it steers the search instead of supplying a reference: `search_brands("like Notion but for restaurants")`. Run the site-to-site path too, as its own set — covered below.
 
-When the prompt already crosses industries — "playful colorful consumer fintech", "a B2B SaaS brand that feels gaming inspired" — that pairing travels straight into the query, no invention needed: `search_brands("playful colorful consumer fintech")`, `search_brands("B2B SaaS brand that feels gaming inspired")`.
+When the prompt already picked the sites, those sites are the references, and the search covers only what they don't. `search_brands("distinctive display typeface pairing for a developer-tool landing page")` is what's left to ask for when a "layout of linear.app, colors of ramp.com" prompt has already named its layout and its color source.
+
+When the prompt already crosses industries — "playful colorful consumer fintech", "a B2B SaaS brand that feels gaming inspired" — that pairing travels straight into the query, no invention needed: `search_brands("playful colorful consumer fintech")`, `search_brands("B2B SaaS brand with a gaming-inspired visual language")`.
 
 ### `search_similar_brands`
 
@@ -38,7 +40,7 @@ Use this one when you already have a brand and want others that look like it —
 
 An unqualified site — "like ours", "competitors of acme.com", "sites like patagonia.com" — calls for two lenses at once: `search_similar_brands(submission_id)` on the extraction follows the *look* (whole-gestalt visual neighbors), while an anchored deep `search_brands` follows the *meaning* (the cultural neighborhood) — `search_brands("outdoor apparel brand with rugged environmental storytelling")` for patagonia.com. Inspect the two sets separately, rank preserved inside each.
 
-When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_brand("https://linear.app")`, `extract_brand("https://ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
+When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_brand("linear.app")`, `extract_brand("ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
 
 A site with a pivot runs its second path alongside the query: extract the anchor and take its neighbors — `search_similar_brands(submission_id)` on Notion's extraction, for a "like Notion but for restaurants" prompt. Keep the sets apart: the query carries the pivot, the neighbors only map the anchor's visual neighborhood.
 
@@ -60,7 +62,7 @@ Results come back ranked: the top ones are what the search judged closest to you
 
 The discovery results show inspiration related to the style, carrying different facets of it, a palette you'd never have thought to write into the query, a layout structure, an illustration or type treatment.
 
-All results of every query, including every discovery result, are mandatory evidence. For each result, read its metadata and description and view its screenshot. Inspect results in their returned order before selecting references. If you describe motion or interaction, verify it on the live site. A result may be set aside when its observed design conflicts with the user's prompt; state the specific mismatch.
+So the top results of every query, plus every discovery, are mandatory evidence. Each card carries metadata, a description paragraph and a screenshot, so open them and look. The ranking already did the judging; looking tells you what a source teaches.
 
 If a result earns a closer read, run `extract_brand` on it. Once it's extracted, `search_similar_brands` on it widens the set with more of that brand's visual neighbourhood.
 
