@@ -15,7 +15,7 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 
 ## 1. Pull the extraction in sections, and save each one as it lands
 
-Acquire the brand first: `extract_brand(url)`, then `poll_brand_extraction(brand_submission_id)` polled until `status: "completed"`, then `get_brand_extraction_result(brand_submission_id)`. Markup written before you hold the brand is a guess you will throw away.
+Acquire the brand first. `extract_brand(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_brand_extraction_result`. Markup written before you hold the brand is a guess you will throw away.
 
 You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Tastelabs SSH tunnel. This is a tunnel where only Tastelabs
 is able to access your page. To run the tunnel, follow the steps:
