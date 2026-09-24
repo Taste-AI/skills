@@ -75,8 +75,8 @@ may expose these as `submit_brand` / `get_submission` /
 `get_brand` / `find_similar_brands`). `taste-director` runs on top of `brand-search`, extracts the references it locks
 (`extract_brand`, `poll_brand_extraction`, `get_brand_extraction_result`) for their
 full design systems and captured HTML, CSS and screenshots, and adds `lookup_slop`
-to audit each composed section for AI slop. `brand-adherence` drives `submit_brand`,
-`get_submission`, and `get_brand` to acquire the reference brand, plus
+to audit each composed section for AI slop. `brand-adherence` drives `extract_brand`,
+`poll_brand_extraction`, and `get_brand_extraction_result` to acquire the reference brand, plus
 `verify_brand_adherence`, `poll_brand_adherence`, and
 `get_brand_adherence_result` to score the page you ship against it — its
 verifier extracts both sides itself from two URLs, so a page graded with it
