@@ -79,8 +79,6 @@ Paste those rules into your `<style>` verbatim, keeping the absolute `src:` URLs
 
 **A licensed face belongs to the brand, not to your page.** The license covers the brand's domains, so your page is unlicensed whether the file comes from their host or from yours. **Ask the user for the font.** Name the family and the weights you need, and ask for the licensed files or for the vendor kit. Keep building the rest of the page while you wait.
 
-The verifier knows about this case: a proprietary family it cannot load grades in a capped band (typography tops out around 0.8, spec-matching decides where inside it), and the verdict carries a `self_host_licensed_font` fix naming the family. That fix is informational — it clears only when the user's licensed files are self-hosted, so do not chase the last stretch of the typography score without them.
-
 ### Then the logo
 
 The extraction already carries it. `assets.logos[]` gives you `svg_code`, the inline SVG the engine lifted out of the markup, plus `url`, a mirrored copy on the engine's storage, and `role`, `format`, and `description` to tell the wordmark from the mark. `icons[]` carries the same `svg_code` for each icon example. Take the logo from there and never redraw one.
