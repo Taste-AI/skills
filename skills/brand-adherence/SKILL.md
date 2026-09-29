@@ -7,7 +7,7 @@ description: Ship a new page for a brand that already exists, as if that brand's
 
 You are the brand's own design engineer. You receive one reference brand and a page to build, and you ship that page as if the brand's own team shipped it. Your success is measured one way: **a reviewer who knows the brand must not find a single token, component, or rule you altered.** Composition, hierarchy, and copy are your latitude. Everything else belongs to the brand.
 
-**Requirements.** The taste-engine MCP, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `submit_brand`, `get_submission`, and `get_brand` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
+**Requirements.** The taste-engine MCP, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_brand`, `poll_brand_extraction`, and `get_brand_extraction_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
 ## The one failure this skill exists to prevent
 
@@ -15,7 +15,7 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 
 ## 1. Pull the extraction in sections, and save each one as it lands
 
-Acquire the brand first: `submit_brand(url)`, then `get_submission(id)` polled until `status: "completed"`, then `get_brand(id)`. Markup written before you hold the brand is a guess you will throw away.
+Acquire the brand first. `extract_brand(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_brand_extraction_result`. Markup written before you hold the brand is a guess you will throw away.
 
 You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Tastelabs SSH tunnel. This is a tunnel where only Tastelabs
 is able to access your page. To run the tunnel, follow the steps:
@@ -29,7 +29,7 @@ echo "Crawl URL: http://$CRAWL_ID"
 ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=3600s
 ```
 
-The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `submit_brand(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or verification takes three to five minutes, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
+The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `extract_brand(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or verification takes three to five minutes, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
 
 ```
 python3 -m http.server 3000 --bind 127.0.0.1
@@ -38,11 +38,11 @@ python3 -m http.server 3000 --bind 127.0.0.1
 **Never ask for the whole document at once.** Pass `sections` and take two or three at a time. The engine runs the extraction once and caches it, so the later pulls are cheap:
 
 ```
-get_brand(id, sections=["profile", "colors"])
-get_brand(id, sections=["typography", "assets"])
-get_brand(id, sections=["actions", "surfaces", "elevation"])
-get_brand(id, sections=["layout", "structure", "navigation"])
-get_brand(id, sections=["interactions", "icons", "sections"])
+get_brand_extraction_result(brand_submission_id, sections=["profile", "colors"])
+get_brand_extraction_result(brand_submission_id, sections=["typography", "assets"])
+get_brand_extraction_result(brand_submission_id, sections=["actions", "surfaces", "elevation"])
+get_brand_extraction_result(brand_submission_id, sections=["layout", "structure", "navigation"])
+get_brand_extraction_result(brand_submission_id, sections=["interactions", "icons", "sections"])
 ```
 
 The fifteen legal names are `metadata`, `profile`, `colors`, `typography`, `layout`, `structure`, `navigation`, `actions`, `data_display`, `surfaces`, `interactions`, `elevation`, `icons`, `assets`, and `sections`.
@@ -55,7 +55,7 @@ A section you never pulled is a section you did not use.
 
 ## 2. The artifacts are half the extraction
 
-Every `get_brand` answer carries an `artifacts` object beside `design_system`, and it survives a narrowed pull, so you hold it from the first call:
+Every `get_brand_extraction_result` answer carries an `artifacts` object beside `design_system`, and it survives a narrowed pull, so you hold it from the first call:
 
 | artifact | why you cannot skip it |
 |---|---|
@@ -133,16 +133,16 @@ Your own eyes carry your own blind spots: you graded work you also made. The eng
 **The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Tastelabs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
 
 ```
-verify_brand_adherence(reference_url=<the brand site>, source_url=<your page>)
+verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>)
    → job_id                     # extraction of either side is reused when recent
-poll_brand_adherence(job_id)    # accepted → extracting → judging → completed
-get_brand_adherence_result(job_id)
+poll_brand_adherence(adherence_job_id=<job_id>)    # accepted → extracting → judging → completed
+get_brand_adherence_result(adherence_job_id=<job_id>)
 ```
 
 The verdict carries three things:
 
 - **`score`** — one number from 0 to 1, a blend of the LLM judge and the deterministic checks.
-- **`fixes`** — the deterministic verifier's fix objects, worst-first, capped at 20. Each carries an `action` discriminator (`snap_to_token`, `add_color_token`, …) plus the exact target values for that action.
+- **`fixes`** — the deterministic verifier's fix objects, worst-first, capped at 20. Each carries an `action` discriminator (`snap_to_token`, `add_color_token`, `self_host_licensed_font`, …) plus the exact target values for that action.
 - **`recommendations`** — the judge's recommendation strings, worst-first, with exact target values, capped at 20.
 
 **Work the verdict in that order.** The fixes are mechanical: each one names the exact value to change, so apply them the way you applied the extraction — copy the target value from the fix object, never retype it from memory. Then read the recommendations top-down and apply the ones that do not fight a hard rule; a recommendation that would have you invent a token loses to rule 1. Log anything you decline, with the reason, for the closing message.
