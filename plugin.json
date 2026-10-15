@@ -1,0 +1,33 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "brand-api",
+  "version": "0.1.0",
+  "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
+  "author": {
+    "name": "Tastelabs",
+    "url": "https://engine.tastelabs.com"
+  },
+  "homepage": "https://engine.tastelabs.com",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Brand API",
+        "shortDescription": "Brand references, brand systems, and brand checks",
+        "longDescription": "Brand API turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
+        "developerName": "Tastelabs",
+        "category": "Design",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://engine.tastelabs.com",
+        "privacyPolicyURL": "https://tastelabs.com/legal/privacy-policy",
+        "termsOfServiceURL": "https://tastelabs.com/legal/terms-of-service",
+        "defaultPrompt": [
+          "Find brands with a warm pastel skincare look",
+          "Extract the brand system of stripe.com"
+        ],
+        "brandColor": "#000000",
+        "composerIcon": "./assets/taste-icon.png",
+        "logo": "./assets/taste-icon.png"
+      }
+    }
+  }
+}
