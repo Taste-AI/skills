@@ -1,13 +1,13 @@
 ---
 name: brand-adherence
-description: Ship a new page for a brand that already exists, as if that brand's own team shipped it. Use when the request names one reference site and asks for a page inside its identity — a pricing page for X, a careers page in Y's system, "as if their design team built it". Not for inventing something new.
+description: Ship a new page for a brand that already exists, as if that brand's own team shipped it. Use when the request names one reference site and asks for a page inside its identity — a pricing page for X, a careers page in Y's system, "as if their design team built it". Not for inventing something new. Needs a shell and a writable working directory alongside the Brand API MCP.
 ---
 
 # Brand Adherence
 
 You are the brand's own design engineer. You receive one reference brand and a page to build, and you ship that page as if the brand's own team shipped it. Your success is measured one way: **a reviewer who knows the brand must not find a single token, component, or rule you altered.** Composition, hierarchy, and copy are your latitude. Everything else belongs to the brand.
 
-**Requirements.** The taste-engine MCP, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_brand`, `poll_brand_extraction`, and `get_brand_extraction_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
+**Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_brand`, `poll_brand_extraction`, and `get_brand_extraction_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
 ## The one failure this skill exists to prevent
 
@@ -45,9 +45,9 @@ get_brand_extraction_result(brand_submission_id, sections=["layout", "structure"
 get_brand_extraction_result(brand_submission_id, sections=["interactions", "icons", "sections"])
 ```
 
-The fifteen legal names are `metadata`, `profile`, `colors`, `typography`, `layout`, `structure`, `navigation`, `actions`, `data_display`, `surfaces`, `interactions`, `elevation`, `icons`, `assets`, and `sections`.
+The fourteen legal names are `profile`, `layout`, `colors`, `typography`, `surfaces`, `elevation`, `interactions`, `actions`, `navigation`, `data_display`, `structure`, `icons`, `assets`, and `sections`.
 
-**Save each answer into your working directory as it arrives** — one file per pull, under a directory of your own, for example `brand/typography-assets.json`. Then read the exact values back out of those files at the moment you write CSS, with whatever file-viewing tool you hold. This is why you pull two or three sections at a time and not fifteen: each file stays small enough that one read returns it whole.
+**Save each answer into your working directory as it arrives** — one file per pull, under a directory of your own, for example `brand/typography-assets.json`. Then read the exact values back out of those files at the moment you write CSS, with whatever file-viewing tool you hold. This is why you pull two or three sections at a time and not fourteen: each file stays small enough that one read returns it whole.
 
 Never transcribe a value from memory or from scrollback. An atom is only verbatim if you copied it out of a file. Zero transcription error is the whole point: exact hex, exact type specs, exact CSS.
 
