@@ -1,95 +1,65 @@
-# Taste Engine skills
+# Brand API plugin
 
-Agent skills for the [Taste Engine](https://engine.thetaste.ai): search for
-design references, or build a new page inside a brand that already exists —
-then grade the result against the reference.
+This plugin connects your agent to the Brand API, the [Taste Engine](https://engine.tastelabs.com) MCP server, and installs three skills that drive it: search for design references, build a new page inside a brand that already exists, then grade the result against the reference. One package works in Claude (Claude Code, claude.ai, Cowork) and in OpenAI (ChatGPT, Codex).
 
-Skills use the open [`SKILL.md`](https://github.com/vercel-labs/skills) standard,
-so the same folder works across Claude Code, Codex, Cursor, OpenCode, Gemini CLI,
-and other agents that support it.
+This repository is a published copy of the plugin. Edit it in `plugin/` in Taste-AI/core, not here.
+
+## what's inside
+
+| path | for |
+|---|---|
+| `.claude-plugin/plugin.json`, `.mcp.json` | Claude |
+| `.claude-plugin/marketplace.json` | `/plugin install` from this repo |
+| `plugin.json`, `mcp.json` | OpenAI |
+| `skills/` | both, and any agent that reads [`SKILL.md`](https://github.com/vercel-labs/skills) |
+| `assets/taste-icon.png` | the directory listings |
+
+Both server configs point at `https://mcp.tastelabs.com/mcp` over streamable HTTP. There is no key to paste: the client opens a browser sign-in to your Taste Engine account the first time it connects. A new account starts with 20 credits.
 
 ## install
 
-Into every coding agent the CLI detects on your machine — `npx` runs the
-installer on demand, nothing to install globally:
+As a Claude Code plugin, inside Claude Code:
+
+```
+/plugin install brand-api --marketplace Taste-AI/skills
+```
+
+On Claude Code older than 2.1.275, add the marketplace first:
+
+```
+/plugin marketplace add Taste-AI/skills
+/plugin install brand-api@tastelabs
+```
+
+To try a local clone without installing, run `claude --plugin-dir .` from its root.
+
+As skills only, into every coding agent the CLI detects (Claude Code, Codex, Cursor, OpenCode, Gemini CLI and others):
 
 ```bash
 npx skills add Taste-AI/skills
 ```
 
-Preview what the repo ships before installing:
-
-```bash
-npx skills add Taste-AI/skills --list
-```
-
-Or install one skill at a time:
-
-```bash
-npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-search
-npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-director
-npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-adherence
-```
-
-## connect the MCP (required)
-
-`npx skills add` installs the **instructions**, not the tools. The skills
-drive the Taste Engine MCP server at `https://mcp.tastelabs.com/mcp`
-(streamable HTTP). Two ways to connect:
-
-**OAuth sign-in (recommended)**: add the server by URL alone and finish
-sign-in in the browser. No key to manage:
+`npx skills add` installs the instructions, not the tools, so connect the MCP server too:
 
 ```bash
 # Claude Code
-claude mcp add --transport http taste-engine https://mcp.tastelabs.com/mcp
+claude mcp add --transport http brand-api https://mcp.tastelabs.com/mcp
 ```
 
-**API key**: for headless/CI use or clients without MCP OAuth. Create a
-`taste_` key with the `extractor:website` scope in the
-[dashboard](https://engine.thetaste.ai/app/api-keys) and send it as a Bearer
-token:
-
-```bash
-# Claude Code
-claude mcp add --transport http taste-engine https://mcp.tastelabs.com/mcp \
-  --header "Authorization: Bearer $TASTE_API_KEY"
-```
-
-For Codex add an `[mcp_servers.taste-engine]` entry in `~/.codex/config.toml`;
-for Cursor and others add the same HTTP server in the client's MCP config.
-Full setup per client: [MCP server docs](https://engine.thetaste.ai/docs/ai-tools/mcp).
+For Codex add an `[mcp_servers.brand-api]` entry in `~/.codex/config.toml`; for Cursor and others add the same HTTP server in the client's MCP config. Full setup per client: [MCP docs](https://docs.tastelabs.com).
 
 ## skills
 
-| skill | what it does |
+| skill | use it to |
 |---|---|
-| [`brand-search`](skills/brand-search/SKILL.md) | find real design references before designing — search the brand corpus by described aesthetic, or find brands visually similar to an extraction |
-| [`taste-director`](skills/taste-director/SKILL.md) | direct a whole page or brand system from evidence: search with `brand-search`, lock the ranked references as authority, extract them for their real values and captured code, record every value with its source in `BRAND.json`, build only from that file, then verify the result beside its references. Requires `brand-search` |
-| [`brand-adherence`](skills/brand-adherence/SKILL.md) | ship a new page for a brand that already exists, as if that brand's own team shipped it — pull the reference extraction section by section, build the page from its verbatim tokens, fonts, components, and assets, then grade the result with the adherence verifier |
+| [`brand-search`](skills/brand-search/SKILL.md) | find real design references by described aesthetic (`search_brands`) or by visual similarity to an extracted site (`search_similar_brands`) |
+| [`taste-director`](skills/taste-director/SKILL.md) | direct a whole page from ranked references: lock the evidence, extract it, record every value with its source in `BRAND.json`, build from that file, then check the page beside its sources. Needs a browser it can drive |
+| [`brand-adherence`](skills/brand-adherence/SKILL.md) | build a new page inside an existing brand from its extraction, then grade it with `verify_brand_adherence`. Needs a shell and a working directory |
 
-`brand-search` drives `search_brands`,
-`extract_brand`, `poll_brand_extraction`,
-`get_brand_extraction_result`, and `search_similar_brands` (an older server
-may expose these as `submit_brand` / `get_submission` /
-`get_brand` / `find_similar_brands`). `taste-director` runs on top of `brand-search`, extracts the references it locks
-(`extract_brand`, `poll_brand_extraction`, `get_brand_extraction_result`) for their
-full design systems and captured HTML, CSS and screenshots, and adds `lookup_slop`
-to audit each composed section for AI slop. `brand-adherence` drives `extract_brand`,
-`poll_brand_extraction`, and `get_brand_extraction_result` to acquire the reference brand, plus
-`verify_brand_adherence`, `poll_brand_adherence`, and
-`get_brand_adherence_result` to score the page you ship against it — its
-verifier extracts both sides itself from two URLs, so a page graded with it
-needs a public URL the engine can reach; a page served on loopback is
-invisible to it.
+Extraction runs through `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result`. An extraction costs 2 credits, a fast search 1, a deep search 2, a similar-brands search 1, and an adherence check 2. Reading back a result you already paid for is free.
 
-```
-skills/
-├── brand-search/
-│   └── SKILL.md            # search the corpus / find similar brands → shortlist
-├── taste-director/
-│   ├── SKILL.md            # search → lock ranked evidence → BRAND.json → build → verify side by side
-│   └── brand-template.md   # the shape and conventions of BRAND.json
-└── brand-adherence/
-    └── SKILL.md            # pull a brand's extraction section by section → build on-brand → grade
-```
+The adherence verifier extracts both pages itself from two URLs, so the page you grade needs a public URL the engine can reach; a page served on loopback is invisible to it.
+
+## teams
+
+OAuth sign-in always uses your Personal account. To spend Team credits, connect with a Team API key instead; the [MCP docs](https://docs.tastelabs.com) show how.
