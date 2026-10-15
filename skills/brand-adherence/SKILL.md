@@ -42,7 +42,8 @@ get_brand_extraction_result(brand_submission_id, sections=["profile", "colors"])
 get_brand_extraction_result(brand_submission_id, sections=["typography", "assets"])
 get_brand_extraction_result(brand_submission_id, sections=["actions", "surfaces", "elevation"])
 get_brand_extraction_result(brand_submission_id, sections=["layout", "structure", "navigation"])
-get_brand_extraction_result(brand_submission_id, sections=["interactions", "icons", "sections"])
+get_brand_extraction_result(brand_submission_id, sections=["interactions", "icons"])
+get_brand_extraction_result(brand_submission_id, sections=["data_display", "sections"])
 ```
 
 The fourteen legal names are `profile`, `layout`, `colors`, `typography`, `surfaces`, `elevation`, `interactions`, `actions`, `navigation`, `data_display`, `structure`, `icons`, `assets`, and `sections`.
@@ -68,7 +69,7 @@ Download all three into your working directory before you design anything:
 ```bash
 curl -fsSL "<artifacts.css.url>"  -o brand/captured.css
 curl -fsSL "<artifacts.html.url>" -o brand/captured.html
-curl -fsSL "<artifacts.full_page_screenshot.url>" -o brand/reference.png
+curl -fsSL "<artifacts.full_page_screenshot.url, or artifacts.screenshot.url when it is null>" -o brand/reference.png
 ```
 
 ### Start with the fonts
