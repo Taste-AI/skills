@@ -9,6 +9,7 @@ This repository is a published copy of the plugin. Edit it in `plugin/` in Taste
 | path | for |
 |---|---|
 | `.claude-plugin/plugin.json`, `.mcp.json` | Claude |
+| `.claude-plugin/marketplace.json` | `/plugin install` from this repo |
 | `plugin.json`, `mcp.json` | OpenAI |
 | `skills/` | both, and any agent that reads [`SKILL.md`](https://github.com/vercel-labs/skills) |
 | `assets/taste-icon.png` | the directory listings |
@@ -17,11 +18,20 @@ Both server configs point at `https://mcp.tastelabs.com/mcp` over streamable HTT
 
 ## install
 
-As a Claude Code plugin, from a clone of this repo:
+As a Claude Code plugin, inside Claude Code:
 
-```bash
-claude --plugin-dir .
 ```
+/plugin install brand-api --marketplace Taste-AI/skills
+```
+
+On Claude Code older than 2.1.275, add the marketplace first:
+
+```
+/plugin marketplace add Taste-AI/skills
+/plugin install brand-api@tastelabs
+```
+
+To try a local clone without installing, run `claude --plugin-dir .` from its root.
 
 As skills only, into every coding agent the CLI detects (Claude Code, Codex, Cursor, OpenCode, Gemini CLI and others):
 
