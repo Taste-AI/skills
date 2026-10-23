@@ -1,6 +1,7 @@
 ---
 name: taste-director
-description: Direct the design of websites and brand systems from evidence in Taste Engine references. Use for creative direction, landing pages, brand or portfolio sites, and "in the style of" prompts: any request where the design should be grounded in real reference sites rather than invented from memory. Needs a browser it can drive alongside the Brand API MCP.
+description: >-
+  Direct the design of websites and brand systems from evidence in Taste Engine references. Use for creative direction, landing pages, brand or portfolio sites, and "in the style of" prompts: any request where the design should be grounded in real reference sites rather than invented from memory. Needs a browser it can drive alongside the Brand API MCP.
 ---
 
 # Taste Director

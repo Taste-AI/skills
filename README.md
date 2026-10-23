@@ -2,7 +2,7 @@
 
 This plugin connects your agent to the Brand API, the [Taste Engine](https://engine.tastelabs.com) MCP server, and installs three skills that drive it: search for design references, build a new page inside a brand that already exists, then grade the result against the reference. One package works in Claude (Claude Code, claude.ai, Cowork) and in OpenAI (ChatGPT, Codex).
 
-This repository is a published copy of the plugin. Edit it in `plugin/` in Taste-AI/core, not here.
+This repository is the source of truth for the plugin: maintain its manifests, assets, skills and supporting files here. The MCP server implementation lives in Taste-AI/core.
 
 ## what's inside
 
@@ -62,4 +62,20 @@ The adherence verifier extracts both pages itself from two URLs, so the page you
 
 ## teams
 
-OAuth sign-in always uses your Personal account. To spend Team credits, connect with a Team API key instead; the [MCP docs](https://docs.tastelabs.com) show how.
+OAuth sign-in always uses your Personal account. To spend Team credits, create an API key in the Team's dashboard and connect the server with it as a Bearer token; the [MCP docs](https://docs.tastelabs.com) show how.
+
+## development checks
+
+Validate the complete plugin package with:
+
+```bash
+claude plugin validate . --strict --profile directory
+```
+
+The tests in `tests/test_skills.py` check the bundled skills against the MCP gateway's registered tools and supported brand sections. Contributors with access to Taste-AI/core can run them from this repository using a sibling core checkout:
+
+```bash
+uv run --project ../core/mcp pytest --asyncio-mode=auto tests
+```
+
+Adjust the project path for a different checkout location. Use the core branch containing the MCP changes when validating coordinated updates.
