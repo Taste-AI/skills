@@ -78,6 +78,10 @@ The tunnel connects to `tunnel.tasting.dev` and forwards requests to the configu
 
 OAuth sign-in always uses your Personal account. To spend Team credits, create an API key in the Team's dashboard and connect the server with it as a Bearer token; the [MCP docs](https://docs.tastelabs.com) show how.
 
+## Support
+
+For help with Taste Engine, the Brand API plugin, or these skills, email [support@tastelabs.com](mailto:support@tastelabs.com).
+
 ## Repository Contents
 
 Maintain the skills and their supporting resources in this repository, together with the manifests and assets used to distribute them as a plugin. The MCP server implementation lives in Taste-AI/core.

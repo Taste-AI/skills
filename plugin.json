@@ -5,9 +5,11 @@
   "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
   "author": {
     "name": "Taste Labs",
+    "email": "support@tastelabs.com",
     "url": "https://engine.tastelabs.com"
   },
   "homepage": "https://engine.tastelabs.com",
+  "repository": "https://github.com/Taste-AI/skills",
   "extensions": {
     "com.openai": {
       "interface": {
