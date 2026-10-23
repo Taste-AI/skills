@@ -12,7 +12,7 @@
   "repository": "https://github.com/Taste-AI/skills",
   "icon": "./assets/taste-icon.png",
   "documentationUrl": "https://docs.tastelabs.com",
-  "supportUrl": "https://github.com/Taste-AI/skills#support",
+  "supportUrl": "https://docs.tastelabs.com/",
   "privacyPolicyUrl": "https://tastelabs.com/legal/privacy-policy",
   "termsOfServiceUrl": "https://tastelabs.com/legal/terms-of-service"
 }
