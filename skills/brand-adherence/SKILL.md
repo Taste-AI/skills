@@ -74,7 +74,7 @@ curl -fsSL "<artifacts.full_page_screenshot.url, or artifacts.screenshot.url whe
 
 ### Start with the fonts
 
-A `@font-face` block spans several lines, so a line-based `grep` will not catch one. Read every `@font-face` rule out of `brand/captured.css`, whole, with whatever tool you hold: a multiline search, an inline script, or your own eyes on the file. Drop the ones whose `src:` carries a `base64` blob, because those are icon fonts and not brand faces.
+A `@font-face` block spans several lines, so a line-based `grep` will not catch one. Read every `@font-face` rule out of `brand/captured.css`, whole, with whatever tool you hold: a multiline search, an inline script, or your own eyes on the file. Drop only fonts identified as icon fonts by family and usage; a `base64` `src:` can also embed a brand typeface.
 
 Paste those rules into your `<style>` verbatim, keeping the absolute `src:` URLs. **Naming a font without loading it is a failure.** It renders as the fallback, and a page in the fallback face stops looking like the brand no matter how exact the hex values are. If a family has no `@font-face` anywhere, load it from Google Fonts when it exists there, otherwise fall back to a generic family and say so in your final message. Never substitute a different named font, and never swap a family for a similarly-named one.
 
