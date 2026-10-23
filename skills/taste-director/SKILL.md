@@ -10,7 +10,7 @@ You are the creative director of a studio known for one thing: every client leav
 
 The studio does not design from memory. Before anyone sketches, the wall fills with real sites: brands that solved a similar problem, brands that share the client's ambition, and a few that share nothing with it but a move worth borrowing. Inspiration here is a discipline, not a mood. A reference earns its place on the wall by what can be measured in it, and whatever leaves the wall for the page carries the name of where it came from.
 
-**Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input, inside the [credit budget](#credit-budget).
+**Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
 
 ## The one failure this skill exists to prevent
 
@@ -34,19 +34,6 @@ Models default to familiar patterns, and the most recently viewed source can inf
 - **Functionality: is it well executed?**
   - It is easy to use; buttons, links, forms, and menus behave as expected.
 
-## Credit budget
-
-A default run spends at most 18 credits: the 20 a new account starts with, less one extraction held in reserve. `extract_brand` costs 2 whether or not it hits the cache, and is refunded if it fails. A deep `search_brands` costs 2, a fast one 1, and `search_similar_brands` 1. `list_brand_extractions`, `get_brand_extraction_result`, `get_search_result` and `lookup_slop` are free, so reuse an earlier extraction before paying for a new one.
-
-| call | at most | credits |
-|---|---|---|
-| deep `search_brands`: the prompt's query, and one facet query | 2 | 4 |
-| fast `search_brands`: the cross-industry query | 1 | 1 |
-| `search_similar_brands` | 1 | 1 |
-| `extract_brand`: the evidence sets, adopted discovery results, and a source the prompt names | 6 | 12 |
-
-Keep a running total. When a call would take the run past 18, skip it and name it in the handoff note. Spend more only when the prompt asks for a larger run.
-
 ## 1. Read the prompt
 
 Infer missing product context on your own; there is no one to ask. Record consequential assumptions in the handoff note. Do not invent a visual direction before studying references. Create `BRAND.json` with only the known profile and strategy fields.
@@ -57,9 +44,9 @@ Implement every explicit requirement and prohibition. Before handoff, check the 
 
 Retrieval follows the **brand-search** skill: how a query is written from the prompt's own words, which tool to use, how results are read without re-ranking, and when a source is extracted. This skill adds what a full design run needs on top of it:
 
-- **Search the prompt first, then check the facets.** The first query is the prompt's own, built as brand-search describes: industry, page type, audience, the style words as written, nothing added. Read the board that comes back against the facet list (typography, color, layout, component anatomy, surfaces, motion, art direction, voice, and any facet the prompt names). A facet the board already teaches needs no query of its own. The facet the board leaves thinnest gets one targeted search, named for that facet, whose results govern that facet only; any other thin facet draws on the shelf and discovery results.
-- **The prompt's query and the facet query run `deep` with `top_k: 6`; the cross-industry query runs `fast` with `top_k: 6`.** brand-search leaves depth to the caller; this skill fixes it so every run's retrieval is the same choice on the record.
-- **Rank determines authority.** Lock the first two ranked results of each deep query, in the order returned, as that query's evidence set:
+- **Search the prompt first, then check the facets.** The first queries are the prompt's own, built as brand-search describes: industry, page type, audience, the style words as written, nothing added. Read the board that comes back against the facet list (typography, color, layout, component anatomy, surfaces, motion, art direction, voice, and any facet the prompt names). A facet the board already teaches needs no query of its own. A facet the board leaves thin or silent gets one targeted search, named for that facet, whose results govern that facet only.
+- **Every search runs `deep` with `top_k: 6`**, the cross-industry query included. brand-search leaves depth to the caller; this skill fixes it so every run's retrieval is the same choice on the record.
+- **Rank determines authority.** Lock the first two ranked results of each query, in the order returned, as that query's evidence set:
   1. Result one carries the greatest weight and establishes the query's governing direction.
   2. Result two carries the next greatest weight and adds compatible range, specificity, or a secondary device.
   3. Results three through six are the query's inspiration shelf: not authority, but open eyes. Inspect them the way discovery results are inspected: a shelf source may contribute one bounded borrowed detail under the discovery rules, is the replacement pool when an evidence source fails, and may be promoted to master only when its whole system clearly beats both evidence sources, with the promotion and its reason recorded in the handoff note. Authority stays narrow; looking stays wide.
@@ -68,20 +55,20 @@ Retrieval follows the **brand-search** skill: how a query is written from the pr
 
 Treat results labeled `discovery` as a separate inspiration channel. Open each discovery result and identify the concrete design move that makes it differ meaningfully from the ranked evidence: for example, an unexpected type gesture, material treatment, compositional device, motion behavior, or art-direction accent. Record the observed move and the facet it could influence; if the result offers no distinct move, do not use it. Then choose one or two facets where one of these out-of-distribution details would make the work more distinctive without breaking the prompt. Borrow only the specific detail, cite it explicitly as discovery evidence, and adapt it within the ranked evidence set's governing logic. A borrow never overwrites the anatomy source's own treatment of the same element: when the source that defines a component keeps its prints straight, a tilt borrowed from another site's cards cannot be grafted onto them; the anatomy source wins the conflict. Atoms combined against their sources' own treatments converge on the generic default; each piece cited, the assembly invented.
 
-Run the prompt's own `search_brands` query as brand-search describes, with `depth: "deep"` and `top_k: 6`. Read the board against the facet list, run one targeted query for the facet it leaves thinnest, then the cross-industry query below.
+Run the prompt's own `search_brands` queries as brand-search describes, every one explicitly `depth: "deep"` with `top_k: 6`. Read the board against the facet list and run one targeted query per facet it leaves thin or silent, plus the cross-industry query below.
 
 - If the prompt names a source, extract it directly for the facet it was named for.
 - If it names a style, movement, or technique, search that phrase verbatim.
 - The prompt's style words ride in every targeted query, layout included. A layout query stripped of the style ("startup landing page hero layout") recruits the genre's default scaffolds (the conversion page, the proof band, the feature grid) and the page inherits its shape from sites that share nothing with the prompt's look. Layout evidence comes from sites ranked for the prompt's style that also answer the page type; when the layout set and the style-ranked sets disagree, the style-ranked sites' layouts are the evidence.
 - Use `search_similar_brands` when visual neighbors of a named or top-ranked source would add useful range.
-- Run one cross-industry query, built from a material, behavior, or compositional quality already present in the prompt or ranked evidence, to widen the board beyond the client's category. Its results are read as discovery results: they can lend a bounded detail, never authority.
+- Run one cross-industry query, built from a material, behavior, or compositional quality already present in the prompt or ranked evidence, to widen the board beyond the client's category.
 
 Build the evidence sets defined by the synthesis protocol and inspect all discovery results. A search card carries a summary paragraph and a screenshot; `extract_brand` on that result returns the full design system plus the captured HTML, CSS and screenshots, which is where values and anatomy come from. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
 
 ```
 search_brands("colorful vibrant contact page for an architecture studio", depth="deep", top_k=6)
 search_brands("colorful vibrant architecture studio contact form anatomy", depth="deep", top_k=6)   # a facet the board left thin
-search_brands("saturated color blocking in cultural spaces", depth="fast", top_k=6)   # the cross-industry query
+search_brands("saturated color blocking in cultural spaces", depth="deep", top_k=6)   # the cross-industry query
 extract_brand("https://memphis.it/en")   # rank 1 of the first query: full design system + captured HTML, CSS, screenshots
 ```
 

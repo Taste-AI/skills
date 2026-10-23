@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
   "author": {
-    "name": "Tastelabs",
+    "name": "Taste Labs",
     "url": "https://engine.tastelabs.com"
   },
   "homepage": "https://engine.tastelabs.com",
@@ -14,7 +14,7 @@
         "displayName": "Brand API",
         "shortDescription": "Find, extract and check brands",
         "longDescription": "Brand API turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
-        "developerName": "Tastelabs",
+        "developerName": "Taste Labs",
         "category": "Design",
         "capabilities": [
           "Read",

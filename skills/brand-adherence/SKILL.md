@@ -17,7 +17,7 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 
 Acquire the brand first. `extract_brand(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_brand_extraction_result`. Markup written before you hold the brand is a guess you will throw away.
 
-You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Tastelabs SSH tunnel. This is a tunnel where only Tastelabs
+You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Taste Labs SSH tunnel. This is a tunnel where only Taste Labs
 is able to access your page. To run the tunnel, follow the steps:
 
 ```
@@ -131,7 +131,7 @@ Write each finding down before you fix it, then fix from the written finding. A 
 
 Your own eyes carry your own blind spots: you graded work you also made. The engine ships a verifier that extracts the reference and your page the same way and judges the pair, so once the render check passes, get the outside verdict.
 
-**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Tastelabs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
+**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Taste Labs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
 
 ```
 verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>)

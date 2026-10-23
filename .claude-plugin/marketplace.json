@@ -1,8 +1,8 @@
 {
   "name": "tastelabs",
-  "description": "Tastelabs plugins for building and checking brand-faithful design with the Taste Engine.",
+  "description": "Taste Labs plugins for building and checking brand-faithful design with the Taste Engine.",
   "owner": {
-    "name": "Tastelabs",
+    "name": "Taste Labs",
     "url": "https://engine.tastelabs.com"
   },
   "plugins": [
