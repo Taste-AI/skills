@@ -1,10 +1,10 @@
-# Taste Labs skills
+# Taste Labs Skills
 
 Agent skills for the [Taste Engine](https://engine.tastelabs.com): search for design references, build a new page inside a brand that already exists, then grade the result against the reference.
 
 Skills use the open [`SKILL.md`](https://github.com/vercel-labs/skills) standard, so the same folders work across Claude Code, Codex, Cursor, OpenCode, Gemini CLI, and other agents that support it. They are also available together as the Brand API plugin, which bundles the skills with their MCP connection configuration.
 
-## skills
+## Skills
 
 | skill | use it to |
 |---|---|
@@ -12,7 +12,7 @@ Skills use the open [`SKILL.md`](https://github.com/vercel-labs/skills) standard
 | [`taste-director`](skills/taste-director/SKILL.md) | direct a whole page from ranked references: lock the evidence, extract it, record every value with its source in `BRAND.json`, build from that file, then check the page beside its sources. Needs `brand-search` and a browser it can drive |
 | [`brand-adherence`](skills/brand-adherence/SKILL.md) | build a new page inside an existing brand from its extraction, then grade it with `verify_brand_adherence`. Needs a shell and a working directory |
 
-## install skills
+## Install Skills
 
 Install into the coding agents the CLI detects on your machine:
 
@@ -34,7 +34,7 @@ npx skills add github.com/Taste-AI/skills/tree/main/skills/taste-director
 npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-adherence
 ```
 
-## connect the MCP
+## Connect the MCP
 
 `npx skills add` installs the instructions, not the tools, so connect the MCP server too:
 
@@ -47,7 +47,7 @@ For Codex add an `[mcp_servers.brand-api]` entry in `~/.codex/config.toml`; for 
 
 The server uses streamable HTTP. Add its URL and complete the browser sign-in to your Taste Engine account. A new account starts with 20 credits.
 
-## install as a plugin
+## Install as a Plugin
 
 The Brand API plugin bundles these skills and the MCP connection configuration for Claude (Claude Code, claude.ai, Cowork) and OpenAI (ChatGPT, Codex).
 
@@ -66,7 +66,7 @@ On Claude Code older than 2.1.275, add the marketplace first:
 
 To try a local clone without installing, run `claude --plugin-dir .` from its root.
 
-## using the skills
+## Using the Skills
 
 Extraction runs through `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result`. An extraction costs 2 credits, a fast search 1, a deep search 2, a similar-brands search 1, and an adherence check 2. Reading back a result you already paid for is free.
 
@@ -74,11 +74,11 @@ The adherence verifier extracts both pages from their URLs, so each page must be
 
 The tunnel connects to `tunnel.tasting.dev` and forwards requests to the configured localhost port (3000 in the provided command), making the page content and assets served there available to Taste Labs for crawling. The printed `http://crawl-<uuid>` address is a private tunnel alias. Keep SSH running during extraction and adherence checks: the tunnel closes when SSH exits or its deadline expires (one hour in the provided command).
 
-## teams
+## Teams
 
 OAuth sign-in always uses your Personal account. To spend Team credits, create an API key in the Team's dashboard and connect the server with it as a Bearer token; the [MCP docs](https://docs.tastelabs.com) show how.
 
-## repository contents
+## Repository Contents
 
 Maintain the skills and their supporting resources in this repository, together with the manifests and assets used to distribute them as a plugin. The MCP server implementation lives in Taste-AI/core.
 
@@ -90,7 +90,7 @@ Maintain the skills and their supporting resources in this repository, together 
 | `plugin.json`, `mcp.json` | OpenAI plugin and MCP configuration |
 | `assets/taste-icon.png` | the directory listings |
 
-## development checks
+## Development Checks
 
 Validate the complete plugin package with:
 
