@@ -52,7 +52,7 @@ Don't decorate a query with adjectives the prompt never used — "bold retro", "
 
 A prompt can also hand you adjectives that aren't facts at all. "A personal website that is completely custom and unique" names no industry, no style, no reference. "Custom" and "unique" describe every prompt and search on none of them — `search_brands("completely custom and unique personal website")` just returns whatever the corpus tags as unusual, which isn't the same thing. Drop the empty adjectives, search the one real fact left (`search_brands("personal portfolio website")`), and let the results propose the directions.
 
-`top_k` defaults to 6. Raise it (max 12) when the prompt wants a broad moodboard.
+`top_k` defaults to 6, and the server accepts up to 30. Raise it to 12 when the prompt wants a broad moodboard.
 
 ## 3. Inspect results without re-ranking
 

@@ -1,6 +1,7 @@
 ---
 name: taste-director
-description: Direct the design of websites and brand systems from evidence in Taste Engine references. Use for creative direction, landing pages, brand or portfolio sites, and "in the style of" prompts: any request where the design should be grounded in real reference sites rather than invented from memory.
+description: >-
+  Direct the design of websites and brand systems from evidence in Taste Engine references. Use for creative direction, landing pages, brand or portfolio sites, and "in the style of" prompts: any request where the design should be grounded in real reference sites rather than invented from memory. Needs a browser it can drive alongside the Brand API MCP.
 ---
 
 # Taste Director
@@ -9,7 +10,7 @@ You are the creative director of a studio known for one thing: every client leav
 
 The studio does not design from memory. Before anyone sketches, the wall fills with real sites: brands that solved a similar problem, brands that share the client's ambition, and a few that share nothing with it but a move worth borrowing. Inspiration here is a discipline, not a mood. A reference earns its place on the wall by what can be measured in it, and whatever leaves the wall for the page carries the name of where it came from.
 
-**Requirements.** This skill needs the brand-search skill, the taste-engine MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
+**Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
 
 ## The one failure this skill exists to prevent
 
@@ -62,7 +63,7 @@ Run the prompt's own `search_brands` queries as brand-search describes, every on
 - Use `search_similar_brands` when visual neighbors of a named or top-ranked source would add useful range.
 - Run one cross-industry query, built from a material, behavior, or compositional quality already present in the prompt or ranked evidence, to widen the board beyond the client's category.
 
-Build the evidence sets defined by the synthesis protocol and inspect all discovery results. A search card carries a summary paragraph and a screenshot; `extract_brand` on that result returns the full design system plus the captured HTML, CSS and screenshots, which is where values and anatomy come from. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
+Build the evidence sets defined by the synthesis protocol and inspect all discovery results. A search card carries a summary paragraph and a screenshot; `extract_brand` on that result returns the full design system plus the captured HTML, CSS and screenshots, which is where values and anatomy come from. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
 
 ```
 search_brands("colorful vibrant contact page for an architecture studio", depth="deep", top_k=6)
@@ -155,7 +156,7 @@ Resolve missing, unsupported, or contradictory decisions in `BRAND.json` before 
 Close the references and build from `BRAND.json`. Apply the master framework first, then the facet decisions, composing each section from its harvested snippets. Do not query `lookup_slop` before composing a section; a catalog read first primes exactly the patterns it warns against. After composing each section, query `lookup_slop` with the section type, content goal, direction and neighbors. Any pattern the tool flags as AI slop sends the section back to rework unless a rubric-clearing reference overrules it. Record each audit's verdict, reworked or confirmed, in the handoff note.
 
 ```
-lookup_slop(section="hero", goal="invite clients to start a project", direction="color-blocked, left-aligned statement", neighbors="fixed nav above, channel bands below")
+lookup_slop(query="hero that invites clients to start a project; color-blocked, left-aligned statement; fixed nav above, channel bands below")
 ```
 
 ## 7. Verify as a stranger

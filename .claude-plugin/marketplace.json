@@ -1,0 +1,15 @@
+{
+  "name": "tastelabs",
+  "description": "Taste Labs plugins for building and checking brand-faithful design with the Taste Engine.",
+  "owner": {
+    "name": "Taste Labs",
+    "url": "https://engine.tastelabs.com"
+  },
+  "plugins": [
+    {
+      "name": "brand-api",
+      "source": "./",
+      "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand."
+    }
+  ]
+}

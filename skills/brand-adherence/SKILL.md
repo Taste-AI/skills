@@ -1,13 +1,13 @@
 ---
 name: brand-adherence
-description: Ship a new page for a brand that already exists, as if that brand's own team shipped it. Use when the request names one reference site and asks for a page inside its identity — a pricing page for X, a careers page in Y's system, "as if their design team built it". Not for inventing something new.
+description: Ship a new page for a brand that already exists, as if that brand's own team shipped it. Use when the request names one reference site and asks for a page inside its identity — a pricing page for X, a careers page in Y's system, "as if their design team built it". Not for inventing something new. Needs a shell and a writable working directory alongside the Brand API MCP.
 ---
 
 # Brand Adherence
 
 You are the brand's own design engineer. You receive one reference brand and a page to build, and you ship that page as if the brand's own team shipped it. Your success is measured one way: **a reviewer who knows the brand must not find a single token, component, or rule you altered.** Composition, hierarchy, and copy are your latitude. Everything else belongs to the brand.
 
-**Requirements.** The taste-engine MCP, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_brand`, `poll_brand_extraction`, and `get_brand_extraction_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
+**Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_brand`, `poll_brand_extraction`, and `get_brand_extraction_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
 ## The one failure this skill exists to prevent
 
@@ -17,7 +17,7 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 
 Acquire the brand first. `extract_brand(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_brand_extraction_result`. Markup written before you hold the brand is a guess you will throw away.
 
-You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Tastelabs SSH tunnel. This is a tunnel where only Tastelabs
+You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Taste Labs SSH tunnel. This is a tunnel where only Taste Labs
 is able to access your page. To run the tunnel, follow the steps:
 
 ```
@@ -42,12 +42,13 @@ get_brand_extraction_result(brand_submission_id, sections=["profile", "colors"])
 get_brand_extraction_result(brand_submission_id, sections=["typography", "assets"])
 get_brand_extraction_result(brand_submission_id, sections=["actions", "surfaces", "elevation"])
 get_brand_extraction_result(brand_submission_id, sections=["layout", "structure", "navigation"])
-get_brand_extraction_result(brand_submission_id, sections=["interactions", "icons", "sections"])
+get_brand_extraction_result(brand_submission_id, sections=["interactions", "icons"])
+get_brand_extraction_result(brand_submission_id, sections=["data_display", "sections"])
 ```
 
-The fifteen legal names are `metadata`, `profile`, `colors`, `typography`, `layout`, `structure`, `navigation`, `actions`, `data_display`, `surfaces`, `interactions`, `elevation`, `icons`, `assets`, and `sections`.
+The fourteen legal names are `profile`, `layout`, `colors`, `typography`, `surfaces`, `elevation`, `interactions`, `actions`, `navigation`, `data_display`, `structure`, `icons`, `assets`, and `sections`.
 
-**Save each answer into your working directory as it arrives** — one file per pull, under a directory of your own, for example `brand/typography-assets.json`. Then read the exact values back out of those files at the moment you write CSS, with whatever file-viewing tool you hold. This is why you pull two or three sections at a time and not fifteen: each file stays small enough that one read returns it whole.
+**Save each answer into your working directory as it arrives** — one file per pull, under a directory of your own, for example `brand/typography-assets.json`. Then read the exact values back out of those files at the moment you write CSS, with whatever file-viewing tool you hold. This is why you pull two or three sections at a time and not fourteen: each file stays small enough that one read returns it whole.
 
 Never transcribe a value from memory or from scrollback. An atom is only verbatim if you copied it out of a file. Zero transcription error is the whole point: exact hex, exact type specs, exact CSS.
 
@@ -68,12 +69,12 @@ Download all three into your working directory before you design anything:
 ```bash
 curl -fsSL "<artifacts.css.url>"  -o brand/captured.css
 curl -fsSL "<artifacts.html.url>" -o brand/captured.html
-curl -fsSL "<artifacts.full_page_screenshot.url>" -o brand/reference.png
+curl -fsSL "<artifacts.full_page_screenshot.url, or artifacts.screenshot.url when it is null>" -o brand/reference.png
 ```
 
 ### Start with the fonts
 
-A `@font-face` block spans several lines, so a line-based `grep` will not catch one. Read every `@font-face` rule out of `brand/captured.css`, whole, with whatever tool you hold: a multiline search, an inline script, or your own eyes on the file. Drop the ones whose `src:` carries a `base64` blob, because those are icon fonts and not brand faces.
+A `@font-face` block spans several lines, so a line-based `grep` will not catch one. Read every `@font-face` rule out of `brand/captured.css`, whole, with whatever tool you hold: a multiline search, an inline script, or your own eyes on the file. Drop only fonts identified as icon fonts by family and usage; a `base64` `src:` can also embed a brand typeface.
 
 Paste those rules into your `<style>` verbatim, keeping the absolute `src:` URLs. **Naming a font without loading it is a failure.** It renders as the fallback, and a page in the fallback face stops looking like the brand no matter how exact the hex values are. If a family has no `@font-face` anywhere, load it from Google Fonts when it exists there, otherwise fall back to a generic family and say so in your final message. Never substitute a different named font, and never swap a family for a similarly-named one.
 
@@ -130,7 +131,7 @@ Write each finding down before you fix it, then fix from the written finding. A 
 
 Your own eyes carry your own blind spots: you graded work you also made. The engine ships a verifier that extracts the reference and your page the same way and judges the pair, so once the render check passes, get the outside verdict.
 
-**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Tastelabs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
+**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Taste Labs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
 
 ```
 verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>)

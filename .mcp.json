@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "brand-api": {
+      "type": "http",
+      "url": "https://mcp.tastelabs.com/mcp"
+    }
+  }
+}

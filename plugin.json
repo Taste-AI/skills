@@ -1,0 +1,91 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "brand-api",
+  "version": "0.1.0",
+  "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
+  "author": {
+    "name": "Taste Labs",
+    "url": "https://engine.tastelabs.com"
+  },
+  "homepage": "https://engine.tastelabs.com",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Brand API",
+        "shortDescription": "Find, extract and check brands",
+        "longDescription": "Brand API turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
+        "developerName": "Taste Labs",
+        "category": "Design",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://engine.tastelabs.com",
+        "supportURL": "https://docs.tastelabs.com",
+        "privacyPolicyURL": "https://tastelabs.com/legal/privacy-policy",
+        "termsOfServiceURL": "https://tastelabs.com/legal/terms-of-service",
+        "defaultPrompt": [
+          "Find brands with a warm pastel skincare look",
+          "Extract the brand system of stripe.com"
+        ],
+        "brandColor": "#000000",
+        "brandColorDark": "#FFFFFF",
+        "composerIcon": "./assets/taste-icon.png",
+        "logo": "./assets/taste-icon.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Search the brand corpus by described aesthetic",
+              "prompt": "Find brands with a warm pastel skincare look",
+              "tools_triggered": "search_brands",
+              "expected_behavior": "Returns a ranked list of real brand websites whose look matches warm pastel skincare, each with its URL."
+            },
+            {
+              "description": "Extract a website's brand system",
+              "prompt": "Extract the brand system of stripe.com",
+              "tools_triggered": "extract_brand, poll_brand_extraction, get_brand_extraction_result",
+              "expected_behavior": "Starts an extraction of https://stripe.com, waits for it to complete, and summarizes the brand's colors, typography, layout and components."
+            },
+            {
+              "description": "Find brands visually similar to an extracted site",
+              "prompt": "Extract linear.app and then find brands that look similar to it",
+              "tools_triggered": "extract_brand, poll_brand_extraction, search_similar_brands",
+              "expected_behavior": "Extracts https://linear.app, then returns a list of visually similar brand websites with their URLs."
+            },
+            {
+              "description": "Score how closely one page follows another site's brand",
+              "prompt": "How closely does https://stripe.com/payments follow the brand of https://stripe.com?",
+              "tools_triggered": "verify_brand_adherence, poll_brand_adherence, get_brand_adherence_result",
+              "expected_behavior": "Runs an adherence check with stripe.com as the reference and stripe.com/payments as the candidate, then reports the adherence score and the main differences."
+            },
+            {
+              "description": "Check a design choice against known AI-slop patterns",
+              "prompt": "Is a purple to blue gradient hero with everything centered a generic AI-looking design?",
+              "tools_triggered": "lookup_slop",
+              "expected_behavior": "Returns the matching slop patterns for the described design choices and explains which ones apply."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Unrelated coding request should not call Brand API tools",
+              "prompt": "Write a Python function that reverses a string."
+            },
+            {
+              "description": "Destructive request the plugin does not support",
+              "prompt": "Delete all of my brand extractions."
+            },
+            {
+              "description": "Missing target should prompt a clarifying question instead of guessing a URL",
+              "prompt": "Extract the brand."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "Initial release: search brands by aesthetic, extract any website's brand system, find similar brands, and score how closely a page follows a brand. Ships with the brand-search, taste-director and brand-adherence skills."
+      }
+    }
+  }
+}

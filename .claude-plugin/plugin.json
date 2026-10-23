@@ -1,0 +1,15 @@
+{
+  "name": "brand-api",
+  "displayName": "Brand API",
+  "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Taste Labs",
+    "url": "https://engine.tastelabs.com"
+  },
+  "homepage": "https://engine.tastelabs.com",
+  "icon": "./assets/taste-icon.png",
+  "documentationUrl": "https://docs.tastelabs.com",
+  "privacyPolicyUrl": "https://tastelabs.com/legal/privacy-policy",
+  "termsOfServiceUrl": "https://tastelabs.com/legal/terms-of-service"
+}
