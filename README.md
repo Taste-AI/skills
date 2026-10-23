@@ -58,7 +58,9 @@ For Codex add an `[mcp_servers.brand-api]` entry in `~/.codex/config.toml`; for 
 
 Extraction runs through `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result`. An extraction costs 2 credits, a fast search 1, a deep search 2, a similar-brands search 1, and an adherence check 2. Reading back a result you already paid for is free.
 
-The adherence verifier extracts both pages itself from two URLs, so the page you grade needs a public URL the engine can reach; a page served on loopback is invisible to it.
+The adherence verifier extracts both pages from their URLs, so each page must be reachable by Taste Engine. Use a deployed URL or the Tastelabs SSH tunnel for a localhost page.
+
+The tunnel connects to `tunnel.tasting.dev` and forwards requests to the configured localhost port (3000 in the provided command), making the page content and assets served there available to Tastelabs for crawling. The printed `http://crawl-<uuid>` address is a private tunnel alias. Keep SSH running during extraction and adherence checks: the tunnel closes when SSH exits or its deadline expires (one hour in the provided command).
 
 ## teams
 
