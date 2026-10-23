@@ -5,11 +5,14 @@
   "version": "0.1.0",
   "author": {
     "name": "Taste Labs",
+    "email": "support@tastelabs.com",
     "url": "https://engine.tastelabs.com"
   },
   "homepage": "https://engine.tastelabs.com",
+  "repository": "https://github.com/Taste-AI/skills",
   "icon": "./assets/taste-icon.png",
   "documentationUrl": "https://docs.tastelabs.com",
+  "supportUrl": "https://github.com/Taste-AI/skills#support",
   "privacyPolicyUrl": "https://tastelabs.com/legal/privacy-policy",
   "termsOfServiceUrl": "https://tastelabs.com/legal/terms-of-service"
 }
