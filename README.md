@@ -88,7 +88,7 @@ Maintain the skills and their supporting resources in this repository, together 
 | `.claude-plugin/plugin.json`, `.mcp.json` | Claude plugin and MCP configuration |
 | `.claude-plugin/marketplace.json` | `/plugin install` from this repo |
 | `plugin.json`, `mcp.json` | OpenAI plugin and MCP configuration |
-| `assets/taste-icon.png` | the directory listings |
+| [assets/taste-icon.png](assets/taste-icon.png) | the directory listings |
 
 ## Development Checks
 
