@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "brand-api",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
   "author": {
     "name": "Taste Labs",
@@ -89,7 +89,7 @@
         }
       },
       "publication": {
-        "release_notes": "Version 0.1.1: explicitly configure OAuth with Dynamic Client Registration for the remote Taste Engine MCP server and clarify the expected behavior of negative review cases. Includes brand search, extraction, similarity and adherence tools with the brand-search, taste-director and brand-adherence skills."
+        "release_notes": "Initial release: search brands by aesthetic, extract any website's brand system, find similar brands, and score how closely a page follows a brand. Ships with the brand-search, taste-director and brand-adherence skills."
       }
     }
   }
