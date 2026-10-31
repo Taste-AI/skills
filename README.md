@@ -101,3 +101,23 @@ Validate the complete plugin package with:
 ```bash
 claude plugin validate . --strict --profile directory
 ```
+
+## OpenAI Publication
+
+The portable `mcp.json` declares OAuth with Dynamic Client Registration for Taste Engine. OpenAI reads these settings from `mcpServers.brand-api.extensions.com.openai.auth`; OAuth discovery supplies the registration and authorization endpoints. The submission portal currently supports OAuth connections, but does not offer an API-key or fixed-Bearer-token connection flow.
+
+Validation note (2026-10-30): OpenAI documents this server-level auth extension, but the published Agent Plugins MCP 1.0.0 JSON Schema currently rejects server-level `extensions`. Claude's validator does not validate this portable OpenAI configuration. Confirm acceptance in the OpenAI upload checks; local validation alone does not establish it.
+
+After committing the release files, package the plugin from this repository's root:
+
+```bash
+git archive --format=zip --output=../brand-api-openai.zip HEAD plugin.json mcp.json skills assets README.md LICENSE
+```
+
+This includes the complete skills and their supporting resources, listing assets, and portable manifests at the ZIP root. The MCP implementation stays in `Taste-AI/core`.
+
+Upload the ZIP to [OpenAI Plugins](https://platform.openai.com/plugins) using **With MCP**. Complete the domain challenge shown in the portal, connect through OAuth, and review the package and tool scan findings. The server already implements `/.well-known/openai-apps-challenge`; configure the portal's exact token in the production `openaiAppsChallenge` setting in `core/infra/stages.ts` and deploy it before verification.
+
+The manifest contains five positive and three negative review cases. Before submitting, run them with a dedicated test account that has sample data and sufficient credits, add an accessible video URL as `extensions.com.openai.review.demo_recording_url`, and confirm the release notes. Enter reviewer credentials and access instructions only in the portal's secure review form. The package does not certify that those cases have been executed.
+
+See OpenAI's [authentication configuration](https://developers.openai.com/plugins/build/plugins#configure-mcp-authentication) and [submission guide](https://developers.openai.com/plugins/deploy/submission) for the current publishing requirements.

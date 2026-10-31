@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "brand-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
   "author": {
     "name": "Taste Labs",
@@ -72,21 +72,24 @@
           "negative": [
             {
               "description": "Unrelated coding request should not call Brand API tools",
-              "prompt": "Write a Python function that reverses a string."
+              "prompt": "Write a Python function that reverses a string.",
+              "expected_behavior": "Answers the coding request without calling Brand API tools because it does not require brand references or analysis."
             },
             {
               "description": "Destructive request the plugin does not support",
-              "prompt": "Delete all of my brand extractions."
+              "prompt": "Delete all of my brand extractions.",
+              "expected_behavior": "Explains that the plugin does not support deleting extractions, makes no deletion attempt, and does not claim that any records were deleted."
             },
             {
               "description": "Missing target should prompt a clarifying question instead of guessing a URL",
-              "prompt": "Extract the brand."
+              "prompt": "Extract the brand.",
+              "expected_behavior": "Asks for the website URL before starting an extraction because no target was provided."
             }
           ]
         }
       },
       "publication": {
-        "release_notes": "Initial release: search brands by aesthetic, extract any website's brand system, find similar brands, and score how closely a page follows a brand. Ships with the brand-search, taste-director and brand-adherence skills."
+        "release_notes": "Version 0.1.1: explicitly configure OAuth with Dynamic Client Registration for the remote Taste Engine MCP server and clarify the expected behavior of negative review cases. Includes brand search, extraction, similarity and adherence tools with the brand-search, taste-director and brand-adherence skills."
       }
     }
   }
