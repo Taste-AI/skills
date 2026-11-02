@@ -17,7 +17,7 @@
         "shortDescription": "Find, extract and check brands",
         "longDescription": "Brand API turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
         "developerName": "Taste Labs",
-        "category": "Design",
+        "category": "Creativity",
         "capabilities": [
           "Read",
           "Write"
@@ -72,15 +72,18 @@
           "negative": [
             {
               "description": "Unrelated coding request should not call Brand API tools",
-              "prompt": "Write a Python function that reverses a string."
+              "prompt": "Write a Python function that reverses a string.",
+              "expected_behavior": "Answers the coding request without calling Brand API tools because it does not require brand references or analysis."
             },
             {
               "description": "Destructive request the plugin does not support",
-              "prompt": "Delete all of my brand extractions."
+              "prompt": "Delete all of my brand extractions.",
+              "expected_behavior": "Explains that the plugin does not support deleting extractions, makes no deletion attempt, and does not claim that any records were deleted."
             },
             {
               "description": "Missing target should prompt a clarifying question instead of guessing a URL",
-              "prompt": "Extract the brand."
+              "prompt": "Extract the brand.",
+              "expected_behavior": "Asks for the website URL before starting an extraction because no target was provided."
             }
           ]
         }
