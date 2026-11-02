@@ -116,7 +116,13 @@ git archive --format=zip --output=../brand-api-openai.zip HEAD plugin.json mcp.j
 
 This includes the complete skills and their supporting resources, listing assets, and portable manifests at the ZIP root. The MCP implementation stays in `Taste-AI/core`.
 
-Upload the ZIP to [OpenAI Plugins](https://platform.openai.com/plugins) using **With MCP**. Complete the domain challenge shown in the portal, connect through OAuth, and review the package and tool scan findings. The server already implements `/.well-known/openai-apps-challenge`; configure the portal's exact token in the production `openaiAppsChallenge` setting in `core/infra/stages.ts` and deploy it before verification.
+Upload the ZIP to [OpenAI Plugins](https://platform.openai.com/plugins) using **With MCP**. Complete the domain challenge shown in the portal, connect through OAuth, and review the package and tool scan findings. The server implements `/.well-known/openai-apps-challenge`. From the `core` checkout, store the portal's exact token in the production SST secret through standard input:
+
+```sh
+AWS_REGION=us-west-2 pnpm exec sst secret set OpenAIAppsChallenge --stage production < /path/to/private/token.txt
+```
+
+Deploy the infrastructure configuration that wires this secret into the MCP service through the existing GitHub Actions workflow. Later token changes use the same secret-and-deploy process. A service restart alone does not apply a newly stored SST secret. The empty default returns HTTP 404; once configured, the route returns the token as plain text. Keep the token out of source files and PRs.
 
 The manifest contains five positive and three negative review cases. Before submitting, run them with a dedicated test account that has sample data and sufficient credits, add an accessible video URL as `extensions.com.openai.review.demo_recording_url`, and confirm the release notes. Enter reviewer credentials and access instructions only in the portal's secure review form. The package does not certify that those cases have been executed.
 
