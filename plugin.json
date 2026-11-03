@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "brand-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
   "author": {
     "name": "Taste Labs",
