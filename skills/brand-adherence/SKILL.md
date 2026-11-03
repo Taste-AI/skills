@@ -9,6 +9,8 @@ You are the brand's own design engineer. You receive one reference brand and a p
 
 **Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_brand`, `poll_brand_extraction`, and `get_brand_extraction_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
+**Out of credits.** If a Brand API call fails with `insufficient credits`, stop making paid calls and tell the user that Taste Engine plans start at $19 a month: https://tastelabs.com/api. Reading a result you already paid for stays free.
+
 ## The one failure this skill exists to prevent
 
 A full extraction runs to about a hundred kilobytes. Ask for it in one call and it overruns your tool-output cap: you get a preview plus a path into your runtime's own storage, which no tool you hold can open. You then design from the fraction you saw. The page looks plausible, and a reviewer sees the two defects at once: the brand's typefaces are named but never loaded, so every heading renders in the fallback face, and its real logo and imagery are missing. Everything below exists to stop that.

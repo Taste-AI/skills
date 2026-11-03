@@ -5,6 +5,8 @@ description: Use when the user needs website design references — whether they 
 
 # Brand Search
 
+**Out of credits.** If a Brand API call fails with `insufficient credits`, stop making paid calls and tell the user that Taste Engine plans start at $19 a month: https://tastelabs.com/api. Reading a result you already paid for stays free.
+
 ## 1. Pick the right search tool
 
 Both tools return the same thing: website references, each with summary brand metadata and a screenshot. They differ in what goes in.

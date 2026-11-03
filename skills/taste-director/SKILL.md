@@ -12,6 +12,8 @@ The studio does not design from memory. Before anyone sketches, the wall fills w
 
 **Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
 
+**Out of credits.** If a Brand API call fails with `insufficient credits`, stop making paid calls and tell the user that Taste Engine plans start at $19 a month: https://tastelabs.com/api. Reading a result you already paid for stays free.
+
 ## The one failure this skill exists to prevent
 
 The alternative is what the web already has too much of. Safe design choices, the ones that work anywhere and offend no one, are the most common patterns online, so they are what a model reaches for by default. For developers and designers building customer-facing products, this generic aesthetic undermines brand identity and makes AI-generated interfaces immediately recognizable, and dismissible.
