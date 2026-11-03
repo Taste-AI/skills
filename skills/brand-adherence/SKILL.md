@@ -7,7 +7,7 @@ description: Ship a new page for a brand that already exists, as if that brand's
 
 You are the brand's own design engineer. You receive one reference brand and a page to build, and you ship that page as if the brand's own team shipped it. Your success is measured one way: **a reviewer who knows the brand must not find a single token, component, or rule you altered.** Composition, hierarchy, and copy are your latitude. Everything else belongs to the brand.
 
-**Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_brand`, `poll_brand_extraction`, and `get_brand_extraction_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
+**Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_website`, `poll_brand_extraction`, and `get_website_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
 ## The one failure this skill exists to prevent
 
@@ -15,7 +15,7 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 
 ## 1. Pull the extraction in sections, and save each one as it lands
 
-Acquire the brand first. `extract_brand(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_brand_extraction_result`. Markup written before you hold the brand is a guess you will throw away.
+Acquire the brand first. `extract_website(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_website_result`. Markup written before you hold the brand is a guess you will throw away.
 
 You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Taste Labs SSH tunnel. This is a tunnel where only Taste Labs
 is able to access your page. To run the tunnel, follow the steps:
@@ -29,7 +29,7 @@ echo "Crawl URL: http://$CRAWL_ID"
 ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=3600s
 ```
 
-The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `extract_brand(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or verification takes three to five minutes, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
+The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `extract_website(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or verification takes three to five minutes, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
 
 ```
 python3 -m http.server 3000 --bind 127.0.0.1
@@ -38,12 +38,12 @@ python3 -m http.server 3000 --bind 127.0.0.1
 **Never ask for the whole document at once.** Pass `sections` and take two or three at a time. The engine runs the extraction once and caches it, so the later pulls are cheap:
 
 ```
-get_brand_extraction_result(brand_submission_id, sections=["profile", "colors"])
-get_brand_extraction_result(brand_submission_id, sections=["typography", "assets"])
-get_brand_extraction_result(brand_submission_id, sections=["actions", "surfaces", "elevation"])
-get_brand_extraction_result(brand_submission_id, sections=["layout", "structure", "navigation"])
-get_brand_extraction_result(brand_submission_id, sections=["interactions", "icons"])
-get_brand_extraction_result(brand_submission_id, sections=["data_display", "sections"])
+get_website_result(brand_submission_id, sections=["profile", "colors"])
+get_website_result(brand_submission_id, sections=["typography", "assets"])
+get_website_result(brand_submission_id, sections=["actions", "surfaces", "elevation"])
+get_website_result(brand_submission_id, sections=["layout", "structure", "navigation"])
+get_website_result(brand_submission_id, sections=["interactions", "icons"])
+get_website_result(brand_submission_id, sections=["data_display", "sections"])
 ```
 
 The fourteen legal names are `profile`, `layout`, `colors`, `typography`, `surfaces`, `elevation`, `interactions`, `actions`, `navigation`, `data_display`, `structure`, `icons`, `assets`, and `sections`.
@@ -56,7 +56,7 @@ A section you never pulled is a section you did not use.
 
 ## 2. The artifacts are half the extraction
 
-Every `get_brand_extraction_result` answer carries an `artifacts` object beside `design_system`, and it survives a narrowed pull, so you hold it from the first call:
+Every `get_website_result` answer carries an `artifacts` object beside `design_system`, and it survives a narrowed pull, so you hold it from the first call:
 
 | artifact | why you cannot skip it |
 |---|---|

@@ -47,13 +47,13 @@
             {
               "description": "Extract a website's brand system",
               "prompt": "Extract the brand system of stripe.com",
-              "tools_triggered": "extract_brand, poll_brand_extraction, get_brand_extraction_result",
+              "tools_triggered": "extract_website, poll_brand_extraction, get_website_result",
               "expected_behavior": "Starts an extraction of https://stripe.com, waits for it to complete, and summarizes the brand's colors, typography, layout and components."
             },
             {
               "description": "Find brands visually similar to an extracted site",
               "prompt": "Extract linear.app and then find brands that look similar to it",
-              "tools_triggered": "extract_brand, poll_brand_extraction, search_similar_brands",
+              "tools_triggered": "extract_website, poll_brand_extraction, search_similar_brands",
               "expected_behavior": "Extracts https://linear.app, then returns a list of visually similar brand websites with their URLs."
             },
             {

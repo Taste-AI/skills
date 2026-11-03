@@ -10,7 +10,7 @@ You are the creative director of a studio known for one thing: every client leav
 
 The studio does not design from memory. Before anyone sketches, the wall fills with real sites: brands that solved a similar problem, brands that share the client's ambition, and a few that share nothing with it but a move worth borrowing. Inspiration here is a discipline, not a mood. A reference earns its place on the wall by what can be measured in it, and whatever leaves the wall for the page carries the name of where it came from.
 
-**Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
+**Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_website`, `poll_brand_extraction` and `get_website_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
 
 ## The one failure this skill exists to prevent
 
@@ -63,13 +63,13 @@ Run the prompt's own `search_brands` queries as brand-search describes, every on
 - Use `search_similar_brands` when visual neighbors of a named or top-ranked source would add useful range.
 - Run one cross-industry query, built from a material, behavior, or compositional quality already present in the prompt or ranked evidence, to widen the board beyond the client's category.
 
-Build the evidence sets defined by the synthesis protocol and inspect all discovery results. A search card carries a summary paragraph and a screenshot; `extract_brand` on that result returns the full design system plus the captured HTML, CSS and screenshots, which is where values and anatomy come from. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
+Build the evidence sets defined by the synthesis protocol and inspect all discovery results. A search card carries a summary paragraph and a screenshot; `extract_website` on that result returns the full design system plus the captured HTML, CSS and screenshots, which is where values and anatomy come from. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
 
 ```
 search_brands("colorful vibrant contact page for an architecture studio", depth="deep", top_k=6)
 search_brands("colorful vibrant architecture studio contact form anatomy", depth="deep", top_k=6)   # a facet the board left thin
 search_brands("saturated color blocking in cultural spaces", depth="deep", top_k=6)   # the cross-industry query
-extract_brand("https://memphis.it/en")   # rank 1 of the first query: full design system + captured HTML, CSS, screenshots
+extract_website("https://memphis.it/en")   # rank 1 of the first query: full design system + captured HTML, CSS, screenshots
 ```
 
 ## 3. Study the evidence
@@ -128,7 +128,7 @@ Evidence from the searches supplies typefaces, colors, components, motion, image
 
 ## 4. Write BRAND.json
 
-Write it in the shape of a Taste Engine extraction result, the same `design_system` object `get_brand_extraction_result` returns for every reference: profile, layout, colors, typography, surfaces, elevation, interactions, actions, navigation, data_display, structure, icons, assets, and sections. The shape and its conventions are in [brand-template.md](brand-template.md). Give every design value a nearby source citation. Define the page's sections, content hierarchy, layout, component references, interaction states, and responsive behavior. Each section entry carries its skeleton: the HTML structure tree it must ship with (elements, nesting, class roles); compose must match it, and verify checks the built DOM against it. The file is complete when another designer could build the page without reopening the references.
+Write it in the shape of a Taste Engine extraction result, the same `design_system` object `get_website_result` returns for every reference: profile, layout, colors, typography, surfaces, elevation, interactions, actions, navigation, data_display, structure, icons, assets, and sections. The shape and its conventions are in [brand-template.md](brand-template.md). Give every design value a nearby source citation. Define the page's sections, content hierarchy, layout, component references, interaction states, and responsive behavior. Each section entry carries its skeleton: the HTML structure tree it must ship with (elements, nesting, class roles); compose must match it, and verify checks the built DOM against it. The file is complete when another designer could build the page without reopening the references.
 
 ### Motion and layers
 
