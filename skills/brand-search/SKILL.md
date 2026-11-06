@@ -34,11 +34,11 @@ When the prompt already crosses industries — "playful colorful consumer fintec
 Use this one when you already have a brand and want others that look like it — whether that brand is the inspiration to follow or the anchor to pivot away from. It reads a completed extraction, not a url, so get the anchor first:
 
 - You already have the extraction — from this run or an earlier one — so pass its `submission_id` straight to `search_similar_brands`.
-- You only have a url — off a `search_brands` card, or a site the user named — so extract it first: `extract_brand(url)` → poll → `search_similar_brands(submission_id)`. The loop is written out in step 4.
+- You only have a url — off a `search_brands` card, or a site the user named — so extract it first: `extract_website(url)` → poll → `search_similar_brands(submission_id)`. The loop is written out in step 4.
 
 An unqualified site — "like ours", "competitors of acme.com", "sites like patagonia.com" — calls for two lenses at once: `search_similar_brands(submission_id)` on the extraction follows the *look* (whole-gestalt visual neighbors), while an anchored deep `search_brands` follows the *meaning* (the cultural neighborhood) — `search_brands("outdoor apparel brand with rugged environmental storytelling")` for patagonia.com. Inspect the two sets separately, rank preserved inside each.
 
-When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_brand("https://linear.app")`, `extract_brand("https://ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
+When sources are already named — "layout of linear.app, colors of ramp.com" — extract them directly, since they're already the reference: `extract_website("https://linear.app")`, `extract_website("https://ramp.com")`. Pull `search_similar_brands(submission_id)` on either only if the board wants more of that look; the facets those sites don't cover go to `search_brands` instead.
 
 A site with a pivot runs its second path alongside the query: extract the anchor and take its neighbors — `search_similar_brands(submission_id)` on Notion's extraction, for a "like Notion but for restaurants" prompt. Keep the sets apart: the query carries the pivot, the neighbors only map the anchor's visual neighborhood.
 
@@ -62,18 +62,20 @@ The discovery results show inspiration related to the style, carrying different 
 
 All results of every query, including every discovery result, are mandatory evidence. For each result, read its metadata and description and view its screenshot. Inspect results in their returned order before selecting references. If you describe motion or interaction, verify it on the live site. A result may be set aside when its observed design conflicts with the user's prompt; state the specific mismatch.
 
-If a result earns a closer read, run `extract_brand` on it. Once it's extracted, `search_similar_brands` on it widens the set with more of that brand's visual neighbourhood.
+If a result earns a closer read, run `extract_website` on it. Once it's extracted, `search_similar_brands` on it widens the set with more of that brand's visual neighbourhood.
 
 ## 4. Acquire the source
 
-Extract only when you actually need more than the card gives. The metadata, description and screenshot are usually enough to judge a reference and often enough to design from. Reach for `extract_brand` when you're going to build directly off that source and need its real values — type, spacing, palette, layout structure — or when you need a `submission_id` to feed `search_similar_brands`. Don't push a whole result set through extraction by default.
+Extract only when you actually need more than the card gives. The metadata, description and screenshot are usually enough to judge a reference and often enough to design from. Reach for `extract_website` when you're going to build directly off that source and need its real values — type, spacing, palette, layout structure — or when you need a `submission_id` to feed `search_similar_brands`. Don't push a whole result set through extraction by default.
 
-When you do need it, send the source through `extract_brand` and poll until it lands:
+When you do need it, send the source through `extract_website` and poll until it lands:
 
 ```
-extract_brand(url)                       → submission_id
+extract_website(url)                     → submission_id
 poll_brand_extraction(submission_id)     # accepted → extracting → ... → completed or failed
-get_brand_extraction_result(submission_id)
+get_website_result(submission_id)
 ```
 
-While a batch runs, study the sources you already have and come back to the queue. Read each completed result with `get_brand_extraction_result`. Record failures and replace them with the next ranked result from the same query.
+A source that is not a site has its own tool, and `poll_brand_extraction` polls all of them: a brand guidelines PDF goes through `extract_brand_kit(url)` and `get_brand_kit_result`, the image of one finished marketing piece through `extract_brand_asset(url)` and `get_brand_asset_result`, and 1 to 12 of a brand's photos through `extract_photography(urls)` and `get_photography_result`. Each URL must be the file itself over https, not a share page.
+
+While a batch runs, study the sources you already have and come back to the queue. Read each completed result with `get_website_result`. Record failures and replace them with the next ranked result from the same query.

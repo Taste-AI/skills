@@ -68,7 +68,7 @@ To try a local clone without installing, run `claude --plugin-dir .` from its ro
 
 ## Using the Skills
 
-Extraction runs through `extract_brand`, `poll_brand_extraction` and `get_brand_extraction_result`. An extraction costs 2 credits, a fast search 1, a deep search 2, a similar-brands search 1, and an adherence check 2. Reading back a result you already paid for is free.
+Extraction runs through `extract_website`, `poll_brand_extraction` and `get_website_result`. A brand guidelines PDF, the image of one finished marketing piece, or 1 to 12 of a brand's photos go through `extract_brand_kit`, `extract_brand_asset` or `extract_photography` instead, each read with its own result tool. An extraction of any kind costs 2 credits, a fast search 1, a deep search 2, a similar-brands search 1, and an adherence check 2. Reading back a result you already paid for is free.
 
 The adherence verifier extracts both pages from their URLs, so each page must be reachable by Taste Engine. Use a deployed URL or the Taste Labs SSH tunnel for a localhost page.
 

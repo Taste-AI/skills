@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "brand-api",
-  "version": "0.1.0",
-  "description": "Find real brand references, extract any website's brand system, and check how closely a page follows a brand.",
+  "version": "0.2.0",
+  "description": "Find real brand references, extract a brand from a website, a brand guidelines PDF, a marketing piece or a set of photos, and check how closely a page follows a brand.",
   "author": {
     "name": "Taste Labs",
     "email": "support@tastelabs.com",
@@ -15,7 +15,7 @@
       "interface": {
         "displayName": "Brand API",
         "shortDescription": "Find, extract and check brands",
-        "longDescription": "Brand API turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
+        "longDescription": "Brand API turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. It also reads a brand guidelines PDF into a brand kit, one finished marketing piece into its design system, and a set of the brand's photos into a photography profile. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
         "developerName": "Taste Labs",
         "category": "Creativity",
         "capabilities": [
@@ -47,13 +47,31 @@
             {
               "description": "Extract a website's brand system",
               "prompt": "Extract the brand system of stripe.com",
-              "tools_triggered": "extract_brand, poll_brand_extraction, get_brand_extraction_result",
+              "tools_triggered": "extract_website, poll_brand_extraction, get_website_result",
               "expected_behavior": "Starts an extraction of https://stripe.com, waits for it to complete, and summarizes the brand's colors, typography, layout and components."
+            },
+            {
+              "description": "Extract a brand kit from a brand guidelines PDF",
+              "prompt": "Extract the brand kit from this brand guidelines PDF: https://www.nasa.gov/wp-content/uploads/2015/01/nasa_graphics_manual_nhb_1430-2_jan_1976.pdf",
+              "tools_triggered": "extract_brand_kit, poll_brand_extraction, get_brand_kit_result",
+              "expected_behavior": "Starts a brand kit extraction from the PDF, waits for it to complete, and summarizes the kit's palette, typography, logo rules and the book's own do's and don'ts."
+            },
+            {
+              "description": "Extract the design system of one marketing piece",
+              "prompt": "Extract the design system of this social card: https://engine.tastelabs.com/og-image.png",
+              "tools_triggered": "extract_brand_asset, poll_brand_extraction, get_brand_asset_result",
+              "expected_behavior": "Starts a brand asset extraction from the image, waits for it to complete, and summarizes the piece's medium, colors, typography and layout."
+            },
+            {
+              "description": "Profile what a brand's photos have in common",
+              "prompt": "What do these brand photos have in common? https://picsum.photos/id/1011/1200/800 https://picsum.photos/id/1015/1200/800 https://picsum.photos/id/1016/1200/800",
+              "tools_triggered": "extract_photography, poll_brand_extraction, get_photography_result",
+              "expected_behavior": "Starts a photography profile from the three photos, waits for it to complete, and summarizes the traits most of them share, what varies between them, and their tone."
             },
             {
               "description": "Find brands visually similar to an extracted site",
               "prompt": "Extract linear.app and then find brands that look similar to it",
-              "tools_triggered": "extract_brand, poll_brand_extraction, search_similar_brands",
+              "tools_triggered": "extract_website, poll_brand_extraction, search_similar_brands",
               "expected_behavior": "Extracts https://linear.app, then returns a list of visually similar brand websites with their URLs."
             },
             {
