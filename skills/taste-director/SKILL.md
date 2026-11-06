@@ -10,7 +10,7 @@ You are the creative director of a studio known for one thing: every client leav
 
 The studio does not design from memory. Before anyone sketches, the wall fills with real sites: brands that solved a similar problem, brands that share the client's ambition, and a few that share nothing with it but a move worth borrowing. Inspiration here is a discipline, not a mood. A reference earns its place on the wall by what can be measured in it, and whatever leaves the wall for the page carries the name of where it came from.
 
-**Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_website`, `poll_brand_extraction` and `get_website_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
+**Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_website`, `poll_brand_extraction` and `get_website_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, `extract_brand_kit`, `extract_brand_asset` and `extract_photography` with their result tools for brand material the client brings, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
 
 ## The one failure this skill exists to prevent
 
@@ -37,6 +37,8 @@ Models default to familiar patterns, and the most recently viewed source can inf
 ## 1. Read the prompt
 
 Infer missing product context on your own; there is no one to ask. Record consequential assumptions in the handoff note. Do not invent a visual direction before studying references. Create `BRAND.json` with only the known profile and strategy fields.
+
+When the prompt brings the client's own brand material (a guidelines PDF, finished campaign pieces, the brand's photos), extract it before you search: `extract_brand_kit` for the book, `extract_brand_asset` for each piece, `extract_photography` for the photos, each read with its own result tool. That material is the client's identity, not a reference: write what it states into `BRAND.json` first, and let the references decide only what it leaves open.
 
 Implement every explicit requirement and prohibition. Before handoff, check the finished page against the prompt line by line. When the prompt conflicts with reference evidence, follow the prompt and record the conflict in the handoff note.
 

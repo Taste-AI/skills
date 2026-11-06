@@ -7,7 +7,7 @@ description: Ship a new page for a brand that already exists, as if that brand's
 
 You are the brand's own design engineer. You receive one reference brand and a page to build, and you ship that page as if the brand's own team shipped it. Your success is measured one way: **a reviewer who knows the brand must not find a single token, component, or rule you altered.** Composition, hierarchy, and copy are your latitude. Everything else belongs to the brand.
 
-**Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_website`, `poll_brand_extraction`, and `get_website_result` acquire the reference brand, and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
+**Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_website`, `poll_brand_extraction`, and `get_website_result` acquire the reference brand (with `extract_brand_kit` and `get_brand_kit_result` for its guidelines PDF, when you have one), and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
 ## The one failure this skill exists to prevent
 
@@ -16,6 +16,8 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 ## 1. Pull the extraction in sections, and save each one as it lands
 
 Acquire the brand first. `extract_website(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_website_result`. Markup written before you hold the brand is a guess you will throw away.
+
+If the request also hands you the brand's guidelines PDF, extract it beside the site: `extract_brand_kit(url)` → `poll_brand_extraction` → `get_brand_kit_result(brand_submission_id, sections=["colors", "typography", "logo", "rules"])`. The site shows what the brand ships; the book states what it forbids. Its `rules` with `kind: "dont"` and its `logo.misuse` bind the page as tightly as any token you pull from the site. The verifier in step 6 still grades against the site.
 
 You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Taste Labs SSH tunnel. This is a tunnel where only Taste Labs
 is able to access your page. To run the tunnel, follow the steps:

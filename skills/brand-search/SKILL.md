@@ -76,4 +76,6 @@ poll_brand_extraction(submission_id)     # accepted → extracting → ... → c
 get_website_result(submission_id)
 ```
 
+A source that is not a site has its own tool, and `poll_brand_extraction` polls all of them: a brand guidelines PDF goes through `extract_brand_kit(url)` and `get_brand_kit_result`, the image of one finished marketing piece through `extract_brand_asset(url)` and `get_brand_asset_result`, and 1 to 12 of a brand's photos through `extract_photography(urls)` and `get_photography_result`. Each URL must be the file itself over https, not a share page.
+
 While a batch runs, study the sources you already have and come back to the queue. Read each completed result with `get_website_result`. Record failures and replace them with the next ranked result from the same query.
