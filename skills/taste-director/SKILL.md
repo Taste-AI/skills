@@ -155,7 +155,9 @@ Resolve missing, unsupported, or contradictory decisions in `BRAND.json` before 
 
 ## 6. Compose
 
-Close the references and build from `BRAND.json`. Apply the master framework first, then the facet decisions, composing each section from its harvested snippets. Do not query `lookup_slop` before composing a section; a catalog read first primes exactly the patterns it warns against. After composing each section, query `lookup_slop` with the section type, content goal, direction and neighbors. Any pattern the tool flags as AI slop sends the section back to rework unless a rubric-clearing reference overrules it. Record each audit's verdict, reworked or confirmed, in the handoff note.
+Close the references and build from `BRAND.json`. Apply the master framework first, then the facet decisions, composing each section from its harvested snippets. Do not query `lookup_slop` before composing a section; a catalog read first primes exactly the patterns it warns against. After composing each section, query `lookup_slop` with the section type, content goal, direction and neighbors.
+
+`lookup_slop` returns the rubric dimensions nearest your query, not a verdict. Every result carries a `slop_excerpt`, and `similarity` measures how close the topic is, not how sloppy the section is: a section built to a dimension's `great_excerpt` comes back on the same dimension, often at a higher similarity, than one built to its `slop_excerpt`. So the verdict is yours. For each returned dimension, set the built section against its three excerpts and name the tier it matches: `slop`, `good` or `great`. A section that matches a `slop_excerpt` goes back to rework unless a rubric-clearing reference overrules it. A dimension whose question does not apply to the section is recorded as not applicable, not as a pass. Record each audit as dimension, tier and the one observation that decided it, in the handoff note.
 
 ```
 lookup_slop(query="hero that invites clients to start a project; color-blocked, left-aligned statement; fixed nav above, channel bands below")
@@ -185,4 +187,4 @@ Ship only when:
 
 ## Deliverables
 
-`index.html`, `BRAND.json`, and final renders at both widths (`page-1440.png`, `page-390.png`) in the working directory. Close with a short handoff note in the conversation: the assumptions made to fill gaps in the prompt, every override of the master with its reason, and the slop audit verdicts.
+`index.html`, `BRAND.json`, and final renders at both widths (`page-1440.png`, `page-390.png`) in the working directory. Close with a short handoff note in the conversation: the assumptions made to fill gaps in the prompt, every override of the master with its reason, and the slop audit verdicts (dimension, tier, deciding observation).
