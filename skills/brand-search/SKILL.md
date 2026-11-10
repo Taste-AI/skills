@@ -10,7 +10,7 @@ description: Use when the user needs website design references — whether they 
 Both tools return the same thing: website references, each with summary brand metadata and a screenshot. They differ in what goes in.
 
 `search_brands`: a natural-language query goes in. What the user or the agent asked for becomes the query. Ex: `search_brands("dark brutalist developer tools")`, `search_brands("warm pastel skincare landing pages")`.
-`search_similar_brands`: the `submission_id` of a completed extraction goes in, and that site's nearest visual neighbours come out. Ex: you extracted linear.app, got back its `submission_id`, and pass that id in.
+`search_similar_brands`: the `submission_id` of a completed extraction goes in, and that site's nearest visual neighbours come out. Ex: you extracted linear.app, got back its `submission_id`, and pass that id in. The tools return the id as `submission_id` but take it as `brand_submission_id`: `search_similar_brands(brand_submission_id=...)`. A call that passes `submission_id=` is rejected as invalid input.
 
 ### `search_brands`
 
@@ -62,6 +62,8 @@ The discovery results show inspiration related to the style, carrying different 
 
 All results of every query, including every discovery result, are mandatory evidence. For each result, read its metadata and description and view its screenshot. Inspect results in their returned order before selecting references. If you describe motion or interaction, verify it on the live site. A result may be set aside when its observed design conflicts with the user's prompt; state the specific mismatch.
 
+Every search returns a `search_id`. Keep it with the result set: `get_search_result(search_id)` reads the same cards again for free, so returning to a set after context compaction or in a later step never needs a second paid search.
+
 If a result earns a closer read, run `extract_website` on it. Once it's extracted, `search_similar_brands` on it widens the set with more of that brand's visual neighbourhood.
 
 ## 4. Acquire the source
@@ -71,9 +73,9 @@ Extract only when you actually need more than the card gives. The metadata, desc
 When you do need it, send the source through `extract_website` and poll until it lands:
 
 ```
-extract_website(url)                     → submission_id
-poll_brand_extraction(submission_id)     # accepted → extracting → ... → completed or failed
-get_website_result(submission_id)
+extract_website(url)                                       → submission_id
+poll_brand_extraction(brand_submission_id=submission_id)   # accepted → extracting → ... → completed or failed
+get_website_result(brand_submission_id=submission_id)
 ```
 
 A source that is not a site has its own tool, and `poll_brand_extraction` polls all of them: a brand guidelines PDF goes through `extract_brand_kit(url)` and `get_brand_kit_result`, the image of one finished marketing piece through `extract_brand_asset(url)` and `get_brand_asset_result`, and 1 to 12 of a brand's photos through `extract_photography(urls)` and `get_photography_result`. Each URL must be the file itself over https, not a share page.
