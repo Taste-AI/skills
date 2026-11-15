@@ -107,7 +107,7 @@
         }
       },
       "publication": {
-        "release_notes": "Initial release: search brands by aesthetic, extract any website's brand system, find similar brands, and score how closely a page follows a brand. Ships with the brand-search, taste-director and brand-adherence skills."
+        "release_notes": "Extract a brand from a brand guidelines PDF, one finished marketing piece or a set of the brand's photos, not only from a website: the new extract_brand_kit, extract_brand_asset and extract_photography tools, each with its own result tool. The website tools are now extract_website and get_website_result; they replace extract_brand and get_brand_extraction_result. The brand-search, brand-adherence and taste-director skills use the new tools."
       }
     }
   }
