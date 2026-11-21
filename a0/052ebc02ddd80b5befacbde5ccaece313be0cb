@@ -1,0 +1,27 @@
+.claude-plugin/plugin.json
+  s_cb7e97d2aba36e::t_c6ff74cefa16af 5
+plugin.json
+  s_cb7e97d2aba36e::t_f3e7042b83ab0c 4,110
+skills/brand-adherence/SKILL.md
+  s_cb7e97d2aba36e::t_e2d9207d7a96f6 20-22,141,155
+skills/brand-search/SKILL.md
+  s_cb7e97d2aba36e::t_d7efe147d44986 8-9,76-77
+skills/taste-director/SKILL.md
+  s_cb7e97d2aba36e::t_8337460025a791 15-16,73-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a0052ebc02ddd80b5befacbde5ccaece313be0cb",
+  "prompts": {},
+  "sessions": {
+    "s_cb7e97d2aba36e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "96ac4403-33ab-47d3-84f0-8aa23ea3be31",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Tobias Pucci Romero <tobiaspucciromero@Tobiass-MacBook-Pro.local>"
+    }
+  }
+}
