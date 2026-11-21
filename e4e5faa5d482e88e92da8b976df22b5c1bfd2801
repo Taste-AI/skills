@@ -1,0 +1,35 @@
+skills/creativity-api/verify.md
+  h_7ebc124c02485e 70,76-78
+  s_c6a2cb2d271574::t_ad4a5c81cf8256 79-82
+skills/creativity-api/SKILL.md
+  s_c6a2cb2d271574::t_8357716a3d0053 185-186
+  s_c6a2cb2d271574::t_789cd3376fddc4 121-125
+  s_c6a2cb2d271574::t_595a129a89ad56 1-56,59,62-66,68-76,79-85,91-120,126-135,140-148,151-154,156-184,187-192
+  s_c6a2cb2d271574::t_74c0214fc0f582 149-150
+skills/creativity-api/anti-slop.md
+  s_c6a2cb2d271574::t_f3d904a2418e59 1,4-5,9,12,18-20,23,26-35,37-54,56-57,59-62,64-67,69-71,74-76,78-79,81-84,86-91,94-96,98-106,110-111,116-118,120-131,133-136,139
+  h_7ebc124c02485e 10,14-17,21-22,24,36,55,58,63,68,72-73,77,80,85,92-93,97,108,115,119,132,137
+skills/creativity-api/brand-template.md
+  h_7ebc124c02485e 1,6,14,16-18,21,23-28,31-32,38,53,55,68-69,74,80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "e4e5faa5d482e88e92da8b976df22b5c1bfd2801",
+  "prompts": {},
+  "humans": {
+    "h_7ebc124c02485e": {
+      "author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  },
+  "sessions": {
+    "s_c6a2cb2d271574": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d2bf9265-8cc7-4f67-b323-132601ab2ea7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}

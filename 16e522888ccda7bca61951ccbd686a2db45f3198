@@ -1,0 +1,33 @@
+skills/brand-adherence/SKILL.md
+  s_e53ea24ce9b047::t_6e8b074968a4b2 147
+  s_e53ea24ce9b047::t_ef737e6205ae9d 107,136,144
+  s_e53ea24ce9b047::t_12fb1495892cea 14
+  s_e53ea24ce9b047::t_4e8381b6870c08 63
+  s_e53ea24ce9b047::t_e84f2e9da20816 132
+  s_e53ea24ce9b047::t_a08cb15e447d9f 8,11,18-40,60,72-86,88-103,109-130,133,137-142,145-146
+  s_e53ea24ce9b047::t_0932e66174390c 58
+  s_e53ea24ce9b047::t_1fea32e40e9a0f 66-69,87
+  s_e53ea24ce9b047::t_d411e71f5d1eb1 65
+  h_7ebc124c02485e 3,10,62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "16e522888ccda7bca61951ccbd686a2db45f3198",
+  "prompts": {},
+  "humans": {
+    "h_7ebc124c02485e": {
+      "author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  },
+  "sessions": {
+    "s_e53ea24ce9b047": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "30276adc-791f-46ed-ad4e-f99cccfaec4d",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}

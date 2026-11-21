@@ -1,0 +1,19 @@
+skills/taste-brand-extractor/SKILL.md
+  s_ad4b271682f154::t_069a85d741997f 49-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "ffbc63e4a4ad3c3f49d8cc0171395a8bd607a3ef",
+  "prompts": {},
+  "sessions": {
+    "s_ad4b271682f154": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a2e77b47-4989-4d7f-9d19-fa66029403b5",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}
