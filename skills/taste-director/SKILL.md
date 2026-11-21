@@ -12,6 +12,8 @@ The studio does not design from memory. Before anyone sketches, the wall fills w
 
 **Requirements.** This skill needs the brand-search skill, the Brand API MCP tools (`search_brands` and `search_similar_brands` to find references, `extract_website`, `poll_brand_extraction` and `get_website_result` to pull a reference's full design system and its captured HTML, CSS and screenshots, `list_brand_extractions` to reuse what has already been extracted, `extract_brand_kit`, `extract_brand_asset` and `extract_photography` with their result tools for brand material the client brings, and `lookup_slop` to audit a composed section) and a driveable browser that can navigate the built page to evaluate the execution and save screenshots as image files. The run is fully autonomous. Complete every step without requesting input.
 
+**One run is one session.** The first call that starts work (a search, or an extraction of the client's material) returns a `session_id`. Pass it as `session_id` on every later `search_brands`, `search_similar_brands` and `extract_*` call of the run. If a call fails because its session expired or was not found, call again without `session_id` and carry the new one.
+
 ## The one failure this skill exists to prevent
 
 The alternative is what the web already has too much of. Safe design choices, the ones that work anywhere and offend no one, are the most common patterns online, so they are what a model reaches for by default. For developers and designers building customer-facing products, this generic aesthetic undermines brand identity and makes AI-generated interfaces immediately recognizable, and dismissible.
@@ -68,10 +70,10 @@ Run the prompt's own `search_brands` queries as brand-search describes, every on
 Build the evidence sets defined by the synthesis protocol and inspect all discovery results. A search card carries a summary paragraph and a screenshot; `extract_website` on that result returns the full design system plus the captured HTML, CSS and screenshots, which is where values and anatomy come from. Acquire sources as brand-search describes, and check `list_brand_extractions` before starting new extractions. The evidence sets and every adopted discovery result are always extracted: the anatomy rules below need their captured code.
 
 ```
-search_brands("colorful vibrant contact page for an architecture studio", depth="deep", top_k=6)
-search_brands("colorful vibrant architecture studio contact form anatomy", depth="deep", top_k=6)   # a facet the board left thin
-search_brands("saturated color blocking in cultural spaces", depth="deep", top_k=6)   # the cross-industry query
-extract_website("https://memphis.it/en")   # rank 1 of the first query: full design system + captured HTML, CSS, screenshots
+search_brands("colorful vibrant contact page for an architecture studio", depth="deep", top_k=6)   # the run's first call: returns session_id
+search_brands("colorful vibrant architecture studio contact form anatomy", depth="deep", top_k=6, session_id=session_id)   # a facet the board left thin
+search_brands("saturated color blocking in cultural spaces", depth="deep", top_k=6, session_id=session_id)   # the cross-industry query
+extract_website("https://memphis.it/en", session_id=session_id)   # rank 1 of the first query: full design system + captured HTML, CSS, screenshots
 ```
 
 ## 3. Study the evidence

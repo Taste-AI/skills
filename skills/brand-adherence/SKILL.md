@@ -17,7 +17,9 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 
 Acquire the brand first. `extract_website(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_website_result`. Markup written before you hold the brand is a guess you will throw away.
 
-If the request also hands you the brand's guidelines PDF, extract it beside the site: `extract_brand_kit(url)` → `poll_brand_extraction` → `get_brand_kit_result(brand_submission_id, sections=["colors", "typography", "logo", "rules"])`. The site shows what the brand ships; the book states what it forbids. Its `rules` with `kind: "dont"` and its `logo.misuse` bind the page as tightly as any token you pull from the site. The verifier in step 6 still grades against the site.
+It also returns a `session_id`. The whole run is one task, so pass that `session_id` to every later call that starts work: `extract_brand_kit` below and each `verify_brand_adherence` in step 6. If the run already holds a `session_id` from an earlier call of the same task, such as a `search_brands` that found the brand, pass it to `extract_website` too. If a call fails because its session expired or was not found, call again without `session_id` and carry the new one.
+
+If the request also hands you the brand's guidelines PDF, extract it beside the site: `extract_brand_kit(url, session_id=session_id)` → `poll_brand_extraction` → `get_brand_kit_result(brand_submission_id, sections=["colors", "typography", "logo", "rules"])`. The site shows what the brand ships; the book states what it forbids. Its `rules` with `kind: "dont"` and its `logo.misuse` bind the page as tightly as any token you pull from the site. The verifier in step 6 still grades against the site.
 
 You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Taste Labs SSH tunnel. This is a tunnel where only Taste Labs
 is able to access your page. To run the tunnel, follow the steps:
@@ -136,7 +138,7 @@ Your own eyes carry your own blind spots: you graded work you also made. The eng
 **The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Taste Labs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
 
 ```
-verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>)
+verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>, session_id=<session_id>)
    → job_id                     # extraction of either side is reused when recent
 poll_brand_adherence(adherence_job_id=<job_id>)    # accepted → extracting → judging → completed
 get_brand_adherence_result(adherence_job_id=<job_id>)
@@ -150,7 +152,7 @@ The verdict carries three things:
 
 **Work the verdict in that order.** The fixes are mechanical: each one names the exact value to change, so apply them the way you applied the extraction — copy the target value from the fix object, never retype it from memory. Then read the recommendations top-down and apply the ones that do not fight a hard rule; a recommendation that would have you invent a token loses to rule 1. Log anything you decline, with the reason, for the closing message.
 
-**The loop runs twice, then it belongs to the user.** Verify, apply the verdict, re-render, and **verify once more** — extraction reuse makes the second run cheap. Do not act on that second verdict. Close with both scores side by side, the fixes and the recommendations the second verdict still names, and whatever you declined and why. The user reads that list and decides whether a third round is worth the credits. A round you start on your own spends them on your blind spot instead of on the page.
+**The loop runs twice, then it belongs to the user.** Verify, apply the verdict, re-render, and **verify once more**, with the same `session_id` — extraction reuse makes the second run cheap. Do not act on that second verdict. Close with both scores side by side, the fixes and the recommendations the second verdict still names, and whatever you declined and why. The user reads that list and decides whether a third round is worth the credits. A round you start on your own spends them on your blind spot instead of on the page.
 
 ## Final self-check
 
