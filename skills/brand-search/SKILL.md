@@ -5,6 +5,8 @@ description: Use when the user needs website design references — whether they 
 
 # Brand Search
 
+**One task, one session.** Every call here that starts work (`search_brands`, `search_similar_brands`, and the `extract_*` tools) returns a `session_id`. The first of those calls in a task goes without one. Pass the `session_id` from that first result into every later one of those calls for the same task, including the ones another skill makes for it. A new task starts without it. If a call fails because its session expired or was not found, call again without `session_id` and carry the new one from then on.
+
 ## 1. Pick the right search tool
 
 Both tools return the same thing: website references, each with summary brand metadata and a screenshot. They differ in what goes in.
@@ -71,8 +73,8 @@ Extract only when you actually need more than the card gives. The metadata, desc
 When you do need it, send the source through `extract_website` and poll until it lands:
 
 ```
-extract_website(url)                     → submission_id
-poll_brand_extraction(submission_id)     # accepted → extracting → ... → completed or failed
+extract_website(url, session_id=session_id)   → submission_id
+poll_brand_extraction(submission_id)          # accepted → extracting → ... → completed or failed
 get_website_result(submission_id)
 ```
 
