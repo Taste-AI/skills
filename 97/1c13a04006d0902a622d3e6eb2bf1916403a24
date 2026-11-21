@@ -1,0 +1,19 @@
+skills/brand-search/SKILL.md
+  s_cb7e97d2aba36e::t_899e0c85e0ec4d 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "971c13a04006d0902a622d3e6eb2bf1916403a24",
+  "prompts": {},
+  "sessions": {
+    "s_cb7e97d2aba36e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "96ac4403-33ab-47d3-84f0-8aa23ea3be31",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Tobias Pucci Romero <tobiaspucciromero@Tobiass-MacBook-Pro.local>"
+    }
+  }
+}
