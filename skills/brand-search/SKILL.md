@@ -36,7 +36,7 @@ When the prompt already crosses industries — "playful colorful consumer fintec
 Use this one when you already have a brand and want others that look like it — whether that brand is the inspiration to follow or the anchor to pivot away from. It reads a completed extraction, not a url, so get the anchor first:
 
 - You already have the extraction — from this run or an earlier one — so pass its `submission_id` straight to `search_similar_brands`.
-- You only have a url — off a `search_brands` card, or a site the user named — so extract it first: `extract_website(url)` → poll → `search_similar_brands(submission_id)`. The loop is written out in step 4.
+- You only have a url — off a `search_brands` card, or a site the user named — so extract it first: `extract_website(url, session_id=session_id)` → poll → `search_similar_brands(submission_id, session_id=session_id)`. The loop is written out in step 4.
 
 An unqualified site — "like ours", "competitors of acme.com", "sites like patagonia.com" — calls for two lenses at once: `search_similar_brands(submission_id)` on the extraction follows the *look* (whole-gestalt visual neighbors), while an anchored deep `search_brands` follows the *meaning* (the cultural neighborhood) — `search_brands("outdoor apparel brand with rugged environmental storytelling")` for patagonia.com. Inspect the two sets separately, rank preserved inside each.
 
