@@ -137,8 +137,8 @@ Your own eyes carry your own blind spots: you graded work you also made. The eng
 
 The verifier runs in two modes, and you use both. **Iterate on fast, grade once on full.**
 
-- **`mode: "fast"`** usually takes about a minute and gives no score. It measures colors, typography, surfaces and gradients from both pages' CSS, compares the two logos, and returns the fixes that matter most as `findings` in three tiers: must fix, fix, recommended.
-- **`mode: "full"`**, the default, takes three to five minutes. It adds a visual judge and the rest of the measured checks, and returns the `score`.
+- **`mode: "fast"`**, the default, usually takes about a minute and gives no score. It measures colors, typography, surfaces and gradients from both pages' CSS, compares the two logos, and returns the fixes that matter most as `findings` in three tiers: must fix, fix, recommended.
+- **`mode: "full"`** takes three to five minutes. It adds a visual judge and the rest of the measured checks, and returns the `score`.
 
 ```
 verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>, mode="fast")
