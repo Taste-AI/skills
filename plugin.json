@@ -78,7 +78,7 @@
               "description": "Score how closely one page follows another site's brand",
               "prompt": "How closely does https://stripe.com/payments follow the brand of https://stripe.com?",
               "tools_triggered": "verify_brand_adherence, poll_brand_adherence, get_brand_adherence_result",
-              "expected_behavior": "Runs an adherence check with stripe.com as the reference and stripe.com/payments as the candidate, then reports the adherence score and the main differences."
+              "expected_behavior": "Runs an adherence check with stripe.com as the reference and stripe.com/payments as the candidate, then reports the main differences: the tiered findings of the default fast run, or the adherence score when it runs a full check (mode \"full\")."
             },
             {
               "description": "Check a design choice against known AI-slop patterns",
