@@ -137,7 +137,7 @@ Your own eyes carry your own blind spots: you graded work you also made. The eng
 
 The verifier runs in two modes, and you use both. **Iterate on fast, grade once on full.**
 
-- **`mode: "fast"`**, the default, usually takes about a minute and gives no score. It measures colors, typography, surfaces and gradients from both pages' CSS, compares the two logos, and returns the fixes that matter most as `findings` in three tiers: must fix, fix, recommended.
+- **`mode: "fast"`**, the default, takes about a minute and gives no score. It measures colors, typography, surfaces and gradients from both pages' CSS, compares the two logos, classifies the page as off brand, partially on brand or on brand (`overall_adherence`), and returns the fixes that matter most as `findings` in three tiers: must fix, fix, recommended.
 - **`mode: "full"`** takes three to five minutes. It adds a visual judge and the rest of the measured checks, and returns the `score`.
 
 ```
@@ -149,7 +149,7 @@ get_brand_adherence_result(adherence_job_id=<job_id>)
 
 ### Read the fast findings
 
-A fast verdict has `score: null` and empty `fixes` and `recommendations`. The work is in `findings`, sorted worst tier first. Each finding names one thing to change:
+A fast verdict has `score: null` and empty `fixes` and `recommendations`. `overall_adherence` is the overall read: `off_brand` means the page reads as another brand, `partially_on_brand` that the brand is there but needs real alignment work, `on_brand` that a few small fixes remain; it is `null` when that read could not run. The work is in `findings`, sorted worst tier first. Each finding names one thing to change:
 
 - **`tier`** — how much it matters: must fix, then fix, then recommended. `finding_counts` gives the number of findings in each tier.
 - **`category`**, **`element`**, **`issue`** — where it is and what is wrong. The category is one of colors, typography, surfaces, gradients, or logo.
@@ -194,4 +194,4 @@ Run this against the file on disk, and against your last render when you have on
 - The page holds its structure at 390 and at 1440, confirmed in a render or in the verifier's verdict rather than assumed, and it holds when a remote font or script fails to load.
 - Nothing overflows, nothing is truncated that had room, and nothing overlaps what a reader was meant to read.
 
-Close with a plain message naming the brand decisions you made, how you obtained the extraction, the fast finding counts from your first and last round, the full run's score (or why the verifier could not run), the fixes and recommendations the full verdict names, any finding you declined and why, and anything you could not verify.
+Close with a plain message naming the brand decisions you made, how you obtained the extraction, the fast finding counts and `overall_adherence` from your first and last round, the full run's score (or why the verifier could not run), the fixes and recommendations the full verdict names, any finding you declined and why, and anything you could not verify.
