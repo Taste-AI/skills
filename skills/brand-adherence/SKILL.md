@@ -157,7 +157,7 @@ A fast verdict has `score: null` and empty `fixes` and `recommendations`. The wo
 - **`members`** — findings that report the same problem are grouped into one, with the originals listed here. Fix every member, not only the headline.
 - **`source`** — `"jev"` marks the logo comparison, which a model makes and which carries no values. The fix is the logo from step 2, pasted from the extraction.
 
-Two fields decide whether the list can be trusted at all. `partial: true` means the run is still producing findings: poll until `completed` and read again. A `skip_reason` means nothing could be measured, usually because a page failed to extract, so **empty `findings` do not mean an on-brand page**: restore the URL or the tunnel and run again.
+Two fields decide whether the list can be trusted at all. `partial: true` means the run is still producing findings: poll until `completed` and read again. A run that ends `failed` produced no verdict: stop polling, record its `error`, and report it in your closing message. A `skip_reason` means nothing could be measured, usually because a page failed to extract, so **empty `findings` do not mean an on-brand page**: restore the URL or the tunnel and run again.
 
 ### Fix by tier, then stop
 
@@ -166,7 +166,7 @@ Two fields decide whether the list can be trusted at all. `partial: true` means 
 Re-render, then verify fast again. Stop iterating at the first of these:
 
 - no must fix and no fix findings remain;
-- a round leaves the must fix and fix counts where they were. A finding that survives your fix is one you misread, and another run will not read it for you: log it and move on;
+- a round resolves none of the previous round's must fix and fix findings. A finding that survives your fix is one you misread, and another run will not read it for you: log it and move on;
 - three fast rounds.
 
 A short fast list is not a clean page. Fast never looks at layout, components, imagery or density; the render check in step 5 and the full run carry those.
