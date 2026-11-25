@@ -31,7 +31,7 @@ echo "Crawl URL: http://$CRAWL_ID"
 ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=3600s
 ```
 
-The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `extract_website(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or full verification takes three to five minutes and a fast verification usually about a minute, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
+The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `extract_website(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or full verification takes three to five minutes and a fast run about a minute, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
 
 ```
 python3 -m http.server 3000 --bind 127.0.0.1
@@ -167,7 +167,7 @@ Re-render, then verify fast again. Stop iterating at the first of these:
 
 - no must fix and no fix findings remain;
 - a round resolves none of the previous round's must fix and fix findings. A finding that survives your fix is one you misread, and another run will not read it for you: log it and move on;
-- three fast rounds.
+- three fast runs.
 
 A short fast list is not a clean page. Fast never looks at layout, components, imagery or density; the render check in step 5 and the full run carry those.
 
