@@ -1,0 +1,36 @@
+.claude-plugin/plugin.json
+  s_17145812a5c5e8::t_77e8ad9491e22a 2-3
+  s_17145812a5c5e8::t_30198d7d44c73c 5
+.claude-plugin/marketplace.json
+  s_17145812a5c5e8::t_77e8ad9491e22a 10
+.mcp.json
+  s_17145812a5c5e8::t_77e8ad9491e22a 3
+mcp.json
+  s_17145812a5c5e8::t_77e8ad9491e22a 4
+plugin.json
+  s_17145812a5c5e8::t_77e8ad9491e22a 3,16,18,92,94
+  s_17145812a5c5e8::t_30198d7d44c73c 4,110
+skills/brand-adherence/SKILL.md
+  s_17145812a5c5e8::t_77e8ad9491e22a 3,10
+skills/taste-director/SKILL.md
+  s_17145812a5c5e8::t_77e8ad9491e22a 4,13
+README.md
+  s_17145812a5c5e8::t_30198d7d44c73c 67-71,90
+  s_17145812a5c5e8::t_77e8ad9491e22a 5,43,46,52,57,64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "04be7818bb04a75df7ffbc53a8dd53453628fe5d",
+  "prompts": {},
+  "sessions": {
+    "s_17145812a5c5e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "05966457-8e40-4d21-be23-745ae9b2f258",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}
