@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "brand-api",
+      "name": "taste-engine",
       "source": "./",
       "description": "Find real brand references, extract a brand from a website, a brand guidelines PDF, a marketing piece or a set of photos, and check how closely a page follows a brand."
     }

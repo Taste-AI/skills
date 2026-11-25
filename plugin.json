@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "brand-api",
-  "version": "0.2.0",
+  "name": "taste-engine",
+  "version": "0.3.0",
   "description": "Find real brand references, extract a brand from a website, a brand guidelines PDF, a marketing piece or a set of photos, and check how closely a page follows a brand.",
   "author": {
     "name": "Taste Labs",
@@ -13,9 +13,9 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Brand API",
+        "displayName": "Taste Engine",
         "shortDescription": "Find, extract and check brands",
-        "longDescription": "Brand API turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. It also reads a brand guidelines PDF into a brand kit, one finished marketing piece into its design system, and a set of the brand's photos into a photography profile. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
+        "longDescription": "Taste Engine turns a website URL into a structured brand system: colors, typography, layout and components, plus the captured HTML, CSS and screenshots. It also reads a brand guidelines PDF into a brand kit, one finished marketing piece into its design system, and a set of the brand's photos into a photography profile. Search a curated corpus of brand sites by aesthetic, build new pages inside an existing brand, and score how closely a page follows it. Ships with three skills: brand-search, taste-director and brand-adherence.",
         "developerName": "Taste Labs",
         "category": "Creativity",
         "capabilities": [
@@ -89,9 +89,9 @@
           ],
           "negative": [
             {
-              "description": "Unrelated coding request should not call Brand API tools",
+              "description": "Unrelated coding request should not call Taste Engine tools",
               "prompt": "Write a Python function that reverses a string.",
-              "expected_behavior": "Answers the coding request without calling Brand API tools because it does not require brand references or analysis."
+              "expected_behavior": "Answers the coding request without calling Taste Engine tools because it does not require brand references or analysis."
             },
             {
               "description": "Destructive request the plugin does not support",
@@ -107,7 +107,7 @@
         }
       },
       "publication": {
-        "release_notes": "Extract a brand from a brand guidelines PDF, one finished marketing piece or a set of the brand's photos, not only from a website: the new extract_brand_kit, extract_brand_asset and extract_photography tools, each with its own result tool. The website tools are now extract_website and get_website_result; they replace extract_brand and get_brand_extraction_result. The brand-search, brand-adherence and taste-director skills use the new tools."
+        "release_notes": "Brand API is now Taste Engine. The plugin and its MCP server are named taste-engine; the tools and skills are unchanged."
       }
     }
   }
