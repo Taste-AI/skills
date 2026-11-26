@@ -1,0 +1,21 @@
+README.md
+  s_17145812a5c5e8::t_9bc02e62eadca0 67
+.claude-plugin/marketplace.json
+  s_17145812a5c5e8::t_9bc02e62eadca0 14-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "a6c28b6009137ca42a4b6a80edc9001a3b0f47d2",
+  "prompts": {},
+  "sessions": {
+    "s_17145812a5c5e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "05966457-8e40-4d21-be23-745ae9b2f258",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Tadeo Donegana Braunschweig <tadeo@thetaste.ai>"
+    }
+  }
+}
