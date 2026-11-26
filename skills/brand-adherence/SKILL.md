@@ -33,7 +33,7 @@ echo "Crawl URL: http://$CRAWL_ID"
 ssh -p 2222 -o ExitOnForwardFailure=yes -R $CRAWL_ID:80:localhost:$SERVER_PORT tunnel.tasting.dev deadline=3600s
 ```
 
-The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `extract_website(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or verification takes three to five minutes, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
+The steps assume your server is running on port 3000 on localhost. Adjust accordingly and use the printed URL for `extract_website(url)`. The tunnel closes when `ssh` exits or the deadline passes, and a submission against a closed tunnel fails with `Page not reachable`. One extraction or full verification takes three to five minutes and a fast verification usually about a minute, so keep `ssh` running across iterations and re-run the command if it expires. For static files without a server consider using the Python built-in server:
 
 ```
 python3 -m http.server 3000 --bind 127.0.0.1
@@ -133,26 +133,55 @@ Write each finding down before you fix it, then fix from the written finding. A 
 
 ## 6. Verify with the brand-adherence verifier
 
-Your own eyes carry your own blind spots: you graded work you also made. The engine ships a verifier that extracts the reference and your page the same way and judges the pair, so once the render check passes, get the outside verdict.
+Your own eyes carry your own blind spots: you graded work you also made. The engine ships a verifier that extracts the reference and your page the same way and compares the pair, so once the render check passes, get the outside verdict.
 
-**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Taste Labs SSH tunnel from the steps above, kept open while you iterate. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
+**The page must be reachable by the engine.** The verifier takes two URLs and extracts both itself — no raw HTML, no file upload — so a page served on loopback is invisible to it. Use the page's deployed or preview URL, or the Taste Labs SSH tunnel from the steps above, kept open while you iterate: every run crawls your page again, so the URL must answer at each submission, not only the first. If the run has no way to put the page on a reachable URL, skip this step and say so in your closing message; never substitute your own impression for the verdict and present it as one.
+
+The verifier runs in two modes, and you use both. **Iterate on fast, grade once on full.**
+
+- **`mode: "fast"`**, the default, takes about a minute and gives no score. It measures colors, typography, surfaces and gradients from both pages' CSS, compares the two logos, classifies the page as off brand, partially on brand or on brand (`overall_adherence`), and returns the fixes that matter most as `findings` in three tiers: must fix, fix, recommended.
+- **`mode: "full"`** takes three to five minutes. It adds a visual judge and the rest of the measured checks, and returns the `score`.
 
 ```
-verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>, session_id=<session_id>)
-   → job_id                     # extraction of either side is reused when recent
+verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>, mode="fast", session_id=<session_id>)
+   → job_id
 poll_brand_adherence(adherence_job_id=<job_id>)    # accepted → extracting → judging → completed
 get_brand_adherence_result(adherence_job_id=<job_id>)
 ```
 
-The verdict carries three things:
+### Read the fast findings
+
+A fast verdict has `score: null` and empty `fixes` and `recommendations`. `overall_adherence` is the overall read: `off_brand` means the page reads as another brand, `partially_on_brand` that the brand is there but needs real alignment work, `on_brand` that a few small fixes remain; it is `null` when that read could not run. The work is in `findings`, sorted worst tier first. Each finding names one thing to change:
+
+- **`tier`** — how much it matters: must fix, then fix, then recommended. `finding_counts` gives the number of findings in each tier.
+- **`category`**, **`element`**, **`issue`** — where it is and what is wrong. The category is one of colors, typography, surfaces, gradients, or logo.
+- **`from`** and **`to`** — on a measured finding, the value found on your page and the brand's value.
+- **`members`** — findings that report the same problem are grouped into one, with the originals listed here. Fix every member, not only the headline.
+- **`source`** — `"jev"` marks the logo comparison, which a model makes and which carries no values. The fix is the logo from step 2, pasted from the extraction.
+
+Two fields decide whether the list can be trusted at all. `partial: true` means the run is still producing findings: poll until `completed` and read again. A run that ends `failed` produced no verdict: stop polling, record its `error`, and report it in your closing message. A `skip_reason` means nothing could be measured, usually because a page failed to extract, so **empty `findings` do not mean an on-brand page**: restore the URL or the tunnel and run again.
+
+### Fix by tier, then stop
+
+**Must fix first, all of them, then fix.** Apply them the way you applied the extraction: copy `to` from the finding, never retype it from memory, and change the value where it is defined so every element that shares it moves together. Take a recommended finding when it costs nothing and does not fight a hard rule; it never justifies a round of its own. Log anything you decline, with the reason, for the closing message.
+
+Re-render, then verify fast again with the same `session_id`. Stop iterating at the first of these:
+
+- no must fix and no fix findings remain;
+- a round resolves none of the previous round's must fix and fix findings. A finding that survives your fix is one you misread, and another run will not read it for you: log it and move on;
+- three fast rounds.
+
+A short fast list is not a clean page. Fast never looks at layout, components, imagery or density; the render check in step 5 and the full run carry those.
+
+### Grade once with a full run
+
+When the fast loop stops, submit the same pair with `mode="full"` and the same `session_id`. If the tunnel's deadline is closer than five minutes, re-open it first and submit the new URL. The full verdict carries three things:
 
 - **`score`** — one number from 0 to 1, a blend of the LLM judge and the deterministic checks.
 - **`fixes`** — the deterministic verifier's fix objects, worst-first, capped at 20. Each carries an `action` discriminator (`snap_to_token`, `add_color_token`, `self_host_licensed_font`, …) plus the exact target values for that action.
 - **`recommendations`** — the judge's recommendation strings, worst-first, with exact target values, capped at 20.
 
-**Work the verdict in that order.** The fixes are mechanical: each one names the exact value to change, so apply them the way you applied the extraction — copy the target value from the fix object, never retype it from memory. Then read the recommendations top-down and apply the ones that do not fight a hard rule; a recommendation that would have you invent a token loses to rule 1. Log anything you decline, with the reason, for the closing message.
-
-**The loop runs twice, then it belongs to the user.** Verify, apply the verdict, re-render, and **verify once more**, with the same `session_id` — extraction reuse makes the second run cheap. Do not act on that second verdict. Close with both scores side by side, the fixes and the recommendations the second verdict still names, and whatever you declined and why. The user reads that list and decides whether a third round is worth the credits. A round you start on your own spends them on your blind spot instead of on the page.
+**The full verdict belongs to the user.** Do not act on it. Close with the score, the fixes and the recommendations it names, the fast findings still open, and whatever you declined and why. The user reads that list and decides whether another round is worth the credits. A round you start on your own spends them on your blind spot instead of on the page.
 
 ## Final self-check
 
@@ -167,4 +196,4 @@ Run this against the file on disk, and against your last render when you have on
 - The page holds its structure at 390 and at 1440, confirmed in a render or in the verifier's verdict rather than assumed, and it holds when a remote font or script fails to load.
 - Nothing overflows, nothing is truncated that had room, and nothing overlaps what a reader was meant to read.
 
-Close with a plain message naming the brand decisions you made, how you obtained the extraction, the verifier's score before and after your corrections (or why the verifier could not run), the fixes and recommendations the second verdict still names, any you declined and why, and anything you could not verify.
+Close with a plain message naming the brand decisions you made, how you obtained the extraction, the fast finding counts and `overall_adherence` from your first and last round, the full run's score (or why the verifier could not run), the fixes and recommendations the full verdict names, any finding you declined and why, and anything you could not verify.
