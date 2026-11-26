@@ -64,10 +64,9 @@ On Claude Code older than 2.1.275, add the marketplace first:
 /plugin install taste-engine@tastelabs
 ```
 
-The plugin was called `brand-api` before version 0.3.0. If you installed it under that name, remove it and install `taste-engine`:
+The plugin was called `brand-api` before version 0.3.0. Claude Code moves an existing install to the new name by itself (the marketplace's `renames` map). If it then reports the plugin as not cached, install it once under the new name:
 
 ```
-/plugin uninstall brand-api@tastelabs
 /plugin install taste-engine@tastelabs
 ```
 
