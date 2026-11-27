@@ -17,7 +17,9 @@ A full extraction runs to about a hundred kilobytes. Ask for it in one call and 
 
 Acquire the brand first. `extract_website(url)` returns a `submission_id`; pass it as `brand_submission_id` to `poll_brand_extraction`, polled until `status: "completed"`, then to `get_website_result`. Markup written before you hold the brand is a guess you will throw away.
 
-If the request also hands you the brand's guidelines PDF, extract it beside the site: `extract_brand_kit(url)` → `poll_brand_extraction` → `get_brand_kit_result(brand_submission_id, sections=["colors", "typography", "logo", "rules"])`. The site shows what the brand ships; the book states what it forbids. Its `rules` with `kind: "dont"` and its `logo.misuse` bind the page as tightly as any token you pull from the site. The verifier in step 6 still grades against the site.
+It also returns a `session_id`. The whole run is one task, so pass that `session_id` to every later call that starts work: `extract_brand_kit` below and each `verify_brand_adherence` in step 6. If the run already holds a `session_id` from an earlier call of the same task, such as a `search_brands` that found the brand, pass it to `extract_website` too. If a call fails because its session expired or was not found, call again without `session_id` and carry the new one.
+
+If the request also hands you the brand's guidelines PDF, extract it beside the site: `extract_brand_kit(url, session_id=session_id)` → `poll_brand_extraction` → `get_brand_kit_result(brand_submission_id, sections=["colors", "typography", "logo", "rules"])`. The site shows what the brand ships; the book states what it forbids. Its `rules` with `kind: "dont"` and its `logo.misuse` bind the page as tightly as any token you pull from the site. The verifier in step 6 still grades against the site.
 
 You can use a publicly facing URL directly. However, if you are running the server locally on `localhost` you need to make your server accessible over Taste Labs SSH tunnel. This is a tunnel where only Taste Labs
 is able to access your page. To run the tunnel, follow the steps:
@@ -141,7 +143,7 @@ The verifier runs in two modes, and you use both. **Iterate on fast, grade once 
 - **`mode: "full"`** takes three to five minutes. It adds a visual judge and the rest of the measured checks, and returns the `score`.
 
 ```
-verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>, mode="fast")
+verify_brand_adherence(reference_url=<the brand site>, candidate_url=<your page>, mode="fast", session_id=<session_id>)
    → job_id
 poll_brand_adherence(adherence_job_id=<job_id>)    # accepted → extracting → judging → completed
 get_brand_adherence_result(adherence_job_id=<job_id>)
@@ -163,7 +165,7 @@ Two fields decide whether the list can be trusted at all. `partial: true` means 
 
 **Must fix first, all of them, then fix.** Apply them the way you applied the extraction: copy `to` from the finding, never retype it from memory, and change the value where it is defined so every element that shares it moves together. Take a recommended finding when it costs nothing and does not fight a hard rule; it never justifies a round of its own. Log anything you decline, with the reason, for the closing message.
 
-Re-render, then verify fast again. Stop iterating at the first of these:
+Re-render, then verify fast again with the same `session_id`. Stop iterating at the first of these:
 
 - no must fix and no fix findings remain;
 - a round resolves none of the previous round's must fix and fix findings. A finding that survives your fix is one you misread, and another run will not read it for you: log it and move on;
@@ -173,7 +175,7 @@ A short fast list is not a clean page. Fast never looks at layout, components, i
 
 ### Grade once with a full run
 
-When the fast loop stops, submit the same pair with `mode="full"`. If the tunnel's deadline is closer than five minutes, re-open it first and submit the new URL. The full verdict carries three things:
+When the fast loop stops, submit the same pair with `mode="full"` and the same `session_id`. If the tunnel's deadline is closer than five minutes, re-open it first and submit the new URL. The full verdict carries three things:
 
 - **`score`** — one number from 0 to 1, a blend of the LLM judge and the deterministic checks.
 - **`fixes`** — the deterministic verifier's fix objects, worst-first, capped at 20. Each carries an `action` discriminator (`snap_to_token`, `add_color_token`, `self_host_licensed_font`, …) plus the exact target values for that action.

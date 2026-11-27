@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "taste-engine",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Find real brand references, extract a brand from a website, a brand guidelines PDF, a marketing piece or a set of photos, and check how closely a page follows a brand.",
   "author": {
     "name": "Taste Labs",
@@ -107,7 +107,7 @@
         }
       },
       "publication": {
-        "release_notes": "Brand API is now Taste Engine. The plugin and its MCP server are named taste-engine; the tools and skills are unchanged."
+        "release_notes": "Each task now runs in one session. The tools that start work return a session_id, and the brand-search, brand-adherence and taste-director skills pass it into every later call of the same task, so the engine records the searches, extractions and adherence checks of a task together. A session lasts 24 hours after its last call."
       }
     }
   }

@@ -5,6 +5,8 @@ description: Use when the user needs website design references — whether they 
 
 # Brand Search
 
+**One task, one session.** Every call here that starts work (`search_brands`, `search_similar_brands`, and the `extract_*` tools) returns a `session_id`. The first of those calls in a task goes without one. Pass the `session_id` from that first result into every later one of those calls for the same task, including the ones another skill makes for it. A new task starts without it. If a call fails because its session expired or was not found, call again without `session_id` and carry the new one from then on.
+
 ## 1. Pick the right search tool
 
 Both tools return the same thing: website references, each with summary brand metadata and a screenshot. They differ in what goes in.
@@ -34,7 +36,7 @@ When the prompt already crosses industries — "playful colorful consumer fintec
 Use this one when you already have a brand and want others that look like it — whether that brand is the inspiration to follow or the anchor to pivot away from. It reads a completed extraction, not a url, so get the anchor first:
 
 - You already have the extraction — from this run or an earlier one — so pass its `submission_id` straight to `search_similar_brands`.
-- You only have a url — off a `search_brands` card, or a site the user named — so extract it first: `extract_website(url)` → poll → `search_similar_brands(submission_id)`. The loop is written out in step 4.
+- You only have a url — off a `search_brands` card, or a site the user named — so extract it first: `extract_website(url, session_id=session_id)` → poll → `search_similar_brands(submission_id, session_id=session_id)`. The loop is written out in step 4.
 
 An unqualified site — "like ours", "competitors of acme.com", "sites like patagonia.com" — calls for two lenses at once: `search_similar_brands(submission_id)` on the extraction follows the *look* (whole-gestalt visual neighbors), while an anchored deep `search_brands` follows the *meaning* (the cultural neighborhood) — `search_brands("outdoor apparel brand with rugged environmental storytelling")` for patagonia.com. Inspect the two sets separately, rank preserved inside each.
 
@@ -71,11 +73,11 @@ Extract only when you actually need more than the card gives. The metadata, desc
 When you do need it, send the source through `extract_website` and poll until it lands:
 
 ```
-extract_website(url)                     → submission_id
-poll_brand_extraction(submission_id)     # accepted → extracting → ... → completed or failed
+extract_website(url, session_id=session_id)   → submission_id
+poll_brand_extraction(submission_id)          # accepted → extracting → ... → completed or failed
 get_website_result(submission_id)
 ```
 
-A source that is not a site has its own tool, and `poll_brand_extraction` polls all of them: a brand guidelines PDF goes through `extract_brand_kit(url)` and `get_brand_kit_result`, the image of one finished marketing piece through `extract_brand_asset(url)` and `get_brand_asset_result`, and 1 to 12 of a brand's photos through `extract_photography(urls)` and `get_photography_result`. Each URL must be the file itself over https, not a share page.
+A source that is not a site has its own tool, and `poll_brand_extraction` polls all of them: a brand guidelines PDF goes through `extract_brand_kit(url)` and `get_brand_kit_result`, the image of one finished marketing piece through `extract_brand_asset(url)` and `get_brand_asset_result`, and 1 to 12 of a brand's photos through `extract_photography(urls)` and `get_photography_result`. Each URL must be the file itself over https, not a share page. These take the task's `session_id` too.
 
 While a batch runs, study the sources you already have and come back to the queue. Read each completed result with `get_website_result`. Record failures and replace them with the next ranked result from the same query.
