@@ -1,8 +1,8 @@
 {
-  "name": "brand-api",
-  "displayName": "Brand API",
+  "name": "taste-engine",
+  "displayName": "Taste Engine",
   "description": "Find real brand references, extract a brand from a website, a brand guidelines PDF, a marketing piece or a set of photos, and check how closely a page follows a brand.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": {
     "name": "Taste Labs",
     "email": "support@tastelabs.com",

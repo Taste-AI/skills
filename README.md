@@ -2,7 +2,7 @@
 
 Agent skills for the [Taste Engine](https://engine.tastelabs.com): search for design references, build a new page inside a brand that already exists, then grade the result against the reference.
 
-Skills use the open [`SKILL.md`](https://github.com/vercel-labs/skills) standard, so the same folders work across Claude Code, Codex, Cursor, OpenCode, Gemini CLI, and other agents that support it. They are also available together as the Brand API plugin, which bundles the skills with their MCP connection configuration.
+Skills use the open [`SKILL.md`](https://github.com/vercel-labs/skills) standard, so the same folders work across Claude Code, Codex, Cursor, OpenCode, Gemini CLI, and other agents that support it. They are also available together as the Taste Engine plugin, which bundles the skills with their MCP connection configuration.
 
 ## Skills
 
@@ -40,28 +40,34 @@ npx skills add github.com/Taste-AI/skills/tree/main/skills/brand-adherence
 
 ```bash
 # Claude Code
-claude mcp add --transport http brand-api https://mcp.tastelabs.com/mcp
+claude mcp add --transport http taste-engine https://mcp.tastelabs.com/mcp
 ```
 
-For Codex add an `[mcp_servers.brand-api]` entry in `~/.codex/config.toml`; for Cursor and others add the same HTTP server in the client's MCP config. Full setup per client: [MCP docs](https://docs.tastelabs.com).
+For Codex add an `[mcp_servers.taste-engine]` entry in `~/.codex/config.toml`; for Cursor and others add the same HTTP server in the client's MCP config. Full setup per client: [MCP docs](https://docs.tastelabs.com).
 
 The server uses streamable HTTP. Add its URL and complete the browser sign-in to your Taste Engine account. A new account starts with 20 credits.
 
 ## Install as a Plugin
 
-The Brand API plugin bundles these skills and the MCP connection configuration for Claude (Claude Code, claude.ai, Cowork) and OpenAI (ChatGPT, Codex).
+The Taste Engine plugin bundles these skills and the MCP connection configuration for Claude (Claude Code, claude.ai, Cowork) and OpenAI (ChatGPT, Codex).
 
 In Claude Code:
 
 ```
-/plugin install brand-api --marketplace Taste-AI/skills
+/plugin install taste-engine --marketplace Taste-AI/skills
 ```
 
 On Claude Code older than 2.1.275, add the marketplace first:
 
 ```
 /plugin marketplace add Taste-AI/skills
-/plugin install brand-api@tastelabs
+/plugin install taste-engine@tastelabs
+```
+
+The plugin was called `brand-api` before version 0.3.0. Claude Code moves an existing install to the new name by itself (the marketplace's `renames` map). If it then reports the plugin as not cached, install it once under the new name:
+
+```
+/plugin install taste-engine@tastelabs
 ```
 
 To try a local clone without installing, run `claude --plugin-dir .` from its root.
@@ -80,7 +86,7 @@ OAuth sign-in always uses your Personal account. To spend Team credits, create a
 
 ## Support
 
-For help with Taste Engine, the Brand API plugin, or these skills, email [support@tastelabs.com](mailto:support@tastelabs.com).
+For help with Taste Engine, its plugin, or these skills, email [support@tastelabs.com](mailto:support@tastelabs.com).
 
 ## Repository Contents
 
