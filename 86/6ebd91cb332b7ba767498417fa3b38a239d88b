@@ -1,0 +1,35 @@
+.claude-plugin/marketplace.json
+  s_b58896240e86dd::t_e124f5be304871 10,14-17
+skills/taste-director/SKILL.md
+  s_b58896240e86dd::t_e124f5be304871 4,13
+skills/brand-adherence/SKILL.md
+  s_b58896240e86dd::t_e124f5be304871 3,10
+plugin.json
+  s_b58896240e86dd::t_14828d3ec27188 4
+  s_b58896240e86dd::t_e124f5be304871 3,16,18,92,94
+mcp.json
+  s_b58896240e86dd::t_e124f5be304871 4
+README.md
+  s_b58896240e86dd::t_e124f5be304871 5,43,46,52,57,64-70,89
+.claude-plugin/plugin.json
+  s_b58896240e86dd::t_14828d3ec27188 5
+  s_b58896240e86dd::t_e124f5be304871 2-3
+.mcp.json
+  s_b58896240e86dd::t_e124f5be304871 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "866ebd91cb332b7ba767498417fa3b38a239d88b",
+  "prompts": {},
+  "sessions": {
+    "s_b58896240e86dd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "914b2b23-2916-4abc-b1f7-9fcd4e109d5b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Tobias Pucci Romero <tobiaspucci@gmail.com>"
+    }
+  }
+}
