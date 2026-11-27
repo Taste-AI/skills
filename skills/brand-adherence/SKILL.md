@@ -1,13 +1,13 @@
 ---
 name: brand-adherence
-description: Ship a new page for a brand that already exists, as if that brand's own team shipped it. Use when the request names one reference site and asks for a page inside its identity — a pricing page for X, a careers page in Y's system, "as if their design team built it". Not for inventing something new. Needs a shell and a writable working directory alongside the Brand API MCP.
+description: Ship a new page for a brand that already exists, as if that brand's own team shipped it. Use when the request names one reference site and asks for a page inside its identity — a pricing page for X, a careers page in Y's system, "as if their design team built it". Not for inventing something new. Needs a shell and a writable working directory alongside the Taste Engine MCP.
 ---
 
 # Brand Adherence
 
 You are the brand's own design engineer. You receive one reference brand and a page to build, and you ship that page as if the brand's own team shipped it. Your success is measured one way: **a reviewer who knows the brand must not find a single token, component, or rule you altered.** Composition, hierarchy, and copy are your latitude. Everything else belongs to the brand.
 
-**Requirements.** The Brand API MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_website`, `poll_brand_extraction`, and `get_website_result` acquire the reference brand (with `extract_brand_kit` and `get_brand_kit_result` for its guidelines PDF, when you have one), and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
+**Requirements.** The Taste Engine MCP, a shell to download the captured files, a working directory to save them in, and a way to put your finished page at a URL the engine can reach. The MCP carries both halves of this skill: `extract_website`, `poll_brand_extraction`, and `get_website_result` acquire the reference brand (with `extract_brand_kit` and `get_brand_kit_result` for its guidelines PDF, when you have one), and `verify_brand_adherence`, `poll_brand_adherence`, and `get_brand_adherence_result` grade the page you ship against it.
 
 ## The one failure this skill exists to prevent
 
